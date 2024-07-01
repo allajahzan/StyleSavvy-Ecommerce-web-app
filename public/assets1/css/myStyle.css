@@ -1,0 +1,1649 @@
+html {
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+/* admin login page------------------------------------ */
+.authentication .card img {
+    width: 100%;
+}
+
+@media (max-width: 991.2px) {
+    .authentication .card img {
+        width: 35%;
+    }
+
+    .authentication .card {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767.2px) {
+    .authentication .card img {
+        width: 55%;
+    }
+
+    .authentication .card {
+        text-align: center;
+    }
+}
+
+.authentication h1 {
+    font-weight: bold;
+    color: black;
+    font-size: 35px;
+}
+
+.authentication label {
+    font-weight: bold;
+}
+
+.authentication .body {
+    text-align: left;
+}
+
+.authentication input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+.authentication .checkbox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.authentication .button {
+    background-color: #e47297;
+    color: white;
+}
+
+.authentication .checkbox input[type="checkbox"]:checked+label::after {
+    background: #e47297;
+    color: #fff;
+}
+
+#password_visibility {
+    cursor: pointer;
+}
+
+/* dashboard ------------------------------------------- */
+
+section.content {
+    margin-right: 0px;
+}
+
+/* #leftsidebar li a{
+    color: black;
+   
+} */
+/* #leftsidebar li a:hover{
+    font-weight: bold;
+} */
+#leftsidebar .user-info p {
+    text-align: left;
+    /* font-weight: bold; */
+}
+
+#leftsidebar .user-info .detail {
+    margin-top: 20px;
+    color: black;
+}
+
+#leftsidebar .navbar-brand span {
+    color: black;
+    font-weight: bold;
+}
+
+#loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #e47297;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+#loading p {
+    font-weight: bold;
+    color: black;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#dashboard {
+    display: none;
+}
+
+/* users-------------------- */
+
+#users {
+    display: none;
+}
+
+#users .active_user {
+    color: #e47297;
+}
+
+#users .blocked_user {
+    color: #e47297;
+}
+
+#users .dataTable tbody td {
+    border-bottom-width: 0;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+#users .dataTable tbody .email_td {
+    width: 26%;
+}
+
+#users .dataTable tbody .phoneno_td {
+    width: 10%;
+}
+
+#users .dataTable tbody .date_td {
+    width: 20%;
+}
+
+#users .dataTable tbody .date_td {
+    width: 20%;
+}
+
+#users .dataTable tbody .btns {
+    width: 10%;
+}
+
+#users .dataTable tbody td .button1 {
+    background-color: rgb(251, 60, 60);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 3px;
+    padding-left: 35px;
+    padding-right: 35px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+#users .dataTable tbody td .button2 {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 3px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+#users .dataTable tbody .stat-active {
+    color: green;
+    font-weight: bold;
+}
+
+#users .dataTable tbody .stat-inactive {
+    color: red;
+    font-weight: bold;
+}
+
+/* modal for block or unblock */
+
+#staticBackdrop .user-name {
+    font-weight: bold;
+}
+
+#staticBackdrop .modal-header h5 {
+    font-weight: bold;
+}
+
+#staticBackdrop .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#staticBackdrop .button2 {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+/* ---- */
+
+#staticBackdrop2 .user-name {
+    font-weight: bold;
+}
+
+#staticBackdrop2 .modal-header h5 {
+    font-weight: bold;
+}
+
+#staticBackdrop2 .close_btn2 {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#staticBackdrop2 .button2 {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#staticBackdropok .button2 {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#staticBackdropok2 .button2 {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#staticBackdropok span {
+    color: green;
+    position: relative;
+    top: 0px;
+    margin-left: 5px;
+}
+
+#staticBackdropok2 span {
+    color: green;
+    position: relative;
+    top: 0px;
+    margin-left: 5px;
+}
+
+#staticBackdropok p {
+    font-weight: bold;
+    margin: 0px;
+}
+
+#staticBackdropok2 p {
+    font-weight: bold;
+    margin: 0px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-body {
+    display: flex;
+}
+
+/* products------------- */
+
+#products {
+    display: none;
+}
+
+#products .listed_products {
+    color: #e47297;
+}
+
+#products .unlisted_products {
+    color: #e47297;
+}
+
+#products .add_products {
+    color: #e47297;
+}
+
+#products .dataTable tbody .image_ {
+    width: 20%;
+}
+
+/* @media (max-width:800px) {
+    #products .dataTable tbody .image_ {
+        width: 50%;
+    }
+} */
+
+#products .dataTable tbody .quantity_ {
+    width: 10%;
+}
+
+#products .dataTable tbody .btn_ {
+    width: 10%;
+}
+
+#products .dataTable tbody .listed_ {
+    width: 10%;
+}
+
+/* .dataTable thead th{
+    background-color: #f2f2f2; 
+} */
+
+.dataTable tbody tr:nth-child(odd) {
+    /* background-color: #f7f7f7;  */
+    background-color: #ffffff;
+}
+
+.dataTable tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.dataTable tbody tr:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+#products #DataTables_Table_0_filter input {
+    width: 72%;
+    border: solid;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+    border-color: rgb(196, 196, 196);
+}
+
+#products #DataTables_Table_0_filter input:focus {
+    border-color: #007bff;
+    border-width: 0px 0px 2px 0px;
+}
+
+#products .image_div {
+    display: flex;
+    
+}
+
+#products input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+}
+
+#products .select2 {
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+#products textarea {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+}
+
+#products .add_product {
+    padding: 30px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    cursor: pointer;
+}
+
+#products .add_varient {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+#products .edit_stock {
+    background-color: rgb(50, 50, 50);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+
+#products .show_categories {
+    display: none;
+}
+
+#show_invalid {
+    display: none;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#show_message {
+    display: none;
+    justify-content: center;
+}
+
+#p_name {
+    position: relative;
+}
+
+
+#products .error_ {
+    position: absolute;
+    color: red;
+    right: 22px;
+    top: 10px;
+}
+
+#p_title{
+    position: relative;
+}
+
+#products .error1_ {
+    position: absolute;
+    color: red;
+    right: 22px;
+    top: 10px;
+}
+
+#products .dataTable tbody .listed {
+    color: green;
+    font-weight: bold;
+}
+
+#products .dataTable tbody .unlisted {
+    color: red;
+    font-weight: bold;
+}
+
+#products .dataTable tbody td .edit_ {
+    background-color: rgb(50, 50, 50);
+    /* background-color: black; */
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+#products .dataTable tbody td .add_ {
+    background-color: rgb(50, 50, 50);
+    /* background-color: black; */
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+@media (max-width: 872px) {
+    #products .dataTable tbody td .edit_ {
+        position: relative;
+        top: 0px;
+    }
+
+    #products .dataTable tbody td .edit_2 {
+        position: relative;
+        top: -5px;
+    }
+
+}
+
+#products .img3 {
+    display: none;
+}
+
+#products .img2 {
+    display: none;
+}
+
+@media (max-width: 830px) {
+    #products .img1 {
+        display: none;
+    }
+
+    #products .img2 {
+        display: block;
+    }
+}
+
+@media (max-width: 550px) {
+    #products .img1 {
+        display: none;
+    }
+
+    #products .img2 {
+        display: none;
+    }
+
+    #products .img3 {
+        display: block;
+    }
+}
+
+#products .reset_ {
+    padding: 30px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border: solid;
+    border-color: rgb(225, 225, 225);
+    cursor: pointer;
+}
+
+#select_category {
+    display: none;
+}
+
+#products .dataTable tbody td .unlist_ {
+    background-color: rgb(251, 60, 60);
+    /* background-color: red; */
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+#products .dataTable tbody td .list_ {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 4px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+    /* width: 60%; */
+}
+
+@media (max-width: 872px) {
+    #products .dataTable tbody td .edit_ {
+        /* width: 100%; */
+        position: relative;
+        top: -5px;
+    }
+
+    #products .dataTable tbody td .unlist_ {
+        /* width: 100%; */
+        position: relative;
+        top: -5px;
+    }
+
+
+    #products .dataTable tbody td .list_ {
+        position: relative;
+        top: -5px;
+    }
+}
+
+/* vareints showing details */
+
+#varients-heading {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -20px;
+    height: 33px;
+}
+
+#varients-heading button {
+    display: flex;
+    position: relative;
+    top: -5px;
+}
+
+/* modal for add verinet */
+#varient {
+    z-index: 2000;
+}
+
+#varient .image_div {
+    display: flex;
+}
+
+#varient .img1 {
+    width: 100%;
+}
+
+#varient .modal-content .modal-header span {
+    position: relative;
+    top: -5px;
+    left: 4px;
+    cursor: pointer;
+}
+
+#varient .modal-content .modal-title {
+    position: relative;
+    top: -12px;
+}
+
+#varient .modal-content h5 {
+    font-weight: bold;
+}
+
+#varient .modal-content .modal-body input {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+#varient .modal-content .modal-body select {
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+#varient .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#varient .add_btn {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#varient .modal-content .modal-body .error_ {
+    position: absolute;
+    color: red;
+    right: 33px;
+    top: 35px;
+}
+
+
+/* modal for edit verinet */
+#varientEdit {
+    z-index: 2000;
+}
+
+#varientEdit .image_div {
+    display: flex;
+    align-items: center;
+}
+
+#varientEdit .img1 {
+    width: 100%;
+}
+
+#varientEdit .modal-content .modal-header span {
+    position: relative;
+    top: -5px;
+    left: 4px;
+    cursor: pointer;
+}
+
+#varientEdit .modal-content .modal-title {
+    position: relative;
+    top: -12px;
+}
+
+#varientEdit .modal-content h5 {
+    font-weight: bold;
+}
+
+#varientEdit .modal-content .modal-body input {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+#varientEdit .modal-content .modal-body select {
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+#varientEdit .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#varientEdit .add_btn {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#varientEdit .modal-content .modal-body .error_ {
+    position: absolute;
+    color: red;
+    right: 33px;
+    top: 35px;
+}
+
+
+
+
+/* show error message */
+
+#message1 .user-name {
+    font-weight: bold;
+}
+
+#message1 .button1 {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#message1 .button2 {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#message1 span {
+    position: relative;
+    top: 0px;
+    margin-left: 5px;
+}
+
+#message1 p {
+    font-weight: bold;
+    margin: 0px;
+}
+
+#message1 .add_btn {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+/* categories--------- */
+
+#contents {
+    display: none;
+}
+
+#contents .set {
+    color: #e47297;
+}
+
+#contents .dataTable tbody .listed {
+    color: green;
+    font-weight: bold;
+}
+
+#contents .dataTable tbody .unlisted {
+    color: red;
+    font-weight: bold;
+}
+
+#contents .dataTable tbody td .edit_ {
+    background-color: rgb(50, 50, 50);
+    /* background-color: black; */
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+@media (max-width: 872px) {
+    #contents .dataTable tbody td .edit_ {
+        position: relative;
+        top: 0px;
+    }
+
+    #contents .dataTable tbody td .edit_2 {
+        position: relative;
+        top: 0px;
+    }
+}
+
+#contents .dataTable tbody td .unlist_ {
+    background-color: rgb(251, 60, 60);
+    /* background-color: red; */
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+
+#contents .dataTable tbody td .list_ {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 4px;
+    border: solid;
+    border-color: lightgray;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+    /* width: 60%; */
+}
+
+@media (max-width: 872px) {
+    #contents .dataTable tbody td .edit_ {
+        /* width: 100%; */
+        position: relative;
+        top: -5px;
+    }
+
+    #contents .dataTable tbody td .unlist_ {
+        /* width: 100%; */
+        position: relative;
+        top: -5px;
+    }
+
+    #contents .dataTable tbody td .list_ {
+        position: relative;
+        top: -5px;
+    }
+
+    #contents .dataTable tbody td .list_type {
+        position: relative;
+        top: -5px;
+    }
+
+}
+
+#contents .add_btn {
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+#contents .add_btn button {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+/* add categories------------ */
+
+#add .modal-content .modal-header {
+    background-color: rgb(246, 246, 246);
+}
+
+#add .modal-content .modal-header span {
+    position: relative;
+    top: -5px;
+    left: 4px;
+    cursor: pointer;
+}
+
+#add .modal-content .modal-title {
+    position: relative;
+    top: -12px;
+}
+
+#add .modal-content h5 {
+    font-weight: bold;
+}
+
+#add .modal-content .modal-body input {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+#add .modal-content .modal-body select {
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+#add .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#add .add_btn {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#add .modal-content .modal-body .error_ {
+    position: absolute;
+    color: red;
+    right: 33px;
+    top: 35px;
+}
+#add .modal-content .modal-body .clr_error_ {
+    position: absolute;
+    color: red;
+    right: 10px;
+    top: 10px;
+}
+
+/* edit categories modal*/
+
+/* edit modal fot type ----------*/
+
+#edit .modal-content .modal-header {
+    /* background-color: rgb(246, 246, 246); */
+    background-color: transparent;
+}
+
+#edit .modal-content .modal-header .btn_close {
+    position: relative;
+    top: -5px;
+    left: 4px;
+    cursor: pointer;
+}
+
+#edit .modal-content .modal-body .error_ {
+    position: absolute;
+    color: red;
+    right: 33px;
+    top: 35px;
+}
+
+#edit .modal-content .modal-body .clr_error_ {
+    position: absolute;
+    color: red;
+    right: 10px;
+    top: 10px;
+}
+
+#edit .modal-content .modal-title {
+    position: relative;
+    top: -12px;
+}
+
+#edit .modal-content h5 {
+    font-weight: bold;
+}
+
+#edit .modal-content .modal-body input {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-width: 1px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#edit .modal-content .modal-body select {
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(210, 210, 210);
+}
+
+#edit .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 0px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+#edit .add_btn {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    left: 0px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/* unlist or list modal for categories */
+
+/* for modal for unlists  types*/
+
+#unlist .type_name {
+    font-weight: bold;
+}
+
+#unlist .modal-header h5 {
+    font-weight: bold;
+}
+
+#unlist .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#unlist .button2 {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+/* list */
+
+#list .type_name {
+    font-weight: bold;
+}
+
+#list .modal-header h5 {
+    font-weight: bold;
+}
+
+#list .close_btn {
+    /* background-color: rgb(249, 249, 249); */
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#list .button2 {
+    background-color: rgb(34, 143, 34);
+    color: white;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#message .user-name {
+    font-weight: bold;
+}
+
+#message .button2 {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    border-radius: 5px;
+    border: solid;
+    border-color: lightgray;
+    position: relative;
+    top: 7px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+#message span {
+    position: relative;
+    top: 0px;
+    margin-left: 5px;
+}
+
+#message p {
+    font-weight: bold;
+    margin: 0px;
+}
+
+#products .file-drop {
+    position: relative;
+    /* width: 200px;
+    height: 250px; */
+    /* Adjust height as needed */
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#products .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#products .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+#products .image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+#products textarea:focus {
+    border-color: red;
+}
+
+#para {
+    position: absolute;
+    z-index: 0;
+}
+
+
+/* addd varietnts */
+
+#para1 {
+    position: absolute;
+    z-index: 0;
+}
+
+#para2 {
+    position: absolute;
+    z-index: 0;
+}
+
+#para3 {
+    position: absolute;
+    z-index: 0;
+}
+
+#varient .modal-dialog {
+    max-width: 750px;
+}
+
+#varient .file-drop {
+    position: relative;
+    width: 200px;
+    height: 220px;
+    /* Adjust height as needed */
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+/* @media (max-width:1000px){
+    #varient .file-drop {
+        height: 420px;
+    }
+} */
+
+@media (max-width:760){
+    #varient .file-drop {
+        height: 400px;
+    }
+}
+
+@media (max-width:650px){
+    #varient .file-drop {
+        height: 280px;
+    }
+}
+
+@media (max-width:500px){
+    #varient .file-drop {
+        height: 250px;
+    }
+}
+
+@media (max-width:450px){
+    #varient .file-drop {
+        height: 220px;
+    }
+}
+
+@media (max-width:420px){
+    #varient .file-drop {
+        height: 210px;
+    }
+}
+
+
+@media (max-width:400px){
+    #varient .file-drop {
+        height: 200px;
+    }
+}
+
+@media (max-width:380px){
+    #varient .file-drop {
+        height: 190px;
+    }
+}
+
+@media (max-width:350px){
+    #varient .file-drop {
+        height: 170px;
+    }
+}
+
+@media (max-width:300px){
+    #varient .file-drop {
+        height: 150px;
+    }
+}
+
+
+#varient .file-dropp {
+    position: relative;
+    width: 200px;
+    height: 238px;
+    /* Adjust height as needed */
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+}
+
+#varient .file-dropp p {
+    font-size: 14px;
+}
+
+#varient .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#varient .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  
+}
+
+#varient .image-preview img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+#edit_product_form .modal-header {
+    /* background-color: rgb(244, 244, 244); */
+    background-color: transparent;
+}
+
+#edit_product_form .modal-header p {
+    margin: 0px;
+    /* margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 18px; */
+}
+
+/* edit varients */
+
+/* addd varietnts */
+
+#para1 {
+    position: absolute;
+    z-index: 0;
+}
+
+#para2 {
+    position: absolute;
+    z-index: 0;
+}
+
+#para3 {
+    position: absolute;
+    z-index: 0;
+}
+
+#varientEdit .modal-dialog {
+    max-width: 750px;
+}
+
+#varientEdit .file-drop {
+    position: relative;
+    width: 200px;
+    height: 220px;
+    /* Adjust height as needed */
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+
+@media (max-width:700px){
+    #varientEdit .file-drop {
+        height: 330px;
+    }
+}
+
+@media (max-width:650px){
+    #varientEdit .file-drop {
+        height: 280px;
+    }
+}
+
+@media (max-width:500px){
+    #varientEdit .file-drop {
+        height: 250px;
+    }
+}
+
+@media (max-width:450px){
+    #varientEdit .file-drop {
+        height: 220px;
+    }
+}
+
+@media (max-width:420px){
+    #varientEdit .file-drop {
+        height: 210px;
+    }
+}
+
+
+@media (max-width:400px){
+    #varientEdit .file-drop {
+        height: 200px;
+    }
+}
+
+@media (max-width:380px){
+    #varientEdit .file-drop {
+        height: 190px;
+    }
+}
+
+@media (max-width:350px){
+    #varientEdit .file-drop {
+        height: 170px;
+    }
+}
+
+@media (max-width:300px){
+    #varientEdit .file-drop {
+        height: 150px;
+    }
+}
+
+
+#varientEdit .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#varientEdit .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+#varientEdit .image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+/* offer */
+
+#select_typeOffer{
+    display: none;
+}

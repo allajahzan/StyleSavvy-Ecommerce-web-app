@@ -1,0 +1,86 @@
+﻿<!doctype html>
+<html class="no-js " lang="en">
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>StyleSavvy</title>
+<!-- Favicon-->
+
+<!-- google icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="/assets1/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets1/css/style.min.css">    
+<link rel="stylesheet" href="/assets1/css/myStyle.css">
+</head>
+
+<body class="theme-blush" onload="adminSign()">
+
+<div class="authentication">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <form id="signin_form" class="card auth_form">
+                    <div class="header">
+                        <h1>StyleSavvy</h1>
+                        <h5>Admin Sign-In</h5>
+                    </div>
+                    <div class="body">
+                        <label for="">Email</label>
+                        <div class="input-group mb-3" style="position: relative;">
+                            <input type="text"  placeholder="Email" autocomplete="off" required>
+                            <span id="email_error" style="color: red; position: absolute; top: 10px; right: 10px;" class="material-symbols-outlined">
+                                
+                                </span>
+                        </div>
+                        <label for="">Password</label>
+                        <div class="input-group mb-3">
+                            <input id="password" type="password" placeholder="Password" autocomplete="off" required>
+                            <span id="password_error" style="color: red; position: absolute; top: 10px; right: 10px;" class="material-symbols-outlined">
+                                
+                                </span>
+                                <span id="password_visibility" onclick="showPassword()" style="color: black; position: absolute; top: 10px; right: 10px;" class="material-symbols-outlined">
+                                    visibility_off
+                                    </span>
+                        </div>
+                        <div class="checkbox">
+                            <!-- <input id="remember_me" type="checkbox">
+                            <label for="remember_me">Remember Me</label><div>
+                            </div> -->
+                            <!-- <a href="forgot-password.html">Forgot password?</a> -->
+                        </div>
+
+                        <input id="admin_signin_btn" class="button" type="submit" value="Sign-In">
+                    </div>
+                    
+                </form>
+                <!-- <div class="copyright text-center">
+                    &copy;
+                    <script>document.write(new Date().getFullYear())</script>,
+                    <span>StyleSavvy</span>
+                </div> -->
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card">
+                    <img src="/assets1/images/signin.svg" alt="Sign In"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Jquery Core Js -->
+<!-- <script src="/assets1/bundles/libscripts.bundle.js"></script> -->
+<!-- <script src="/assets1/bundles/vendorscripts.bundle.js"></script> Lib Scripts Plugin Js -->
+<script src="/assets1/js/pages/api/signin.js"></script>
+</body>
+
+
+</html>

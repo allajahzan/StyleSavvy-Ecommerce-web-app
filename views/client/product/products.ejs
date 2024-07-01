@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/category-fullwidth.html  22 Nov 2019 10:03:02 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shop</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/plugins/jquery.countdown.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/plugins/nouislider/nouislider.css">
+       <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+       <link rel="stylesheet" href="/assets/css/myStyle.css">
+</head>
+
+<body onload="loadProducts()">
+
+
+     <!-- loading -->
+     <!-- <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+    </section> -->
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+            task_alt
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+    <section id="product">
+    <div class="page-wrapper">
+        <header class="header header-5">
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler">
+                            <span class="sr-only">Toggle mobile menu</span>
+                            <i class="icon-bars"></i>
+                        </button>
+
+                        <h2 id="logo">StyleSavvy</h2>
+                        <!-- <img width="20%" src="/assets/images/demos/demo-5/logo11.png" alt=""> -->
+
+                        <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li  class="home">
+                                    <p class=""><a id="a_menu_item" href="/home">Home</a></p>
+                                </li>
+                                <li class="products active">
+                                    <p><a id="a_menu_item"  href="/shop">Shop</a></p>
+                                </li>    
+                 
+                                <li class="more" id="more">
+                                    <p><a id="a_menu_item" href="/contact">Contact</a></p>
+
+                                    <!-- <ul>
+                                        <li><a href="elements-products.html">About</a></li>
+                                        <li><a href="elements-typography.html">Contact</a></li>
+                                    </ul> -->
+                                </li>
+                            </ul><!-- End .menu -->
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+                        <div class="header-search header-search-extended header-search-visible">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                            <form id="search_form"  method="get">
+                                <div class="header-search-wrapper">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <input type="search" class="form-control" value="<%= locals.searchQuery? locals.searchQuery : ''%>" name="search" id="search"
+                                        placeholder="Search product" required autocomplete="off">
+                                    <button class="btn btn-primary" type="submit"><i
+                                            class="icon-search"></i></button>
+                                </div>
+                            </form>
+
+                            <script>
+                                    const form = document.getElementById('search_form')
+                                    form.addEventListener('submit', (e)=>{
+                                         e.preventDefault()
+
+                                        const data = document.getElementById('search').value
+
+                                        let url = new URL(window.location.href);
+                                        url.pathname = '/shop';
+                                        url.searchParams.set('search', data);
+                                        url.searchParams.set('page', '1');
+                                        window.location.href = url.toString();
+
+                                    })     
+                                    
+
+                            </script>
+
+                             <script>
+                               // Debounce function
+                                     function debounce(func, delay) {
+                                     let debounceTimer;
+                                     return function() {
+                                     const context = this;
+                                     const args = arguments;
+                                     clearTimeout(debounceTimer);
+                                     debounceTimer = setTimeout(() => func.apply(context, args), delay);
+                                    };
+                                }
+                 
+                         const inputTag = document.getElementById('search');
+                         inputTag.addEventListener('keydown', debounce(handleInputChange, 1));
+
+     
+                                    function handleInputChange() {
+                                    if(inputTag.value === ''){
+        
+                                        let url = new URL(window.location.href);
+                                        url.pathname = '/shop';
+                                        url.searchParams.delete('search');
+                                        url.searchParams.set('page', '1');
+                                        window.location.href = url.toString();
+                                        }
+       
+                                    }
+
+                        </script>
+                       
+                        </div>
+                        
+                      
+
+                        <% if (locals.user) { %>
+
+                            <a id="wishlist_icon" href="/wishlist" class="dropdown cart-dropdown">
+                                <i style="font-size: 24px;" class="icon-heart-o"></i>
+                                <span id="wishlist_count" class="cart-count"><%= locals.wishlist? locals.wishlist.items.length : 0 %></span> 
+                            </a>
+                        
+                        <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                            <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                            <span id="cart_count" class="cart-count"><%= locals.cart? locals.cart.items.length : 0 %></span>      
+                          </a>
+
+        
+                            <% const names = locals.user.split(' ')[0]; %>
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>
+                                </li>
+                            </ul>    
+                        <% } else { %>
+
+                            <a href="/wishlist" class="wishlist">
+                                <i class="icon-heart-o"></i>
+                            </a>
+
+                            <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                                <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                                <!-- <span class="cart-count">2</span>       -->
+                              </a>
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                                </li>
+                            </ul> 
+                        <% } %>
+                        
+                        
+
+                    </div><!-- End .header-right -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        
+        <main class="">
+        	<!-- <div class="page-header text-center" style="background-image: url('/assets/images/demos/demo-5/login-bg.jpg')">
+        		<div class="container">
+        			<p style="position: relative; top: 30px; color: white; font-size: 25px;" class="page-title">Products</p>
+        		</div>
+        	</div> -->
+       
+            <br>
+            
+            <div style="padding-bottom: 4.3rem;" class="page-content">
+                <div class="container">
+        			<div class="toolbox">
+        				<div class="toolbox-left">
+                            <a style="font-weight: 500;" href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>
+        				</div><!-- End .toolbox-left -->
+
+                        <div class="toolbox-center">
+                            <div class="toolbox-info">
+                               <p style="font-weight: 500;"> Showing <span style="color: black; font-size: 14px;"><%= locals.totalVarients > 12 ?  12 : locals.totalVarients %> of <%= locals.totalVarients %></span> Products</p>
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-center -->
+
+        				<div class="toolbox-right">
+        					<div class="toolbox-sort">
+        						<label style="font-weight: 500;" for="sortby">Sort by:</label>
+        						<div class="select-custom">
+									<select name="sortby" id="sortby" onchange="getSotyBy()" class="form-control">
+										<% if(locals.select == 0){ %>
+                                            <option style="color: black; font-weight: 500;" disabled selected hidden>New Arrivals</option>
+                                        <% }else if(locals.select === 1){ %>
+                                            <option style="color: black; font-weight: 500;" disabled selected hidden>Name [A-Z]↑</option>
+                                        <% } else if(locals.select === 2){%>
+                                            <option style="color: black; font-weight: 500;" disabled selected hidden>Name [Z-A]↓</option>
+                                        <% } else if(locals.select === 3){%>
+                                            <option style="color: black; font-weight: 500;" disabled selected hidden>Price [Low-High]↑</option>
+                                        <% }else{%>
+                                            <option style="color: black; font-weight: 500;" disabled selected hidden>Price [High-Low]↓</option>
+                                        <% } %>  
+                                        <option style="color: black; font-weight: 500;" value="0">New Arrivals</option>
+										<option style="color: black; font-weight: 500;" value="1">Name [A-Z]↑</option>
+                                        <option style="color: black; font-weight: 500;" value="2">Name [Z-A]↓</option>
+                                        <option style="color: black; font-weight: 500;" value="3">Price [Low-High]↑</option>
+                                        <option style="color: black; font-weight: 500;" value="4">Price [High-Low]↓</option>
+									</select>
+								</div>
+        					</div>
+        				</div>
+
+        			</div>
+                </div>    
+
+                    
+                    <!-- show products -->
+
+                    <% if(locals.varients.length>0){ %>
+
+                    <div class="container pt-2 new-arrivals" id="products_listed">
+                       
+        
+                        <div class="tab-content">
+                            <div class="tab-pane p-0 fade show active" id="new-all-tab" role="tabpanel" aria-labelledby="new-all-link">
+                                <div class="products">
+
+                                    <!-- <div id="product_loading"  class="row">
+                                        <div class="product product-2 load-div">
+                                            <h2 style="text-align: center;" class="logo">StyleSavvy</h2>
+                                            <span class="loader"></span>
+                                        </div>
+                                    </div> -->
+
+                                   
+
+                                    <div id="tab1_items" class="row justify-content-center">
+
+                                       
+                                     <% locals.varients.forEach((v)=> { %>
+
+                                            <div class="col-6 col-md-4 col-lg-3 varient_image">
+                                                <div class="product product-2">
+                                                    <figure style="margin-top: 10px;" class="product-media">
+
+                                                        <% if(v.stock[0] === 0){ %>
+
+                                                            <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                                         
+                                                        <% } else{%>
+                                                            
+                                                            <% 
+                                                            let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                                            let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                                            %>
+                                                            <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                                                <% if (offer1 > offer2) { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                                                <% } else { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                                                <% } %>        
+                                                            <% } %>
+
+                                                          
+                                                         
+                                                        <% } %>    
+
+                                                        <!-- <span class="product-label label-new">New</span> -->
+                                                        <!-- <span class="product-label label-out">Out of stock</span> -->
+                                                        <!-- <span class="product-label label-sale">30% off</span> -->
+                                                        <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                            <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                                                alt="Product image" class="product-image">
+                                                            <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                                                alt="Product image" class="product-image-hover">
+                                                        </a>
+
+                                                        <div class="product-action-vertical">
+                                                            <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                                                title="Add to wishlist"><span>add to wishlist</span></a>       
+                                                        </div>
+
+
+                                                        <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                                            <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                                    cart</span></a>
+                                                                    <form action="">
+                                                                        <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                                        <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                                    </form>
+                                                            <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                                                class="btn-product btn-quickview"
+                                                                title="Quick view"><span>Quick view</span></a>
+                
+                                                        </div>
+
+                                                        <!-- <div class="product-action product-action-transparent">
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                        </div> -->
+
+                                                    </figure><!-- End .product-media -->
+
+                                                    <div class="product-body">
+                                                        <!-- <div class="product-cat">
+                                                            <a href="#">Clothing</a>
+                                                        </div> -->
+                                                        <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                                <%= v.product.product_name %>
+                                                            </a></p><!-- End .product-title -->
+                                                      
+
+
+                                                        <% 
+                                    let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                    let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                                    %>
+                                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                        <% if (offer1 > offer2) { %>
+
+                                            <% let discountAmount = v.actualPrice * (offer1/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+        
+                                        <% }else{ %> 
+
+                                            <% let discountAmount = v.actualPrice * (offer2/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+                                            
+                                        <% } %>    
+                                    <% }else{ %>
+                                        <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                                            <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                        </div>
+                                    <% } %> 
+
+
+                                                        <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                                        
+                                                            <% v.allColors.forEach((color,index) => { %>
+
+                                                             
+                                                               
+                                                                    <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                                        <!-- <span class="">Color name</span> -->
+                                                                    </a>
+                                                                    <script type="text/javascript">
+                                                                        // Execute the function when the DOM content is loaded
+                                                                        document.addEventListener("DOMContentLoaded", function (event) {
+                                                                            getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                                        });
+                                                                    </script>
+
+                                                                
+                                                                   
+                                                               
+                                                            <% }) %>
+                                                        </div>
+
+                                                       
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                 
+
+                                    <% }); %>
+        
+                                        
+                                    </div>
+                                </div>
+                        </div>
+    
+                        <nav style="display: flex; justify-content: center; margin-top: 40px;" aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item">
+                                <a class="page-link" onclick="pageDecrement()"  style="cursor: pointer;"  aria-label="Previous">
+                                  <span style="font-size: 20px;"  aria-hidden="true">&laquo;</span>
+                                </a>
+                              </li>
+                              <% for (let i = 1; i <= locals.totalPages; i++) { %>
+                                <% if (i == locals.currentPage) { %>
+                                  <li style="cursor: pointer;" class="page-item active"><a class="page-link" style="font-weight: 500; font-size: 15px;" onclick="changePage('<%= i %>')"><%= i %></a></li>
+                                <% } else { %>
+                                  <li  style="cursor: pointer;"  class="page-item"><a class="page-link" style="font-weight: 500; color: black; font-size: 15px;" onclick="changePage('<%= i %>')"><%= i %></a></li>
+                                <% } %>
+                              <% } %>
+                              <form action="">
+                                <input type="hidden" id="total_pages" value="<%= locals.totalPages %>">
+                              </form>
+                              <li class="page-item">
+                                <a class="page-link" onclick="pageIncrement()"  style="cursor: pointer;"  aria-label="Next">
+                                  <span style="font-size: 20px;" aria-hidden="true">&raquo;</span>
+                                </a>
+                              </li>
+                            </ul>
+                          </nav>
+                          
+                          <form id="pagination-form" action="/your-pagination-endpoint" method="get" style="display:none;">
+                            <input type="hidden" id="page_number" name="page" value="<%= locals.currentPage %>">
+                          </form>
+                          
+                    </div>
+
+                    <% }else{ %>
+
+                        <div style="display: flex; justify-content: center; padding-top: 58px; padding-bottom: 0px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                                <h5>No products found!</h5>
+                                <p>Explore our wide selection and find something else you like</p>
+                                <img style="width: 54%; margin-top: 30px;" src="/assets/images/demos/demo-5/no-product.png" alt="">
+                                <a style="cursor: pointer; color: #c96; font-weight: 500; font-size: 16px; position: relative; top: -30px; left: 2px;"  href="/shop">Shop Now</a>
+                            </div>
+                        </div>
+        
+
+                    <% } %>    
+                        
+
+
+                    <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
+                    <aside class="sidebar-shop sidebar-filter">
+                        <div class="sidebar-filter-wrapper">
+                            <div class="widget widget-clean">
+                                <label><i class="icon-close"></i>Filters</label>
+                                <a href="#" class="sidebar-filter-clear">Clean All</a>
+                            </div><!-- End .widget -->
+                            <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                        Categories
+                                    </a>
+                                </h3><!-- End .widget-title -->
+
+                                <div class="collapse show" id="widget-1">
+                                    <div class="widget-body">
+                                        <div class="filter-items">
+
+                                           <% locals.type.forEach((item, index)=>{ %>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input name="category" type="checkbox" value="<%= item.type_name %>" class="custom-control-input" id="cat-<%= index %>">
+                                                    <label class="custom-control-label"  for="cat-<%= index %>"><%= item.type_name %></label>
+                                                </div>
+                                            </div>
+
+                                           <% }) %>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                    const checkboxes = document.querySelectorAll('input[name="category"]');
+
+                                    checkboxes.forEach((checkbox) => {
+                                    checkbox.addEventListener('change', function () {
+                                    if (this.checked) {
+                                    checkboxes.forEach((otherCheckbox) => {
+                                    if (otherCheckbox !== this) {
+                                    otherCheckbox.checked = false;
+                                     }
+                                    });
+                                    }
+                                    });
+                                    });
+                                    });
+                                </script>
+
+                            </div><!-- End .widget -->
+
+                            <!-- <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                        Size
+                                    </a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-2">
+                                    <div class="widget-body">
+                                        <div class="filter-items">
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="size-1">
+                                                    <label class="custom-control-label" for="size-1">XS</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="size-2">
+                                                    <label class="custom-control-label" for="size-2">S</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked id="size-3">
+                                                    <label class="custom-control-label" for="size-3">M</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked id="size-4">
+                                                    <label class="custom-control-label" for="size-4">L</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="size-5">
+                                                    <label class="custom-control-label" for="size-5">XL</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="size-6">
+                                                    <label class="custom-control-label" for="size-6">XXL</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            
+                            <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                        Sub Categories
+                                    </a>
+                                </h3><!-- End .widget-title -->
+
+                                <div class="collapse show" id="widget-4">
+                                    <div class="widget-body">
+                                        <div class="filter-items">
+
+                                           <% locals.category.forEach((item, index)=>{ %>
+
+                                            <div class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input name="sub_category" type="checkbox" value="<%= item.category_name %>" class="custom-control-input" id="brand-<%= index %>">
+                                                    <label class="custom-control-label"  for="brand-<%= index %>"><%= item.category_name %></label>
+                                                </div>
+                                            </div>
+
+                                           <% }) %>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
+                                        Colors
+                                    </a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-3">
+                                    <div class="widget-body">
+                                        <!-- <div class="filter-colors"> -->
+                                        <div class="filter-items">
+
+                                            <!-- <a href="#" style="background: #b87145;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #f0c04a;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #333333;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" class="selected" style="background: #cc3333;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #3399cc;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #669933;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #f2719c;"><span class="sr-only">Color Name</span></a>
+                                            <a href="#" style="background: #ebebeb;"><span class="sr-only">Color Name</span></a> -->
+                                            <% locals.colors.forEach((color,index)=>{ %>
+                                              
+                                            
+                                                <div style="padding-bottom: 3px;" class="custom-control custom-checkbox">
+                                                    <input name="color" type="checkbox" value="<%= color.color_name %>" class="custom-control-input" id="color-<%= index %>">
+                                                    <% let colorName = color.color_name[0].toUpperCase() + color.color_name.slice(1) %>
+                                                    <label class="custom-control-label"  for="color-<%= index %>"><%= colorName %></label>
+                                                </div>
+                                               
+                                                
+                                            <% }) %>
+
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                const checkboxes = document.querySelectorAll('input[name="color"]');
+            
+                                                checkboxes.forEach((checkbox) => {
+                                                checkbox.addEventListener('change', function () {
+                                                if (this.checked) {
+                                                checkboxes.forEach((otherCheckbox) => {
+                                                if (otherCheckbox !== this) {
+                                                otherCheckbox.checked = false;
+                                                 }
+                                                });
+                                                }
+                                                });
+                                                });
+                                                });
+                                            </script>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+
+                            <button style="background-color: #c96; width: 100%; color: white;" class="btn" onclick="getFilterAndCategory()">Get the products</button>
+
+                            <!-- <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                        Price
+                                    </a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-5">
+                                    <div class="widget-body">
+                                        <div class="filter-price">
+                                            <div class="filter-price-text">
+                                                Price Range:
+                                                <span id="filter-price-range"></span>
+                                            </div>
+
+                                            <div id="price-slider"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div><!-- End .sidebar-filter-wrapper -->
+                    </aside><!-- End .sidebar-filter -->
+                <!-- </div>End .container-fluid -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+        
+        <footer class="footer">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget widget-about">
+                                <h2 id="footer-logo">StyleSavvy</h2>
+                                <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+
+                                <div class="social-icons">
+                                    <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                    <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                    <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                </div><!-- End .soial-icons -->
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Useful Links</h4>
+
+                                <ul class="widget-list">
+                                    <li><a>About Molla</a></li>
+                                    <li><a>How to shop on StyleSavvy</a></li>
+                                    <li><a>FAQ</a></li>
+                                    <li><a>Contact us</a></li>
+                                    <li><a>Log in</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Customer Service</h4>
+
+                                <ul class="widget-list">
+                                    <li><a >Payment Methods</a></li>
+                                    <li><a >Money-back guarantee!</a></li>
+                                    <li><a >Returns</a></li>
+                                    <li><a >Shipping</a></li>
+                                    <li><a >Terms and conditions</a></li>
+                                    <li><a >Privacy Policy</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4>
+
+                                <ul class="widget-list">
+                                    <li><a href="/signIn">Sign In</a></li>
+                                    <li><a href="/cart">View Cart</a></li>
+                                    <li><a href="/wishlist">My Wishlist</a></li>
+                                    <li><a href="/orders">Track My Order</a></li>
+                                    <li><a href="/contact">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                    <!-- End .footer-copyright -->
+                    <figure class="footer-payments">
+                        <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                            height="20">
+                    </figure><!-- End .footer-payments -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container mobile-menu-dark">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form id="search_form1" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search"  class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+
+            <script>
+                const form1 = document.getElementById('search_form1')
+                form1.addEventListener('submit', (e)=>{
+                     e.preventDefault()
+
+                    const data = document.getElementById('search1').value
+
+                    let url = new URL(window.location.href);
+                    url.pathname = '/shop';
+                    url.searchParams.set('search', data);
+                    url.searchParams.set('page', '1');
+                    window.location.href = url.toString();
+                })                                        
+           </script>
+            
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li>
+                        <a href="/home">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="/shop">Shop</a>
+
+                    </li>
+
+                    <li>
+                        <a href="/contact">Contact</a>
+
+                    </li>
+                    <li>
+                        <a href="/wishlist">Wishlist</a>
+                    </li>
+                    <li>
+                        <a href="/cart">Cart</a>
+                    </li>
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="social-icons">
+                <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    
+ </section>
+
+    <!-- Plugins JS File -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/assets/js/api/product.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/superfish.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/wNumb.js"></script>
+    <script src="/assets/js/bootstrap-input-spinner.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/js/nouislider.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+</body>
+
+
+<!-- molla/category-fullwidth.html  22 Nov 2019 10:03:02 GMT -->
+</html>

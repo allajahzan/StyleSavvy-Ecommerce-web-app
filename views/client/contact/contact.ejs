@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Wishlist</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+         <!-- bootstrap -->
+
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+</head>
+
+<body onload="loadContactPage()">
+
+    <!-- loading -->
+    <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+
+    </section>
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+            task_alt
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+    <section  id="cart">
+        <div class="page-wrapper">
+
+            <header class="header header-5">
+                <div class="header-middle sticky-header">
+                    <div class="container">
+                        <div class="header-left">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">Toggle mobile menu</span>
+                                <i class="icon-bars"></i>
+                            </button>
+
+                            <h2 id="logo">StyleSavvy</h2>
+
+                            <nav class="main-nav">
+                                <ul class="menu sf-arrows">
+                                    <li class="home">
+                                        <p class=""><a id="a_menu_item" href="/home">Home</a></p>
+                                    </li>
+                                    <li class="products">
+                                        <p><a id="a_menu_item" href="/shop">Shop</a></p>
+                                    </li>
+
+                                    <li class="more active" id="more">
+                                        <p><a id="a_menu_item" href="/contact">Contact</a></p>
+                                    </li>
+                                </ul><!-- End .menu -->
+                            </nav><!-- End .main-nav -->
+                        </div><!-- End .header-left -->
+
+                        <div class="header-right">
+                            <div class="header-search header-search-extended header-search-visible">
+                                <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                <form id="search_form"  method="get">
+                                    <div class="header-search-wrapper">
+                                        <label for="q" class="sr-only">Search</label>
+                                        <input type="search" class="form-control" name="search" id="search"
+                                            placeholder="Search product" required autocomplete="off">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="icon-search"></i></button>
+                                    </div>
+                                </form>
+
+                                <script>
+                                        const form = document.getElementById('search_form')
+                                        form.addEventListener('submit', (e)=>{
+                                             e.preventDefault()
+
+                                            const data = document.getElementById('search').value
+
+                                            let url = new URL(window.location.href);
+                                            url.pathname = '/shop';
+                                            url.searchParams.set('search', data);
+                                            window.location.href = url.toString();
+
+                                        })                                        
+                                </script>
+                            </div>
+
+                        
+                            <% if (locals.user) { %>
+
+                                <a id="wishlist_icon" href="/wishlist" class="dropdown cart-dropdown">
+                                    <i style="font-size: 24px;" class="icon-heart-o"></i>
+                                    <span id="wishlist_count" class="cart-count"><%= locals.wishlist? locals.wishlist.items.length : 0 %></span> 
+                                </a>
+
+                            <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                                <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                                <span class="cart-count"><%= locals.cart? locals.cart.items.length : 0 %></span>      
+                              </a>
+
+                      
+                                <% const names=locals.user.name.split(' ')[0]; %>
+                        <ul class="menu">
+                            <li class="home">
+                                <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>
+                            </li>
+                        </ul>    
+                    <% } else { %>
+
+                        <a href="/wishlist" class="wishlist">
+                            <i class="icon-heart-o"></i>
+                        </a>
+
+                        <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                            <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                            <!-- <span class="cart-count">2</span>       -->
+                          </a>
+                        <ul class="menu sf-arrows">
+                            <li class="home">
+                                <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                            </li>
+                        </ul> 
+                    <% } %>
+                    
+                    
+
+                </div><!-- End .header-right -->
+            </div><!-- End .container-fluid -->
+        </div><!-- End .header-middle -->
+    </header><!-- End .header -->
+
+        
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb mt-1">
+                        <li class="breadcrumb-item"><a style="font-size: 15px; margin-right: 8px;font-weight: 500;" href="home">Home </a>  >  <a style="font-size: 15px; margin-right: 8px; margin-left: 8px;font-weight: 500;" href="/shop"> Shop </a>  >  <a style="font-size: 15px; margin-left: 8px; color: black; font-weight: 500;" > Contact</a></li>
+                    </ol>
+                </div>
+            </nav>
+        </nav>
+        
+        <div class="container">
+            <div class="page-header page-header-big text-center" style="background-image: url('/assets/images/about-header-bg.jpg');">
+                <h1 class="page-title text-white">Contact us<span class="text-white">keep in touch with us</span></h1>
+            </div>
+        </div>
+
+        <div class="page-content pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mb-2 mb-lg-0">
+                        <h5 class="mb-2">Contact Information</h5><!-- End .title mb-2 -->
+                        <p style="font-size: 15px;" class="mb-3">We're here to help! Whether you have questions, need assistance, or want to share your feedback, our team is ready to assist you. Please feel free to reach out through the form here.</p>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="contact-info">
+                                    <h3>Office</h3>
+
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="icon-map-marker"></i>
+                                            StyleSavvy Kakancheri Malappuram India 673634
+                                        </li>
+                                        <li>
+                                            <i class="icon-phone"></i>
+                                            <a href="tel:#">+91 7034661353</a>
+                                        </li>
+                                        <li>
+                                            <i class="icon-envelope"></i>
+                                            <a href="mailto:#">ahsanallajpk22@gmail.com</a>
+                                        </li>
+                                    </ul><!-- End .contact-list -->
+                                </div><!-- End .contact-info -->
+                            </div><!-- End .col-sm-7 -->
+
+                            <div class="col-sm-5">
+                                <div class="contact-info">
+                                    <h3>Timing</h3>
+
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="icon-clock-o"></i>
+                                            <span class="text-dark">Monday-Saturday</span> <br>11am-7pm IND
+                                        </li>
+                                        <li>
+                                            <i class="icon-calendar"></i>
+                                            <span class="text-dark">Sunday</span> <br>11am-6pm IND
+                                        </li>
+                                    </ul><!-- End .contact-list -->
+                                </div><!-- End .contact-info -->
+                            </div><!-- End .col-sm-5 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .col-lg-6 -->
+                    <div class="col-lg-6">
+                        <h5 class="mb-2">Got Any Questions?</h5><!-- End .title mb-2 -->
+                        <p style="font-size: 15px;" class="mb-2">Use the form below to get in touch with the sales team</p>
+
+                        <form id="submit-to-google-sheet" class="contact-form mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="cname" class="sr-only">Name</label>
+                                    <input autocomplete="off" pattern="[A-Za-z]+" title="Please enter only alphabets" name="name" style="color: black; font-size: 15px;" type="text" class="form-control" id="cname" placeholder="Name" required>
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label for="cemail" class="sr-only">Email</label>
+                                    <input autocomplete="off" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Please enter a valid email address in the format abc@gmail.com" style="color: black; font-size: 15px;" name="email" type="email" class="form-control" id="cemail" placeholder="Email" required>
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="cphone" class="sr-only">Phone</label>
+                                    <input autocomplete="off" pattern="\d{10}" title="Please enter a 10-digit phone number" maxlength="10" minlength="10"  style="color: black; font-size: 15px;" name="phone" type="tel" class="form-control" id="cphone" placeholder="Phone" required>
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label for="csubject" class="sr-only">Subject</label>
+                                    <input autocomplete="off" style="color: black; font-size: 15px;" name="subject" type="text" class="form-control" id="csubject" placeholder="Subject" required>
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                            <label for="cmessage" class="sr-only">Message</label>
+                            <textarea style="color: black; font-size: 15px;" class="form-control" cols="30" name="message" rows="4" id="cmessage" required placeholder="Message"></textarea>
+
+                            <button type="submit" id="submit_btn" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                <span>SUBMIT</span>
+                                <i class="icon-long-arrow-right"></i>
+                            </button>
+                        </form><!-- End .contact-form -->
+                    </div><!-- End .col-lg-6 -->
+                </div><!-- End .row -->
+
+                <hr style="color: rgb(203, 203, 203);" class="mt-4 mb-5">
+
+                <div class="stores mb-4 mb-lg-5">
+                    <h5 class="text-center mb-3">Our Stores</h5>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="store">
+                                <div class="row">
+                                    <div class="col-sm-5 col-xl-6">
+                                        <figure class="store-media mb-2 mb-lg-0">
+                                            <img src="assets/images/stores/img-1.jpg" alt="image">
+                                        </figure><!-- End .store-media -->
+                                    </div><!-- End .col-xl-6 -->
+                                    <div class="col-sm-7 col-xl-6">
+                                        <div class="store-content">
+                                            <h3 class="store-title">SM Street</h3><!-- End .store-title -->
+                                            <address>88 Railway Calicut, Kerala</address>
+                                            <div><a href="tel:#">+91 7034661353</a></div>
+
+                                            <h4 class="store-subtitle">Store Hours:</h4><!-- End .store-subtitle -->
+                                            <div>Monday - Saturday 11am to 7pm</div>
+                                            <div>Sunday 11am to 6pm</div>
+
+                                            <a href="https://maps.app.goo.gl/jRUZqNedPfDdYF3G6" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .store-content -->
+                                    </div><!-- End .col-xl-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .store -->
+                        </div><!-- End .col-lg-6 -->
+
+                        <div class="col-lg-6">
+                            <div class="store">
+                                <div class="row">
+                                    <div class="col-sm-5 col-xl-6">
+                                        <figure class="store-media mb-2 mb-lg-0">
+                                            <img src="assets/images/stores/img-2.jpg" alt="image">
+                                        </figure><!-- End .store-media -->
+                                    </div><!-- End .col-xl-6 -->
+
+                                    <div class="col-sm-7 col-xl-6">
+                                        <div class="store-content">
+                                            <h3 class="store-title">Kochi Lulu Mall</h3><!-- End .store-title -->
+                                            <address>88 Pine St,NY Kochi, Kerala</address>
+                                            <div><a href="tel:#">+91 9878766543</a></div>
+
+                                            <h4 class="store-subtitle">Store Hours:</h4><!-- End .store-subtitle -->
+                                            <div>Monday - Friday 9am to 8pm</div>
+                                            <div>Saturday - 9am to 2pm</div>
+                                            <div>Sunday - Closed</div>
+
+                                            <a href="https://maps.app.goo.gl/xRCGsRpyMfoMAzrG7" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End .stores -->
+            </div><!-- End .container -->
+            
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <script>
+        
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxqJhMIy6ALoov3h7nesNWVDmDANSxA4xjfXrpTTUtEQHaqfEAyVFucBphHjfxP9gL8HQ/exec';
+  const forms = document.getElementById('submit-to-google-sheet')
+
+  forms.addEventListener('submit', e => {
+    e.preventDefault()
+
+    document.getElementById('submit_btn').setAttribute('disabled','disabled')
+    document.getElementById('submit_btn').style.display = '0.8'
+   
+    fetch(scriptURL, { method: 'POST', body: new FormData(forms)})
+      .then(response => 
+        {   
+             document.getElementById('submit_btn').removeAttribute('disabled')
+             document.getElementById('submit_btn').style.display = '1'
+            forms.reset();
+            showSnackBar('Message has been sent successfully')
+      
+        })
+      .catch(error => 
+       
+       { 
+           
+        window.location.href = '/500-Server-Error'
+         
+       }
+      )
+  });
+
+  // show snack bar
+function showSnackBar(text) {
+    document.getElementById('snackbar_msg').innerHTML = text
+    const x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+}
+
+
+
+
+    </script>
+      
+
+        <footer class="footer">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget widget-about">
+                                <h2 id="footer-logo">StyleSavvy</h2>
+                                <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+
+                                <div class="social-icons">
+                                    <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                    <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                    <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                </div><!-- End .soial-icons -->
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a>About Molla</a></li>
+                                    <li><a>How to shop on StyleSavvy</a></li>
+                                    <li><a>FAQ</a></li>
+                                    <li><a>Contact us</a></li>
+                                    <li><a>Log in</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a >Payment Methods</a></li>
+                                    <li><a >Money-back guarantee!</a></li>
+                                    <li><a >Returns</a></li>
+                                    <li><a >Shipping</a></li>
+                                    <li><a >Terms and conditions</a></li>
+                                    <li><a >Privacy Policy</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="/signIn">Sign In</a></li>
+                                    <li><a href="/cart">View Cart</a></li>
+                                    <li><a href="/wishlist">My Wishlist</a></li>
+                                    <li><a href="/orders">Track My Order</a></li>
+                                    <li><a href="/contact">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                    <!-- End .footer-copyright -->
+                    <figure class="footer-payments">
+                        <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                            height="20">
+                    </figure><!-- End .footer-payments -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+                    </div><!-- End .page-wrapper -->
+                    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+                    <div class="mobile-menu-container mobile-menu-dark">
+                        <div class="mobile-menu-wrapper">
+                            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+            
+                            <form id="search_form1" method="get" class="mobile-search">
+                                <label for="mobile-search" class="sr-only">Search</label>
+                                <input type="search"  class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                            </form>
+
+                            <script>
+                                const form1 = document.getElementById('search_form1')
+                                form1.addEventListener('submit', (e)=>{
+                                     e.preventDefault()
+                
+                                    const data = document.getElementById('search1').value
+                
+                                    let url = new URL(window.location.href);
+                                    url.pathname = '/shop';
+                                    url.searchParams.set('search', data);
+                                    window.location.href = url.toString();
+                                })                                        
+                           </script>
+                            
+                            <nav class="mobile-nav">
+                                <ul class="mobile-menu">
+                                    <li>
+                                        <a href="/home">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="/shop">Shop</a>
+                
+                                    </li>
+                
+                                    <li class="active">
+                                        <a href="/contact">Contact</a>
+                
+                                    </li>
+                                    <li>
+                                        <a href="/wishlist">Wishlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="/cart">Cart</a>
+                                    </li>
+                                    <li>
+                                        <a href="/profile">Profile</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                            <div class="social-icons">
+                                <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+    </section>
+
+    <div class="modal fade" id="remove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- <img id="img_cart" src="/assets/images/demos/demo-5/cart-unscreen.gif" alt="" style="position: absolute; top: 10em; left: 50%; transform: translateX(-120%); z-index: 9999; width: 45%;"> -->
+            <div class="modal-content">
+                <div class="modal-body text-center"> <!-- Added text-center class to center align text -->
+                    <h6>Are you sure you want to remove this item?</h6>
+                </div>
+                <div class="modal-footer justify-content-center"> <!-- Added justify-content-center class to center align buttons -->
+                    <button class="close_btn" data-bs-dismiss="modal">No</button>
+                    <button id="confirm_btn" class="button2">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plugins JS File -->
+    <script src="/assets/js/api/contact.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/superfish.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/bootstrap-input-spinner.js"></script>
+    <!-- Main JS File --> 
+    <script src="/assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+
+<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+
+</html>

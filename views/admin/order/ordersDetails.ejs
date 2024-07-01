@@ -1,0 +1,482 @@
+<!doctype html>
+<html class="no-js " lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+    <title>StyleSavvy-Admin</title>
+ 
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="/assets1/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- JQuery DataTable Css -->
+    <link rel="stylesheet" href="/assets1/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets1/css/style.min.css">
+
+    <link rel="stylesheet" href="/assets1/css/myStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    
+</head>
+
+<body class="theme-blush" onload="loadOrders()">
+
+    <!-- Page Loader -->
+    <section id="loading">
+        <div class="loader"></div>
+        <p>Loading</p>
+    </section>
+
+    <!-- Left Sidebar -->
+    <section id="products">
+        <aside id="leftsidebar" class="sidebar">
+            <div class="navbar-brand">
+                <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
+                <a href="/admin/dashboard"><span class="m-l-10">StyleSavvy</span></a>
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <div class="user-info">
+                            <a class="image" href="/admin/dashboard"><img src="/assets1/images/admin.jpeg"
+                                    alt="User"></a>
+                            <div class="detail">
+                                <h4>
+                                    <%= locals.admin%>
+                                </h4>
+                                <p>Admin</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="dashboard" class="dashboard"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+                    </li>
+
+                    <li> <a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-account"></i><span>Users</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="activeUsers">Active Users</a></li>
+                            <li><a href="blockedUsers">Blocked Users</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="active"> <a href="orders"><i class="zmdi zmdi-shopping-basket listed_products"></i><span>Orders</span></a>
+                    </li>
+                    <!-- <li> <a href="javascript:void(0);"><i class="zmdi zmdi-refresh"></i><span>returns</span></a></li> -->
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span
+                                class="product">Products</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="addProducts">Products Add</a></li>
+                            <li><a href="listedProducts">Products Listed</a></li>
+                            <li><a href="unlistedProducts">Products Unlisted</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i
+                                class="zmdi zmdi-card-giftcard"></i><span>Coupons</span></a>
+                        <ul class="ml-menu">
+                            <li><a  href="addCoupons">Coupons Add</a></li>
+                            <li><a  href="listsCoupons">Coupons Lists</a></li>    
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="fas fa-percentage"></i><span>Offers</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="addOffers" >Offers Add</a></li>
+                            <li><a href="listsOffers" >Offers Lists</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-male-female"></i>
+                        <span>Types</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="listedTypes">Types Listed</a></li>
+                            <li><a href="unlistedTypes">Types Unlisted</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-folder"></i>
+                        <span>Categories</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="listedCategories">Categories Listed</a></li>
+                            <li><a href="unlistedCategories">Categories Unlisted</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-crop"></i>
+                        <span>Size</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="listedSizes">Size Listed</a></li>
+                            <li><a href="unlistedSizes">Size Unlisted</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-palette"></i>
+                        <span>Colors</span></a>
+                        <ul class="ml-menu">
+                            <li><a href="listedColors">Colors Listed</a></li>
+                            <li><a href="UnlistedColors">Colors Unlisted</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin/salesReports"><i class="zmdi zmdi-trending-up"></i><span>Sales Report</span></a></li>   
+                    <li><a href="/admin/logout" ><i class="zmdi zmdi-power"></i><span>Sign-Out</span></a></li>  
+
+
+                </ul>
+            </div>
+        </aside>
+
+        <section class="content">
+            <div class="body_scroll">
+                <div class="block-header">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-6 col-sm-12">
+                            <h2>Orders</h2>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item active">Orders</li>
+                                <li class="breadcrumb-item active">Order Details</li>
+                            </ul>
+                            <button style="z-index: 1;" class="btn btn-primary btn-icon mobile_menu" type="button"><i
+                                    class="zmdi zmdi-sort-amount-desc"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <!-- Basic Examples -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <!-- <div class="header">
+                                    <h2><strong>Active</strong> Users</h2>
+                                </div> -->
+                                <div class="body">
+
+                              
+                                    <div class="container-fluid">
+                                        <div class="row" style="position: relative; top: -30px; display: flex; justify-content: space-between;">
+                                            <% if(locals.orders) {%>
+
+                                                <div>
+                                                    <!-- <h4 style="font-size: 16px; font-weight: bold;"></h4> -->
+                                                    <h4 style="font-size: 16px; font-weight: bold;">Customer Info:</h4>
+                                                    <p><%= locals.orders.address.name %></p> 
+                                                    <p><%= locals.orders.address.phoneNo %></p>
+                                                </div>
+                                                <div>
+                                                    <h4 style="font-size: 16px; font-weight: bold;">Delivery Address:</h4>
+                                                    <p><%= locals.orders.address.address %></p>
+                                                    <p><%= locals.orders.address.city %>, <%= locals.orders.address.district %>, <%= locals.orders.address.pincode %></p>
+                                                </div>
+
+                                            <% } %>    
+                                        </div>
+                                    </div>
+                                    
+                                   
+
+                                    <div class="table-responsive">
+                                        <table
+                                            class="table table-bordered table-striped table-hover js-basic-example dataTable">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+                                                    <th>Product&nbsp;Name</th>
+                                                    <!-- <th>Category</th> -->
+                                                    <th>Variant</th>
+                                                    <th>Price</th>
+                                                    <th>Offer</th>
+                                                    <th>Last&nbsp;Price</th>
+                                                    <th>Qty</th>
+                                                    <th>Total&nbsp;Price</th>
+                                                    <th>Discount&nbsp;Amount</th>
+                                                    <th>Last&nbsp;Total</th>
+                                                    <th>Payment&nbsp;Status</th>
+                                                    <th>Order&nbsp;Status</th>
+                                                    <th>Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Image</th>
+                                                    <th>Product&nbsp;Name</th>
+                                                    <!-- <th>Category</th> -->
+                                                    <th>Variant</th>
+                                                    <th>Price</th>
+                                                    <th>Offer</th>
+                                                    <th>Last&nbsp;Price</th>
+                                                    <th>Qty</th>
+                                                    <th>Total&nbsp;Price</th>
+                                                    <th>Discount&nbsp;Amount</th>
+                                                    <th>Last&nbsp;Total</th>
+                                                    <th>Payment&nbsp;Status</th>
+                                                    <th>Order&nbsp;Status</th>
+                                                    <th>Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody id="tableBody_listed">
+
+                                                <% if(locals.orders) {%>
+
+                                                <% locals.orders.orderedItems.forEach((item, index)=>{ %>
+
+                                                    <tr>
+
+                                                        <td class="image_" style="cursor: pointer; width: 10%;">
+                                                            <img src="/products/uploads/<%= item.image %>" alt="">
+                                                        </td>
+                                                       
+                                                        <td>
+                                                            <%= item.product_name%>
+                                                        </td>
+                                                      
+                                                        <td>
+                                                            <%= item.type%>, <%= item.category %>, <%= item.color%>, <%= item.size %>
+                                                        </td>
+
+
+                                                        <td>
+                                                            ₹ <%= item.price %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= item.offer %>%
+                                                        </td>
+
+                                                        <td>
+                                                            <%= item.realPrice %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= item.quantity %>
+                                                        </td>
+
+                                                        <td id="item_totalPrice<%= item._id %>">
+                                                            ₹ <%= item.totalPrice%>
+                                                        </td>
+
+                                                        <td id="item_discountAmount<%= item._id %>">
+                                                            ₹ <%= item.discountAmount%>
+                                                        </td>
+
+                                                        <td id="item_totalAmount<%= item._id %>">
+                                                            ₹ <%= item.totalAmount%>
+                                                        </td>
+
+                                                        <td id="<%= item._id %>paymentSts">
+                                                        <% if(item.paymentStatus === 'Pending'){ %>
+                                                            <p style="color: orange; font-weight: bold;">
+                                                                <%= item.paymentStatus %>
+                                                            </p>
+                                                        <% } else if(item.paymentStatus === 'Refunded') { %>
+                                                            <p style="color: green; font-weight: bold;">
+                                                                <%= item.paymentStatus %>
+                                                            </p>
+                                                        <% } else { %>
+                                                            <p style="color: green; font-weight: bold;">
+                                                                <%= item.paymentStatus %>
+                                                            </p>
+                                                        <% } %> 
+                                                        </td> 
+
+                                                      
+
+                                                        <td id="<%= item._id %>orderSts">
+                                                            <% if ((locals.orders.paymentMethod === 'COD' || locals.orders.paymentMethod === 'Wallet') && item.orderStatus === 'Pending') { %>
+                                                            <p style="font-weight: bold; color: green;">  
+                                                                Confirmed
+                                                            </p>
+                                                            <% } else if (locals.orders.paymentMethod === 'Online' && item.paymentStatus === 'Pending') { %>
+                                                                <p style="font-weight: bold; color: orange;">  
+                                                                    <%= item.orderStatus %>
+                                                                </p>
+                                                            <% } else if (locals.orders.paymentMethod === 'Online' && item.paymentStatus === 'Success' && item.orderStatus === 'Pending') { %>
+                                                                <p style="font-weight: bold; color: green;">  
+                                                                    Confirmed
+                                                                </p>
+                                                            <% } else if(item.orderStatus === 'Cancelled') { %>
+                                                                <p style="font-weight: bold; color: red;">  
+                                                                    <%= item.orderStatus %>
+                                                                </p>
+                                                            <% } else if(item.orderStatus === 'RequestedReturn') { %>
+                                                                <p style="font-weight: bold; color: orange;">  
+                                                                    <%= item.orderStatus %>
+                                                                </p>
+                                                            <% } else if(item.orderStatus === 'RequestAccepted') { %>
+                                                                <p style="font-weight: bold; color: black;">  
+                                                                    Return Request <span style="color: green;">Accepted</span>
+                                                                </p>
+                                                            <% } else if(item.orderStatus === 'RequestRejected') { %>
+                                                                <p style="font-weight: bold; color: black;">  
+                                                                    Return Request <span style="color: red;">Rejected</span>
+                                                                </p>          
+                                                            <% } else if(item.orderStatus === 'Returned') { %>
+                                                                <p style="font-weight: bold; color: green;">  
+                                                                    <%= item.orderStatus %>
+                                                                </p>
+                                                            <% } else { %>
+                                                                <p style="font-weight: bold; color: green;">  
+                                                                    <%= item.orderStatus %>
+                                                                </p> 
+                                                            <% } %>    
+                                                                   
+                                                       
+                                                        </td>
+
+                                                        <td id="<%= item._id %>changeSts">
+                                                            <div class="form-group">
+                                                                <% if (item.orderStatus === 'Delivered') { %>
+                                                                    <select disabled style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Status</option>
+                                                                    </select>
+                                                                <% } else if (item.orderStatus === 'Cancelled') { %>
+                                                                    <select disabled style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);"  class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Status</option>
+                                                                    </select>
+                                                                <% } else if (item.orderStatus === 'RequestedReturn') { %>
+                                                                    <select onchange="requestStatus('<%= item._id %>')" style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" id="select_request<%= item._id %>" class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Request</option>
+                                                                        <option value="Accept">Accept</option>
+                                                                        <option value="Reject">Reject</option>
+                                                                    </select>
+                                                                <% } else if (item.orderStatus === 'RequestAccepted') { %>
+                                                                    <select onchange="recieveReturn('<%= item._id %>')" style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" id="select_recieve<%= item._id %>" class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Return</option>
+                                                                        <option value="Recieved">Recieved</option>
+                                                                    </select> 
+                                                                <% } else if (item.orderStatus === 'RequestRejected') { %>
+                                                                    <select disabled style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Request</option>  
+                                                                    </select>           
+                                                                <% } else if (item.orderStatus === 'Returned') { %>
+                                                                    <select disabled style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" class="show-tick ms select2"
+                                                                        data-placeholder="Search and select" required>
+                                                                        <option disabled selected hidden>Status</option>
+                                                                    </select> 
+                                                                <% } else { %>
+                                                                    <% if(locals.orders.paymentMethod !== 'Online'){%>
+                                                                        <select onchange="changeStatus('<%= item._id %>')" style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" id="select_status<%= item._id %>" class="show-tick ms select2"
+                                                                            data-placeholder="Search and select" required>
+                                                                            <option disabled selected hidden>Status</option>
+                                                                            <option value="Shipped" <%= item.orderStatus === 'Shipped' ? 'disabled' : '' %>>Shipped</option>
+                                                                            <option value="Delivered" <%= item.orderStatus === 'Pending' ? 'disabled' : '' %>>Delivered</option>
+                                                                        </select>
+                                                                    <% } else {%>
+                                                                        <% if(item.paymentStatus === 'Success') {%>
+                                                                            <select onchange="changeStatus('<%= item._id %>')" style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" id="select_status<%= item._id %>" class="show-tick ms select2"
+                                                                                data-placeholder="Search and select" required>
+                                                                                <option disabled selected hidden>Status</option>
+                                                                                <option value="Shipped" <%= item.orderStatus === 'Shipped' ? 'disabled' : '' %>>Shipped</option>
+                                                                                <option value="Delivered" <%= item.orderStatus === 'Pending' ? 'disabled' : '' %>>Delivered</option>
+                                                                            </select>
+                                                                        <% } else { %>
+                                                                            <select disabled onchange="changeStatus('<%= item._id %>')" style="border: none; border-style: solid; border-width: 1px; border-color: rgb(218, 218, 218);" id="select_status<%= item._id %>" class="show-tick ms select2"
+                                                                                data-placeholder="Search and select" required>
+                                                                                <option disabled selected hidden>Status</option>
+                                                                            </select>
+                                                                         <% } %>       
+                                                                     <% } %>   
+                                                                <% } %>
+                                                                
+                                                            
+                                                                        
+                                                                        <form id="order_details<%= item._id %>" action="">
+                                                                            <input type="hidden" value="<%= locals.orders.customerId %>">
+                                                                            <input type="hidden" value="<%= locals.orders._id %>">
+                                                                            <input type="hidden" value="<%= index %>">
+                                                                        </form>  
+                                                            </div>
+                                                        </td>
+                                       
+
+                                                    </tr>
+
+                                                    <% }) %>
+
+                                                 
+                                            <% } %>
+                                                  
+                                            </tbody>
+                                          
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+
+    <!-- modal -->
+
+ 
+
+   <!-- modal for unlist or list  -->
+
+    <div class="modal fade" id="unlist" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+             <div class="modal-body">
+                <p>Do you wanna unlist this product&nbsp;<span id="name_" class="type_name"></span></p>
+             </div>
+             <div class="modal-footer">
+                 <button class="close_btn" data-bs-dismiss="modal">No</button>
+                 <button id="confirm_btn" data-bs-dismiss="modal" class="button2">Yes</button>
+             </div>
+         </div>
+     </div>
+    </div>
+
+        <div class="modal fade" id="message" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropokLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                 <p id="error_p"></p><span id="error_symbol" class="material-symbols-outlined"></span>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button class="close_btn" data-bs-dismiss="modal">Close</button> -->
+                  <button id="ok_btn" data-bs-dismiss="modal" class="button2">OK</button>  
+                </div>
+              </div>
+            </div>
+        </div>    
+
+
+
+    <!-- Jquery Core Js -->
+    <script src="/assets1/js/pages/api/order/orderDetails.js"></script>
+    <script src="/assets1/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="/assets1/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/assets1/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets1/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+
+    <script src="/assets1/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="/assets1/js/pages/tables/jquery-datatable.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+
+</html>

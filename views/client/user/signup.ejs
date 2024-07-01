@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SignUp</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+
+</head>
+
+<body onload="loadSignUp()">
+
+
+    <script src="/assets/js/api/farebase.js" defer type="module" ></script>
+
+
+    <div id="snackbar">
+        <span style="color: red;" id="snackbar_icon" class="material-symbols-outlined">
+            error
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+
+
+    <section id="signup_page">
+        <div class="page-wrapper">
+            <header class="header header-5">
+                <div class="header-middle sticky-header">
+                    <div class="container">
+                        <div class="header-left">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">Toggle mobile menu</span>
+                                <i class="icon-bars"></i>
+                            </button>
+    
+                           <h2 id="logo">StyleSavvy</h2>
+    
+                            <nav class="main-nav">
+                                <ul class="menu sf-arrows">
+                                    <li  class="home">
+                                        <p class=""><a id="a_menu_item" href="/home">Home</a></p>
+                                    </li>
+                                    <li class="products">
+                                        <p><a id="a_menu_item"  href="/shop">Shop</a></p>
+                                    </li>
+                                
+                                
+                                    <li class="more" id="more">
+                                        <p><a id="a_menu_item" href="/contact">Contact</a></p>
+    
+                                        <!-- <ul>
+                                            <li><a href="elements-products.html">About</a></li>
+                                            <li><a href="elements-typography.html">Contact</a></li>
+                                        </ul> -->
+                                    </li>
+                                </ul><!-- End .menu -->
+                            </nav><!-- End .main-nav -->
+                        </div><!-- End .header-left -->
+    
+                        <div class="header-right">
+                            <div class="header-search header-search-extended header-search-visible">
+                                <a class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                <form id="search_form"  method="get">
+                                    <div class="header-search-wrapper">
+                                        <label for="q" class="sr-only">Search</label>
+                                        <input type="search" class="form-control" name="search" id="search"
+                                            placeholder="Search product" required autocomplete="off">
+                                        <button class="btn btn-primary" style="background-color: transparent;" type="submit"><i
+                                                class="icon-search"></i></button>
+                                    </div>
+                                </form>
+
+                                <script>
+                                        const form = document.getElementById('search_form')
+                                        form.addEventListener('submit', (e)=>{
+                                             e.preventDefault()
+
+                                            const data = document.getElementById('search').value
+
+                                            let url = new URL(window.location.href);
+                                            url.pathname = '/shop';
+                                            url.searchParams.set('search', data);
+                                            window.location.href = url.toString();
+
+                                        })                                        
+                                </script>
+                            </div>
+                            
+                            <a href="/wishlist" class="wishlist">
+                                <i class="icon-heart-o"></i>
+                            </a>
+    
+                            <div style="display: flex;" class="cart-dropdown">
+                                <a href="" >
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                                <!-- <span class="cart-count">2</span> -->
+                            </div>
+    
+    
+                            <ul class="menu sf-arrows">
+                                <li  class="active home">
+                                    <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                                </li>
+                            </ul>  
+    
+                        </div><!-- End .header-right -->
+                    </div><!-- End .container-fluid -->
+                </div><!-- End .header-middle -->
+            </header><!-- End .header -->
+    
+            <main class="main">
+
+
+                <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+                    style="background-image: url('/assets/images/demos/demo-5/slider/slide-4.jpg'); background-size: cover;">
+                    <div class="container">
+                        <div class="form-box">
+                            <div class="form-tab">
+                                <ul class="nav nav-pills nav-fill" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/signIn">Sign In</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a style="border-width: 0px 0px 2px 0px; border-color: #bf8040; border-style: solid;"
+                                            class="nav-link active" href="/signUp">Sign Up</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                        aria-labelledby="register-tab-2">
+
+                                        <!-- <form id="signup_form">
+
+                                            <div class="form-group">
+                                             
+                                                    <label for="register-password-2">Name *</label>
+                                                
+                                                    <input type="text" class="form-control" name="name" required
+                                                        autocomplete="off">
+                                                    <p id="name_error" style="font-weight: 500; color: red; font-size: 13px;"></p>    
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="register-email-2">Email *</label>
+
+                                           
+                                                    <input type="email" class="form-control" name="email" required
+                                                        autocomplete="off">
+                                                    <p id="email_error" style="font-weight: 500; color: red; font-size: 13px;"></p>   
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="register-password-2">Phone Number *</label>
+                                
+                                                    <input type="text" class="form-control" name="phoneNo" required
+                                                        autocomplete="off">
+                                                    <p id="phone_error" style="font-weight: 500; color: red; font-size: 13px;"></p>   
+                                             
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Password *</label>
+                                                <div id="field_div">
+                                                    <input type="password" class="form-control" name="password" id="password1" required
+                                                        autocomplete="off">
+                                                
+                                                    <span onclick="showPasswordSignUp1()" id="password_visibility1" class="material-symbols-outlined">
+                                                        visibility_off
+                                                    </span>
+
+                                                </div>
+                                                <p id="p1_error" style="font-weight: 500; color: red; font-size: 13px;"></p>   
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Confirm Password *</label>
+                                                <div id="field_div">
+                                                    <input type="password" class="form-control" name="cpassword" id="password2" 
+                                                        required autocomplete="off">
+                                                    
+                                                    <span onclick="showPasswordSignUp2()" id="password_visibility2" class="material-symbols-outlined">
+                                                        visibility_off
+                                                    </span>
+                                                </div>
+                                                <p id="p2_error" style="font-weight: 500; color: red; font-size: 13px;"></p>  
+                                            </div>
+
+                                            <div class="form-footer">
+                                                <button id="signup_btn" style="padding-top: 8.5px; padding-bottom: 8.5px;" type="submit" class="btn btn-outline-primary-2">
+                                                    <span>Sign Up</span>
+                                                    <i class="icon-long-arrow-right"></i>
+                                                </button>
+
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="register-policy-2" required>
+                                                    <label class="custom-control-label" for="register-policy-2">I agree
+                                                        to
+                                                        the <a>privacy policy</a> *</label>
+                                                </div>
+                                            </div>
+                                        </form> -->
+
+                                        <form id="signup_form">
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Name *</label>
+                                                <div id="field_div">
+                                                    <input type="text" class="form-control" name="name" required
+                                                        autocomplete="off">
+                                                    <span id="name_error" class="material-symbols-outlined">
+                                                     
+                                                    </span>
+                                                </div>
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-group">
+                                                <label for="register-email-2">Email *</label>
+                                                <div id="field_div">
+                                                    <input type="email" class="form-control" name="email" required
+                                                        autocomplete="off">
+                                                    <span id="email_error" class="material-symbols-outlined">
+
+                                                    </span>
+                                                </div>
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Phone Number *</label>
+                                                <div id="field_div">
+                                                    <input type="text" class="form-control" name="phoneNo" required
+                                                        autocomplete="off">
+                                                    <span id="phoneNo_error" class="material-symbols-outlined">
+
+                                                    </span>
+                                                </div>
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Password *</label>
+                                                <div id="field_div">
+                                                    <input type="password" class="form-control" name="password" id="password1" required
+                                                        autocomplete="off">
+                                                    <span id="password_error" class="material-symbols-outlined">
+
+                                                    </span>
+                                                    <span onclick="showPasswordSignUp1()" id="password_visibility1" class="material-symbols-outlined">
+                                                        visibility_off
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="register-password-2">Confirm Password *</label>
+                                                <div id="field_div">
+                                                    <input type="password" class="form-control" name="cpassword" id="password2" 
+                                                        required autocomplete="off">
+                                                    <span id="cpassword_error" class="material-symbols-outlined">
+
+                                                    </span>
+                                                    <span onclick="showPasswordSignUp2()" id="password_visibility2" class="material-symbols-outlined">
+                                                        visibility_off
+                                                    </span>
+                                                </div>
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-footer">
+                                                <button id="signup_btn" type="submit" class="btn btn-outline-primary-2">
+                                                    <span>Sign Up</span>
+                                                    <i class="icon-long-arrow-right"></i>
+                                                </button>
+
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="register-policy-2" required>
+                                                    <label class="custom-control-label" for="register-policy-2">I agree
+                                                        to
+                                                        the <a>privacy policy</a> *</label>
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .form-footer -->
+                                        </form>
+
+                                        <div class="form-choice">
+                                            <p class="text-center">or sign in with</p>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <a id="google_login_btn" class="btn btn-login btn-g">
+                                                        <i class="icon-google"></i>
+                                                        Login With Google
+                                                    </a>
+                                                </div><!-- End .col-6 -->
+                                                <!-- <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-login  btn-f">
+                                                        <i class="icon-facebook-f"></i>
+                                                        Login With Facebook
+                                                    </a>
+                                                </div>End .col-6 -->
+                                            </div><!-- End .row -->
+                                        </div><!-- End .form-choice -->
+                                    </div><!-- .End .tab-pane -->
+                                </div><!-- End .tab-content -->
+                            </div><!-- End .form-tab -->
+                        </div><!-- End .form-box -->
+                    </div><!-- End .container -->
+                </div><!-- End .login-page section-bg -->
+            </main><!-- End .main -->
+
+            <footer class="footer">
+                <div class="footer-middle">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="widget widget-about">
+                                    <h2 id="footer-logo">StyleSavvy</h2>
+                                    <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+    
+                                    <div class="social-icons">
+                                        <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                        <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                        <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                        <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                    </div><!-- End .soial-icons -->
+                                </div><!-- End .widget about-widget -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+    
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="widget">
+                                    <h4 class="widget-title">Useful Links</h4>
+    
+                                    <ul class="widget-list">
+                                        <li><a>About Molla</a></li>
+                                        <li><a>How to shop on StyleSavvy</a></li>
+                                        <li><a>FAQ</a></li>
+                                        <li><a>Contact us</a></li>
+                                        <li><a>Log in</a></li>
+                                    </ul><!-- End .widget-list -->
+                                </div><!-- End .widget -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+    
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="widget">
+                                    <h4 class="widget-title">Customer Service</h4>
+    
+                                    <ul class="widget-list">
+                                        <li><a >Payment Methods</a></li>
+                                        <li><a >Money-back guarantee!</a></li>
+                                        <li><a >Returns</a></li>
+                                        <li><a >Shipping</a></li>
+                                        <li><a >Terms and conditions</a></li>
+                                        <li><a >Privacy Policy</a></li>
+                                    </ul><!-- End .widget-list -->
+                                </div><!-- End .widget -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+    
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="widget">
+                                    <h4 class="widget-title">My Account</h4>
+    
+                                    <ul class="widget-list">
+                                        <li><a href="/signIn">Sign In</a></li>
+                                        <li><a href="/cart">View Cart</a></li>
+                                        <li><a href="/wishlidt">My Wishlist</a></li>
+                                        <li><a href="/orders">Track My Order</a></li>
+                                        <li><a href="/contact">Help</a></li>
+                                    </ul><!-- End .widget-list -->
+                                </div><!-- End .widget -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .footer-middle -->
+    
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                        <!-- End .footer-copyright -->
+                        <figure class="footer-payments">
+                            <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                                height="20">
+                        </figure><!-- End .footer-payments -->
+                    </div><!-- End .container -->
+                </div><!-- End .footer-bottom -->
+            </footer><!-- End .footer -->
+        </div><!-- End .page-wrapper -->
+        <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+        <div class="mobile-menu-container mobile-menu-dark">
+            <div class="mobile-menu-wrapper">
+                <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+                <form id="search_form1" method="get" class="mobile-search">
+                    <label for="mobile-search" class="sr-only">Search</label>
+                    <input type="search" style="color: white; font-size: 12px;" class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                </form>
+
+                <script>
+                    const form1 = document.getElementById('search_form1')
+                    form1.addEventListener('submit', (e)=>{
+                         e.preventDefault()
+    
+                        const data = document.getElementById('search1').value
+    
+                        let url = new URL(window.location.href);
+                        url.pathname = '/shop';
+                        url.searchParams.set('search', data);
+                        window.location.href = url.toString();
+                    })                                        
+               </script>
+                
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
+                        <li>
+                            <a href="/home">Home</a>
+                        </li>
+                        <li>
+                            <a href="/shop">Shop</a>
+    
+                        </li>
+    
+                        <li>
+                            <a href="/contact">Contact</a>
+    
+                        </li>
+                        <li>
+                            <a href="/wishlist">Wishlist</a>
+                        </li>
+                        <li>
+                            <a href="/cart">Cart</a>
+                        </li>
+                        <li class="active">
+                            <a href="/signIn">Login</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                    <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                    <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                    <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                </div><!-- End .social-icons -->
+            </div><!-- End .mobile-menu-wrapper -->
+        </div>
+    </section>
+
+    <!-- loading -->
+    <section id="loadings">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+    </section>
+
+
+    <section id="verify_page">
+        <header  style="padding: 13px 0px 8px 0px;" class="header header-5">
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <h2 id="logo">StyleSavvy</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="login-page verify_page">
+                <div class="container cont">
+                    <p class="p_heading" style="text-align: center;">Please enter the OTP send your email<br><span id="verify_email"></span></p>
+                    <div style="position: relative;" class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <li class="nav-item">
+                                    <a style="border-width: 0px 0px 2px 0px; border-color: #bf8040; border-style: solid;"
+                                        class="nav-link active">Verify Email</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+
+                                <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                    aria-labelledby="register-tab-2">
+
+                                    <form id="verify_form">
+                                        <div class="form-group">
+                                            <label for="register-password-2">Enter the OTP *</label>
+                                            <div id="field_div">
+                                                <input type="text" class="form-control" name="otp" pattern="[1-9][0-9]*" maxlength="6" minlength="6" required
+                                                    autocomplete="off">
+                                                <span id="otp_error" class="material-symbols-outlined">
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div dis class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>Verify Email</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                            <div id="otp_div">
+                                                <p id="otp_p">Resend OTP in <span id="timer_otp"></span> seconds</p>
+                                                <a id="otp_button">Resend OTP?</a>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-group -->
+                                    </form>
+                                    <!-- End .form-choice -->
+                                </div><!-- .End .tab-pane -->
+                            </div><!-- End .tab-content -->
+                        </div><!-- End .form-tab -->
+                        <div id="toast-div">
+                            <h6>Email Verified Successfully</h6>
+                            <span id="" class="material-symbols-outlined icon">
+                             verified
+                            </span>
+                        </div>
+                    </div><!-- End .form-box -->
+
+                    
+
+                </div><!-- End .container -->
+            </div><!-- End .login-page section-bg -->
+        </main>
+
+    </section>
+
+    <!-- Plugins JS File -->
+    <script src="/assets/js/api/signup.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/superfish.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+
+</body>
+
+
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
+
+</html>

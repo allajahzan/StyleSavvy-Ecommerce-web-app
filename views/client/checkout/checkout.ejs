@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Checkout</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+         <!-- bootstrap -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+</head>
+
+<body onload="loadCheckouPage()">
+
+    <!-- loading -->
+    <!-- <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+
+    </section> -->
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+            task_alt
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+    <section  style="display: block;" id="checkout">
+        <div class="page-wrapper">
+
+            <header style="padding: 13px 0px 8px 0px;" class="header header-5 ">
+                <div class="header-middle sticky-header">
+                    <div class="container">
+                        <div class="header-left">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">Toggle mobile menu</span>
+                                <i class="icon-bars"></i>
+                            </button>
+
+                            <h2 id="logo">StyleSavvy</h2>
+                        </div>
+                </div><!-- End .header-right -->
+            </div><!-- End .container-fluid -->
+        </div><!-- End .header-middle -->
+    </header><!-- End .header -->
+
+        <main class="main">
+        	
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                    <div class="container d-flex align-items-center">
+                        <ol class="breadcrumb mt-1">
+                            <li class="breadcrumb-item"><a style="font-size: 15px; margin-right: 8px;font-weight: 500;" href="home">Home </a>  >  <a style="font-size: 15px; margin-right: 8px; margin-left: 8px;font-weight: 500;" href="/shop"> Shop </a>  >  <a style="font-size: 15px; margin-left: 8px; color: black;font-weight: 500;" > Checkout</a></li>
+                        </ol>
+                    </div>
+                </nav>
+            </nav>
+
+            <div class="page-content">
+            	<div class="cart">
+   
+                    
+                    <% if(locals.cart && locals.items.length >0){ %>  
+	                <div class="container">
+
+
+	                	<div class="row">
+                            
+	                	<div class="col-lg-8">
+
+                            <div class="checkout-discount">
+                                <form id="coupon_form">
+                                    <button type='button' style="margin-bottom: 0px; font-size: 15px; color: black;" class="form-control" id="checkout-discount-input">Have coupon? <span style="color: #bf8040;">Click below to see coupons</span></button>
+                                    <label for="checkout-discount-input" class="text-truncate"></label>
+                                </form>
+                            </div>
+
+                            <% if(locals.coupons.length > 0){ %>
+                            <p class="d-inline-flex gap-1">
+                                <!-- data-bs-toggle="collapse" data-bs-target=".mm" aria-expanded="false" aria-controls="addresses" -->
+                                <div data-bs-toggle="collapse" data-bs-target=".xx" role="button" aria-expanded="false" aria-controls="collapseExample"style="height: 50px; background-color: #c96; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                                    <h2 style="color: white; margin-left: 12px;" class="checkout-title">View Coupons </h2><!-- End .checkout-title -->
+                                    <!-- <p style="font-weight: 500; font-size: 16px; color: white; margin-right: 10px;" id="change_address_btn" value="0">Change</p> -->
+                                </div>
+                              </p>
+                              <div class="collapse xx" id="collapseExample">
+                                <div id="show_coupons" style="padding: 15px; padding-top: 20px; border-color: #e6e6e6; border-style: solid; border-width: 1px;">
+                                   <% locals.coupons.forEach((coupon)=>{ %>
+                                     <div class="row">
+                                        <div class="col-2 col-sm-2 col-md-2 img-div">
+                                            <img style="width: 70%;" src="/assets/images/demos/demo-5/coupon2.png" alt="">
+                                        </div>
+                                        <div class="col-10 col-sm-10 col-md-10 name-div">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                     <p id="product_name" style=" overflow: hidden;text-overflow: ellipsis; white-space: nowrap;width: 100%;"><%= coupon.coupon_code %> (<%= coupon.discription %>)</p>
+                                                     <p id="category_of_p"><span style="color:#bf8040; font-weight:500; font-size:16px"><%= coupon.discount %>% discount<span style="color: black; font-weight: normal;"> for purchase above ₹ <%= coupon.min_amount %></span></span></p>
+                                                    
+                                                </div>
+                                                <div  style="display:flex;justify-content:end;" class="col-3">
+                                                <button class="coupon" type="button"  id="btn<%= coupon._id %>" onclick="applycoupon(`<%= coupon._id %>`)" style="background-color:white; border:none;color:green; font-weight: 500;">Apply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <% }) %>
+                                </div>
+                              </div>
+                            <% } else {%>
+                                <p class="d-inline-flex gap-1">
+                                    <div data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls=""style="height: 50px; background-color: #c96; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                                        <h2 style="color: white; margin-left: 12px;" class="checkout-title">No coupons are available</h2><!-- End .checkout-title -->
+                                        <!-- <p style="font-weight: 500; font-size: 16px; color: white; margin-right: 10px;" id="change_address_btn" value="0">Change</p> -->
+                                    </div>
+                                  </p>
+                            <% } %>    
+
+
+                            <% if(locals.address && locals.address.addresses.length!==0) {%>
+                            <div id="address_section">
+                            <p class="d-inline-flex gap-1">
+                               
+                                <div onclick="clearAll()" data-bs-toggle="collapse" data-bs-target=".mm" aria-expanded="false" aria-controls="addresses" style="height: 50px; background-color: #c96; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                                    <h2 style="color: white; margin-left: 12px;" class="checkout-title">Delivery Address</h2><!-- End .checkout-title -->
+                                    <p style="font-weight: 500; font-size: 16px; color: white; margin-right: 10px;" id="change_address_btn" value="0">Change</p>
+                                </div>
+            
+                            </p>
+
+                              <div style="padding: 15px; padding-top: 20px; border-color: #e6e6e6; border-style: solid; border-width: 1px;">
+                                <form id="address_form_selected" action="">
+                                     
+                                            <div style="position: relative;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <label>
+                                                        <h5 id="name_add" style="font-size: 16px; margin-bottom: 0px;"><%= locals.address.addresses[0].name %>&nbsp;&nbsp;&nbsp;<%= locals.address.addresses[0].phoneNo %></h5>
+                                                    </label>
+                                                    <input id="radioBtn_add" style="position: absolute; left: 0px; top: 1px; visibility: hidden;" type="radio" checked  name="address" value="0">
+                                                </div>
+                                                <div>
+                                                    <p id="address_add" style="font-size: 15px; color: black;">
+                                                        <%= locals.address.addresses[0].streetAddress %>,
+                                                    </p>
+                                                    <p id="place_add" style="font-size: 15px; line-height: 2em; color: black;">
+                                                       <%= locals.address.addresses[0].city %> <%= locals.address.addresses[0].district %> <%= locals.address.addresses[0].pincode %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                         
+                                </form>
+                              </div>
+
+                             
+                              <div class="collapse mm" id="addresses">                        
+                                <form id="address_form_select" action="">
+                                <% locals.address.addresses.forEach((add, index) => { %> 
+                                <div style="padding: 15px; padding-top: 18px; border-color: #e6e6e6; border-style: solid; border-width: 0px 1px 1px 1px;">
+
+                                                <div style="position: relative;">
+                                                  <div style="display: flex; justify-content: space-between;">
+                                                    <div style="display: flex; align-items: center;">
+                                                        <input onchange="changeAddress('<%= add._id %>')" style="position: absolute; left: 0px; top: 1px; height: 15px; width: 15px;" type="radio" id="address<%= add._id %>" name="add" value="<%= index %>">
+                                                        <label for="address<%= add._id %>" style="margin-left: 25px;">
+                                                            <h5 style="font-size: 16px; margin-bottom: 3px;"><%= add.name %>&nbsp;&nbsp;&nbsp;<%= add.phoneNo %></h5>
+                                                        </label>
+                                                    </div>
+                                                    <button data-bs-toggle="collapse" data-bs-target=".mm" aria-expanded="false" style="visibility: hidden;" type="button" class="deliver_here" onclick="selectThisAddress('<%= index %>', '<%= add._id %>','<%= add.name %>','<%= add.phoneNo %>','<%= add.streetAddress %>','<%= add.city %>','<%= add.district %>','<%= add.pincode %>')" id="deliver_here<%= add._id %>">Deliver Here</button>
+                                                  </div>
+                                                    <div style="margin-left: 25px;">
+                                                        <p style="font-size: 15px; color: black;">
+                                                            <%= add.streetAddress %>,
+                                                        </p>
+                                                        <p style="font-size: 15px; line-height: 2em; color: black;">
+                                                           <%= add.city %> <%= add.district %> <%= add.pincode %>
+                                                        </p>
+                                                    </div>
+                                                </div>                                              
+
+                                </div>
+                                <% }) %>
+                                </form>
+                                
+    
+
+                                <p class="d-inline-flex gap-1">
+                                    <div data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="collapseExample" style="height: 50px; cursor: pointer; background-color: #c96; display: flex; align-items: center;">
+                                        <h2 style="color: white;; margin-left: 12px;" class="checkout-title">Add Address +</h2><!-- End .checkout-title -->
+                                    </div>
+                                  </p>
+                                  
+                                  <div style="border-color: #e6e6e6; border-style: solid; border-width: 1px;" class="collapse multi-collapse hh"  id="collapseExample">
+                                    <div>
+                                        <div style="padding: 15px; padding-top: 0px;">
+                                            <form id="add_address_form_checkout" onsubmit="addAddress(event)">
+                                                    
+                                                <h2 class="checkout-title">Add Address</h2><!-- End .checkout-title -->
+        
+                                                <label>Name *</label>
+                                                <div style="position: relative;">
+                                                    <input type="text" value="<%= locals.user.name %>" class="form-control" required autocomplete="off">
+                                                <span id="Name_error" class="material-symbols-outlined pass_icon">
+                                                 
+                                                </span>
+                                                </div>
+                                               
+    
+                                                <label>Street Address *</label>
+                                                <textarea class="form-control" required autocomplete="off" ></textarea>
+                                                
+
+                                                <div class="row">
+
+                                                   <div class="col-sm-6">
+                                                    <label>Town / City *</label>
+                                                    <div style="position: relative;">
+                                                        <input type="text" class="form-control" required autocomplete="off">
+                                                    <span id="city_error" class="material-symbols-outlined pass_icon">
+                                                        
+                                                       </span>
+                                                    </div>
+                                                   </div>
+
+                                                  <div class="col-sm-6">
+                                                    <label>District / State *</label>
+                                                    <div style="position: relative;">
+                                                   <input type="text" class="form-control" required autocomplete="off">
+                                                    <span id="district_error" class="material-symbols-outlined pass_icon">
+                                                   </span>
+                                                    </div>
+                                                  </div>
+
+                                                </div>
+                                                
+
+                                               <div class="row">
+
+                                                <div class="col-sm-6">
+                                                    <label>Pin Code *</label>
+                                                    <input type="text" maxlength="6" minlength="6" pattern="[1-9][0-9]*" class="form-control" required autocomplete="off">
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>Phone Number *</label>
+                                                    <div style="position: relative;">
+                                                     <input type="text" value="<%= locals.user.phoneNo %>" class="form-control" required autocomplete="off">
+                                                     <span id="Phone_error" class="material-symbols-outlined pass_icon">
+                                                         
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                               </div>
+        
+                                                    <div style="display: flex;">
+                                                        <button style="margin-right: 5px;" id="add_address_btn"  type="submit" class="btn btn-outline-primary-2">
+                                                            <span>Add Address</span>
+                                                            <i class="icon-long-arrow-right"></i>
+                                                        </button>
+                                                        <button id="close_address_btn" onclick="closeAddForm2()" type="button" data-bs-toggle="collapse" data-bs-target=".hh" aria-expanded="false" aria-controls="collapseExample"  class="btn btn-outline-primary-2" type="reset" >Close</button>
+                                                    </div>
+                                     
+                                    </form>
+                                        </div>
+                        
+                                       </div>
+                                    </div>
+
+                              </div>
+                             </div>  
+                              <% }else{ %>  
+                                            
+                                <div id="address_section">
+                                    <p class="d-inline-flex gap-1">
+                                        <div data-bs-toggle="collapse" data-bs-target=".multi" aria-expanded="false" aria-controls="collapseExample"  style="height: 50px;  cursor: pointer; background-color: #c96; display: flex; align-items: center; justify-content: space-between;">
+                                            <h2 style="color: white; margin-left: 12px;" class="checkout-title">Addresses are not added</h2><!-- End .checkout-title -->
+                                            <p style="font-weight: 500; font-size: 16px; color: white; margin-right: 10px; cursor: pointer;" id="change_address_btn">Add +</p>
+                                        </div>
+                                      </p>
+                                      <!-- <div data-sts="block" id="no_add_div" style="padding: 15px; padding-top: 20px; border-color: #ebebeb; border-style: solid; border-width: 1px;">
+                                        <p style="font-size: 15px; color: black;">No addresses are added</p>
+                                      </div> -->
+                                      <div style="border-color: #e6e6e6; border-style: solid; border-width: 1px;" class="collapse multi hh"  id="collapseExample">
+                                        <div>
+                                            <div style="padding: 15px; padding-top: 0px;">
+                                                <form id="add_address_form_checkout" onsubmit="addAddress(event)">
+                                                    
+                                                            <h2 class="checkout-title">Add Address</h2><!-- End .checkout-title -->
+                    
+                                                            <label>Name *</label>
+                                                            <div style="position: relative;">
+                                                                <input type="text" value="<%= locals.user.name %>" class="form-control" required autocomplete="off">
+                                                            <span id="Name_error" class="material-symbols-outlined pass_icon">
+                                                             
+                                                            </span>
+                                                            </div>
+                                                           
+                
+                                                            <label>Street Address *</label>
+                                                            <textarea class="form-control" required autocomplete="off" ></textarea>
+                                                            
+            
+                                                            <div class="row">
+            
+                                                               <div class="col-sm-6">
+                                                                <label>Town / City *</label>
+                                                                <div style="position: relative;">
+                                                                    <input type="text" class="form-control" required autocomplete="off">
+                                                                <span id="city_error" class="material-symbols-outlined pass_icon">
+                                                                    
+                                                                   </span>
+                                                                </div>
+                                                               </div>
+            
+                                                              <div class="col-sm-6">
+                                                                <label>District / State *</label>
+                                                                <div style="position: relative;">
+                                                               <input type="text" class="form-control" required autocomplete="off">
+                                                                <span id="district_error" class="material-symbols-outlined pass_icon">
+                                                               </span>
+                                                                </div>
+                                                              </div>
+            
+                                                            </div>
+                                                            
+            
+                                                           <div class="row">
+            
+                                                            <div class="col-sm-6">
+                                                                <label>Pin Code *</label>
+                                                                <input type="text" maxlength="6" minlength="6" pattern="[1-9][0-9]*" class="form-control" required autocomplete="off">
+                                                            </div>
+            
+                                                            <div class="col-sm-6">
+                                                                <label>Phone Number *</label>
+                                                                <div style="position: relative;">
+                                                                 <input type="text" value="<%= locals.user.phoneNo %>" class="form-control" required autocomplete="off">
+                                                                 <span id="Phone_error" class="material-symbols-outlined pass_icon">
+                                                                     
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+            
+                                                           </div>
+                    
+                                                                <div style="display: flex;">
+                                                                    <button style="margin-right: 5px;" id="add_address_btn"  type="submit" class="btn btn-outline-primary-2">
+                                                                        <span>Add Address</span>
+                                                                        <i class="icon-long-arrow-right"></i>
+                                                                    </button>
+                                                                    <button id="close_address_btn" onclick="closeAddForm2()" type="button" data-bs-toggle="collapse" data-bs-target=".hh" aria-expanded="false" aria-controls="collapseExample"  class="btn btn-outline-primary-2" type="reset" >Close</button>
+                                                                </div>
+                                                 
+                                                </form>
+                                            </div>
+                            
+                                           </div>
+                                        </div>
+                                </div>
+    
+                                
+
+                            <% } %>   
+
+                            
+                            <p class="d-inline-flex gap-1">
+                                <div  data-bs-toggle="collapse" href="#summury" role="button" aria-expanded="false" aria-controls="summury" style="height: 50px; background-color: #c96; display: flex; align-items: center; cursor: auto;">
+                                    <h2 style="color: white;; margin-left: 12px;" class="checkout-title">Order Summury</h2><!-- End .checkout-title -->
+                                </div>
+                              </p>
+                              <div id="cart_whole_items_div"  style="border-color: #e6e6e6; border-style: solid; border-width: 1px;" class="collapse mm multi show">
+                                 
+
+                                <% locals.cart.reverse().forEach(item => { %>
+                                    <div id="row<%= item._id %>" class="row lap_size" style="margin-right: 0px; margin-left: 0px; margin-bottom: 0px; box-shadow: none; border-color: rgb(241, 241, 241); border-style: solid; border-width: 1px 0px 0px 0px;">
+                                        <div class="col-3 col-sm-3 col-md-2 img-div">
+                                            <img src="/products/uploads/<%= item.image %>" alt="">
+                                            <input type="hidden" name="varientId" value="<%= item.varientId  %>">
+        
+                                            
+                                            <% if(item.stock !== 0){ %>
+
+                                           
+                                                <div class="quantity<%= item._id %>" id="btn_quantity_cart">
+                                                    <div class="product-details-quantity">
+                                                        <button onclick="decrement('<%= item.vId %>', '<%= item.sId %>','<%=item._id %>')" id="btn_decrement"><span
+                                                    class="material-symbols-outlined">
+                                                    remove
+                                                </span></button>
+                                                <input disabled type="text" id="quantity<%= item._id %>"
+                                                    name="quantity" value="<%= item.quantity %>" readonly required>
+                                                <button onclick="increment('<%= item.vId %>', '<%= item.sId %>','<%= item._id %>')"
+                                                    id="btn_increment"><span class="material-symbols-outlined">
+                                                        add
+                                                    </span></button>
+                                                </div>
+                                               </div>
+        
+                                             <% }else{ %>  
+        
+                                                <div class="quantity<%= item._id %>" style="display: none;" id="btn_quantity_cart">
+                                                    <div class="product-details-quantity">
+                                                        <button onclick="decrement('<%= item.vId %>', '<%= item.sId %>','<%=item._id %>')" id="btn_decrement"><span
+                                                    class="material-symbols-outlined">
+                                                    remove
+                                                </span></button>
+                                                <input disabled type="text" id="quantity<%= item._id %>"
+                                                    value="<%= item.quantity %>" readonly required>
+                                                <button onclick="increment('<%= item.vId %>', '<%= item.sId %>','<%= item._id %>')"
+                                                    id="btn_increment"><span class="material-symbols-outlined">
+                                                        add
+                                                    </span></button>
+                                                </div>
+                                               </div>
+        
+                                                
+                                             <% } %>   
+        
+                                        </div>
+        
+                                    <div class="col-8 col-sm-8 col-md-9 name-div">
+                            <p class="name-p">
+        
+                            <h6>
+                                <%= item.product_name %>
+                            </h6>
+                            <p class="category">
+                                <%= item.type %> > <%= item.category %> > <%= item.color %> > <span style="color: #bf8040;"><%= item.size %></span>
+                            </p>
+                            <input type="hidden" name="sizeId" value="<%=item.sId %>">
+                          
+                            <% if(item.stock !==0){ %>
+        
+                                <h5 id="totalPrice<%= item._id %>">₹ <%= item.totalPrice %> </h5>
+        
+                            <% } %>   
+        
+                           
+                            <% if(item.stock<=5 && item.stock>0){ %>
+        
+                                <% if(item.stock<item.quantity || item.stock === item.quantity) {%>
+        
+                                    <p id="stock_lable<%= item._id %>" class="p" style="color: red;">Only <%= item.stock %> stock(s) left</p>
+        
+                                 <% }else{ %>
+        
+                                    <p id="stock_lable<%= item._id %>" class="p" style="color: red;">Only few stocks</p>
+                                    
+                                 <% } %>   
+        
+                                <% } else if(item.stock> 5){%>
+        
+                                    <p class="p" id="stock_lable<%= item._id %>" style="color: green;">In stock</p>
+        
+                                    <% } else{%>
+        
+                                        <p class="p" id="stock_lable<%= item._id %>" style="color: red;">Out of stock</p>
+        
+                                        <% } %>
+                                            </p>
+        
+                                            <form action="">
+                                                <input type="hidden" id="itemId<%= item._id %>" value="<%= item._id %>">
+                                                <input type="hidden" id="itemIndex<%= item._id %>" value="<%= item.index %>">
+                                                <input type="hidden" name="varientsId" id="varientId<%= item._id %>" value = "<%= item.vId %>" >
+                                            </form>
+                        </div>
+        
+                        <div class="col-1 col-sm-1 col-md-1 remove">
+                            <span  onclick="getRemoveModal('<%= item._id %>')" data-bs-toggle="modal" data-bs-target="#remove" class="material-symbols-outlined">
+                                close
+                            </span>
+                        </div>
+        
+                         </div>
+           
+                      <% }); %>
+                                
+
+                        </div>
+                                
+
+
+            </div><!-- End .col-lg-9 -->
+            
+        
+
+            <aside id="checkout_div" class="col-lg-4">
+             <form id="payment_method_form" onsubmit="checkOut(event)">
+                <div class="summary summary-cart">
+                    <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+
+                    <table class="table table-summary">
+                        <tbody>
+                            <tr class="summary-subtotal">
+                                <td style="border-style: none; background-color: #f9f9f9;" id="count">Price(<%= locals.count %> Items):</td>
+                                <td style="border-style: none; background-color: #f9f9f9;" id="sub_total" >₹ <%= locals.total %>.00</td>
+                            </tr><!-- End .summary-subtotal -->
+                          
+
+                            <tr id="discount_row" class="summary-subtotal summary-shipping-row">
+                                <td style="border-style: none; background-color: #f9f9f9;">
+                                  
+                                    Discount:
+                                </td>
+                                <td id="discount_amount" style="border-style: none; background-color: #f9f9f9;">₹ 0.00</td>
+                            </tr>
+
+                    
+
+                            <tr class="summary-total">
+                                <td style="font-size: 18px; font-weight: 500; background-color: #f9f9f9;">Total:</td>
+                                <td id="last_total" style="font-size: 18px; font-weight: 500; background-color: #f9f9f9;">
+                                    ₹ <%= (locals.total ? locals.total : 0) %>.00
+                                </td>                                  
+                            </tr><!-- End .summary-total -->
+                            <form action="">
+                                <input id="total_price" type="hidden" value="<%= locals.total %>">
+                            </form>
+                        </tbody>
+                    </table><!-- End .table table-summary -->
+
+                    
+                    <div class="accordion-summary" id="accordion-payment">
+                        
+                        <div style="margin-bottom: 5px;" class="card">
+                            <div style="display: flex; align-items: center;" class="card-header" id="heading-2">
+                                <input type="radio" id="cod" value="cod" name="payment_method" style="height: 15px; width: 15px;" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2" required>
+                                
+                                    <label for="cod" style="font-size: 15px; color: black; margin-left: 5px;  margin-bottom:0px;" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                                        Cash on delivery
+                                    </label>
+                               
+                            </div><!-- End .card-header -->
+                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2" data-parent="#accordion-payment">
+                                <div style="padding-left: 20px;" class="card-body">
+                                    <p style="font-size: 13px;">In cash on delievery you can't order items which are coming more than Rs 1000</p>
+                                </div><!-- End .card-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .card -->
+
+                        <div style="margin-bottom: 5px;" class="card">
+                            <div style="display: flex; align-items: center;" class="card-header" id="heading-3">
+                                <input type="radio" id="wallet" value="wallet" name="payment_method" style="height: 15px; width: 15px;" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3" required>
+
+                                    <label for="wallet" style="font-size: 15px; color: black; margin-left: 5px;  margin-bottom:0px;" class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                                        Wallet
+                                    </label>
+                             
+                            </div><!-- End .card-header -->
+                            <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment" >
+                                <div style="padding-left: 20px;" class="card-body"> <p style="font-size: 13px;">You have balance amount Rs <%= locals.wallet.length>0? locals.wallet[0].balance : 0 %> in you wallet</p>
+                                </div><!-- End .card-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .card -->
+
+                        <div style="margin-bottom: 5px;" class="card">
+                            <div style="display: flex; align-items: center;" class="card-header" id="heading-4">
+                                <input type="radio" id="online" value="online" name="payment_method" style="height: 15px; width: 15px;"  role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4" required>
+                               
+                                    <label for="online" style="font-size: 15px; color: black; margin-left: 5px; margin-bottom:0px;" class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+                                        RazorPay 
+                                    </label>
+                               
+                            </div><!-- End .card-header -->
+                            <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
+                                <div style="padding-left: 20px; " class="card-body">
+                                  <p style="font-size: 13px;"> Its an online payment method and you can choose differnt methods within that, like credit card, internet banking, etc...</p>
+                                </div><!-- End .card-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .card -->
+
+                    </div><!-- End .accordion -->
+               
+
+                    <button type="submit" id="checkout_btn" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO
+                        CONTINUE</button>
+                </div><!-- End .summary -->
+            </form>
+
+                <a href="/allProducts" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i
+                        class="icon-refresh"></i></a>
+            </aside>
+
+
+            </div><!-- End .row -->
+            </div><!-- End .container -->
+       
+            
+            <% } %>
+
+
+                <div id="nocart_div" style="justify-content: center; padding-top: 58px; padding-bottom: 58px;">
+
+                    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                        <h5>Your cart is empty!</h5>
+                        <p>Explore our wide selection and find something you like</p>
+                        <img style="width: 50%;" src="/assets/images/demos/demo-5/cart.png" alt="">
+                        <a style="cursor: pointer; color: #c96; font-weight: 500; font-size: 16px;" href="/allProducts">Shop Now</a>
+                    </div>
+                </div>
+
+
+                    </div><!-- End .cart -->
+                    </div><!-- End .page-content -->
+                    </main><!-- End .main -->
+
+                    <footer class="footer">
+
+                        <div class="footer-bottom">
+                            <div class="container">
+                                <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                                <!-- End .footer-copyright -->
+                                <figure class="footer-payments">
+                                    <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                                        height="20">
+                                </figure><!-- End .footer-payments -->
+                            </div><!-- End .container -->
+                        </div><!-- End .footer-bottom -->
+                    </footer><!-- End .footer -->
+                    </div><!-- End .page-wrapper -->
+                    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+                    <!-- Mobile Menu -->
+                    
+    </section>
+
+    <div class="modal fade" id="remove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- <img id="img_cart" src="/assets/images/demos/demo-5/cart-unscreen.gif" alt="" style="position: absolute; top: 10em; left: 50%; transform: translateX(-120%); z-index: 9999; width: 45%;"> -->
+            <div class="modal-content">
+                <div class="modal-body text-center"> <!-- Added text-center class to center align text -->
+                    <h6>Are you sure you want to remove this item?</h6>
+                </div>
+                <div class="modal-footer justify-content-center"> <!-- Added justify-content-center class to center align buttons -->
+                    <button class="close_btn" data-bs-dismiss="modal">No</button>
+                    <button id="confirm_btn" class="button2">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add_money" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- <img id="img_cart" src="/assets/images/demos/demo-5/cart-unscreen.gif" alt="" style="position: absolute; top: 10em; left: 50%; transform: translateX(-120%); z-index: 9999; width: 45%;"> -->
+            <div class="modal-content">
+                <div class="modal-body text-center"> <!-- Added text-center class to center align text -->
+                    <h6>Are you sure you want to order these item(s)?</h6>
+                </div>
+                <div class="modal-footer justify-content-center"> <!-- Added justify-content-center class to center align buttons -->
+                    <button class="close_btn" onclick="dontOrder()" data-bs-dismiss="modal">No</button>
+                    <button  id="orderNow_btn" onclick="orderNow()" class="button2">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal -->
+  <div class="modal fade" id="outofstock" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-md">
+      <div class="modal-content">
+        <!-- <h1>Ordered Products</h1> -->
+        <div id="show_unavailable_p" class="modal-body">
+            <div class="row">
+                <div class="col-2 col-sm-2 col-md-2 img-div">
+                    <img id="product_img" alt="">
+                </div>
+                <div class="col-9 col-sm-9 col-md-9 name-div">
+                    <div class="row">
+                        <div class="col">
+                            <h6 id="product_name"></h6>
+                            <p id="category_of_p"></p>
+                            <p style="color: black; font-weight: 500; font-size: 16px;" id="show_label_p"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="footer_" style="display: flex;" >
+          <button type="button" id="close_btn_unavailable" onclick="cancelCheckOut()" class="btn" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="understood_btn_unavailable" onclick="continueCheckOut()"  class="btn">Order</button>
+        </div> -->
+        <div class="modal-footer"> <!-- Added justify-content-center class to center align buttons -->
+            <button id="close_btn_unavailable" class="close_btn" onclick="cancelCheckOut()" data-bs-dismiss="modal">Close</button>
+            <button id="understood_btn_unavailable"  onclick="continueCheckOut()" class="button2">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+    <!-- Plugins JS File -->
+
+    <script src="/assets/js/api/checkout.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/superfish.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/bootstrap-input-spinner.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+
+
+<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+
+</html>

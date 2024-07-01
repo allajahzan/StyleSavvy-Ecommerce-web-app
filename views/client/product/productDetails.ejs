@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/product.html  22 Nov 2019 09:54:50 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Details</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/plugins/magnific-popup/magnific-popup.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/plugins/nouislider/nouislider.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+       <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+
+</head>
+
+<body onload="loadProductDetails('<%= locals.varient._id %>')">
+
+
+      <!-- loading -->
+      <!-- <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+    </section> -->
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+        task_alt                                  
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+<section id="productDetails">
+    <div class="page-wrapper">
+        <header class="header header-5 header_productDetails">
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler">
+                            <span class="sr-only">Toggle mobile menu</span>
+                            <i class="icon-bars"></i>
+                        </button>
+
+                        <h2 id="logo">StyleSavvy</h2>
+
+                        <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li  class="home">
+                                    <p class=""><a id="a_menu_item"  href="/home" >Home</a></p>
+                                    <!-- <button>Show Snackbar</button> -->
+                                </li>
+                                <li class="products active">
+                                    <p><a id="a_menu_item"  href="/shop">Shop</a></p>      
+                                </li>           
+                  
+                                <li class="more" id="more">
+                                    <p><a id="a_menu_item" href="/contact">Contact</a></p>
+
+                                    <!-- <ul>
+                                        <li><a href="elements-products.html">About</a></li>
+                                        <li><a href="elements-typography.html">Contact</a></li>
+                                    </ul> -->
+                                </li>
+                            </ul><!-- End .menu -->
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+                        <div class="header-search header-search-extended header-search-visible">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                            <form id="search_form" action="/shop" method="get">
+                                <div class="header-search-wrapper">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <input type="search" class="form-control" name="search" id="search"
+                                        placeholder="Search product" required autocomplete="off">
+                                    <button class="btn btn-primary" type="submit"><i
+                                            class="icon-search"></i></button>
+                                </div>
+                            </form>
+
+                        
+                        </div>
+                        
+                   
+
+                        <% if (locals.user) { %>
+
+                            <a id="wishlist_icon" href="/wishlist" class="dropdown cart-dropdown">
+                                <i style="font-size: 24px;" class="icon-heart-o"></i>
+                                <span id="wishlist_count" class="cart-count"><%= locals.wishlist? locals.wishlist.items.length : 0 %></span> 
+                            </a>
+
+                        <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                            <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                            <span id="cart_count" class="cart-count"><%= locals.cart? locals.cart.items.length : 0 %></span>      
+                          </a>
+
+                       
+                            <% const names = locals.user.split(' ')[0]; %>
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>
+                                </li>
+                            </ul>    
+                        <% } else { %>
+
+                            <a href="/wishlist" class="wishlist">
+                                <i class="icon-heart-o"></i>
+                            </a>
+
+                            <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                                <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                                <!-- <span class="cart-count">2</span>       -->
+                              </a>
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                                </li>
+                            </ul> 
+                        <% } %>
+                        
+                        
+
+                    </div><!-- End .header-right -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        <main class="main">
+            
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb mt-1">
+                        <li class="breadcrumb-item"><a style="font-size: 15px; font-weight: 500;" href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a style="font-size: 15px; font-weight: 500;" href="/shop">Shop</a></li>
+                        <li style="font-size: 15px; font-weight: 500;" class="breadcrumb-item active" aria-current="page"><%= locals.varient.product.product_name %></li>
+                        <li style="font-size: 15px; font-weight: 500;" class="breadcrumb-item active" aria-current="page"><%= locals.varient.color[0].color_name %></li>
+                    </ol>
+                </div>
+            </nav>
+
+            <!-- <br> -->
+            <div style="margin-top: 10px;" class="page-content">
+                <div class="container">
+                    <div class="product-details-top">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-gallery product-gallery-vertical">
+                                    <div id="row_product" class="row">
+                                        <figure class="product-main-image">
+                                            <img id="product-zoom" src="/products/uploads/<%= locals.varient.images[0] %>" data-zoom-image="/products/uploads/<%= locals.varient.images[0] %>" alt="product image">
+                                    
+                                            <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                                <i class="icon-arrows"></i>
+                                            </a>
+                                        </figure>
+                                    
+                                        <div id="product-zoom-gallery" class="product-image-gallery">
+                                            <% locals.varient.images.forEach((image, index) => { %>
+                                                <a id="select_image" class="product-gallery-item <%= index === 0 ? 'active' : '' %>" href="#" data-image="/products/uploads/<%= image %>" data-zoom-image="/products/uploads/<%= image %>">
+                                                    <img src="/products/uploads/<%= image %>" alt="product image <%= index + 1 %>">
+                                                </a>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                    
+                                </div><!-- End .product-gallery -->
+                            </div><!-- End .col-md-6 -->
+
+                            <div class="col-md-6">
+                                <div class="product-details">
+                                    <h1 class="product-title"><%= locals.varient.product.product_name %></h1><!-- End .product-title -->
+
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                        </div>
+                                        <!-- <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a> -->
+                                    </div>
+
+                                    <% 
+                                    let offer1 = locals.varient.product.productOffer ? locals.varient.product.productOffer : 0;
+                                    let offer2 = locals.varient.product.category.categoryOffer ? locals.varient.product.category.categoryOffer : 0;
+                                    %>
+                                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                        <% if (offer1 > offer2) { %>
+
+                                            <% let discountAmount = locals.varient.actualPrice * (offer1/100) %>
+                                            <% let lastTotal = locals.varient.actualPrice - discountAmount %>
+                                            
+
+                                            <div style="display: flex;" id="varient_price" class="">
+                                                <p style="font-size: 22px; color: black; font-weight: 400;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 22px; color: rgb(181, 180, 180); font-weight: 400;">₹&nbsp;<%= locals.varient.price[0] %></p>
+                                            </div>
+                                            
+        
+                                        <% }else{ %> 
+
+                                            <% let discountAmount = locals.varient.actualPrice * (offer2/100) %>
+                                            <% let lastTotal = locals.varient.actualPrice - discountAmount %>
+                                            
+
+                                            <div style="display: flex;" id="varient_price" class="">
+                                                <p style="font-size: 22px; color: black; font-weight: 400;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 22px; color: rgb(181, 180, 180); font-weight: 400;">₹&nbsp;<%= locals.varient.actualPrice %></p>
+                                            </div>
+                                            
+                                            
+                                        <% } %>    
+                                    <% }else{ %>
+                                        
+                                        <div style="display: flex;" id="varient_price" class="">
+                                            <p style="font-size: 22px; color: black; font-weight: 400;">₹&nbsp;<%= locals.varient.actualPrice %></p>
+                                        </div>
+                                    <% } %>    
+
+                            
+                                    <div class="product-content">
+                                        <p><%= locals.varient.product.discription %></p>
+                                    </div><!-- End .product-content -->
+
+                            
+
+                                        <!-- <div style="width: 100px; display: flex;" class="">
+                                        <a href="" class="">
+                                            <img style="object-fit: contain;" src="/products/uploads/<%= locals.varient.images[0] %>" alt="product desc">
+                                        </a>
+                                        </div> -->
+
+                                        <div class="details-filter-row details-row-size">
+                                            <label>Color:</label>
+    
+                                            <!-- <div style="width: 100px; display: flex;" class="">
+                                            <a href="" class="">
+                                                <img style="object-fit: contain;" src="/products/uploads/<%= locals.varient.images[0] %>" alt="product desc">
+                                            </a>
+                                            </div> -->
+    
+    
+                                            <div style="margin-left: 2px;" class="product-nav product-nav-dots">
+                                                <!-- Display the image of the current variant -->
+                                                <img onclick="getVarient('<%= locals.varient.product._id %>','<%= locals.varient._id %>')" 
+                                                     style="width: 8%; cursor: pointer; margin-right: 10px;" 
+                                                     src="/products/uploads/<%= locals.varient.images[1] %>" 
+                                                     alt="">
+                                            
+                                                <!-- Iterate through the remaining variants and display their images -->
+                                                <% locals.varient.product.varients.forEach((varient) => { %>
+                                                    <% if(varient._id.toString() !== locals.varient._id.toString()){ %>
+                                                        <img onclick="getVarient('<%= locals.varient.product._id %>','<%= varient._id %>')" 
+                                                             style="width: 8%; cursor: pointer; margin-right: 10px;" 
+                                                             src="/products/uploads/<%= varient.images[1] %>" 
+                                                             alt="">
+                                                    <% } %>
+                                                <% }) %>
+                                            </div>
+                                            
+                                            
+    
+                                            
+                                            <!-- End .product-nav -->
+                                        </div><!-- End .details-filter-row -->
+
+
+                            
+
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="size">Size:</label>
+                                        <div class="select-custom">
+
+                                            <% if(locals.varient.stock[0]===0){ %>
+                                                <input type="hidden" id="presentQuantity" value='0'>
+                                            <% } else{%>
+                                                <input type="hidden" id="presentQuantity" value='1'>
+                                            <% } %>    
+
+                                            <input type="hidden" id="varient_id" value="<%= locals.varient._id %>">
+                                            <input type="hidden" id="present_size_id" value="<%= locals.varient.size[0]._id %>">
+                                            <input type="hidden" id="present_size_name" value="<%= locals.varient.size[0].size_name %>">
+                                            <input type="hidden" id="price" value="<%= locals.varient.actualPrice%>" >
+                                            <input type="hidden" id="product_id" value="<%= locals.varient.product._id %>">
+                                            <select id="select_size" name="size" class="form-control">
+                                                <option value="#" id="initial_size" disabled selected hidden selected="selected"><%= locals.varient.size[0].size_name %></option>
+                                                <% locals.varient.size.forEach(size => { %>
+                                                    <option value="<%= size._id %>"><%= size.size_name %></option>
+                                                <% }); %>
+                                            </select>
+                                        </div>
+
+                                        <% if(locals.varient.stock[0] > 0){%>
+                                            
+                                            <a id="varient_available" style="color: green; font-size: 16px;" class="size-guide">Available</a>
+
+                                        <% }else{%>
+
+                                            <a id="varient_available" style="color: rgb(255, 0, 0); font-size: 16px;" class="size-guide">Out of stock</a>
+                                            
+                                         <% } %>   
+                                    </div>
+
+                                    <% if(locals.varient.stock[0] > 0){%>
+
+                                        <div id="show_message">
+                                            <h4>Sold Out</h4>
+                                            <p>This item is currently out of stock</p>
+                                        </div>
+                                        <div id="btn_quantity" class="details-filter-row details-row-size">
+                                            <label for="qty">Qty:</label>
+                                            <div class="product-details-quantity">
+                                                <button onclick="decrement()" id="btn_decrement">-</button>
+                                                <input disabled min="1" type="text" name="" id="quantity" value="1" readonly required>
+                                                <button onclick="increment()" id="btn_increment">+</button>
+                                            </div>
+                                        </div><!-- End .details-filter-row -->
+    
+                                        <div class="product-details-action">
+                            
+                                            <a id="btn_addtocart" onclick="addToCart('<%= locals.varient._id %>')" class="btn-product btn-cart"><span>add to cart</span></a>                                           
+                                        
+                                            <div id="btn_wishlist1" onclick="addToWishList('<%= locals.varient._id %>')" class="details-action-wrapper">
+                                                <a id="btn_wishlist_text" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                                <!-- <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a> -->
+                                            </div><!-- End .details-action-wrapper -->
+    
+                                            <div id="btn_wishlist2" onclick="addToWishList('<%= locals.varient._id %>')" class="">
+                                                <a id="btn_wishlist_text" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                                <!-- <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a> -->
+                                            </div>
+                                        </div><!-- End .product-details-action -->
+
+                                    <% }else{ %>
+
+                                        <div id="show_message1">
+                                            <h4>Sold Out</h4>
+                                            <p>This item is currently out of stock</p>
+                                        </div>
+                                        <div id="btn_quantity1" class="details-filter-row details-row-size">
+                                            <label for="qty">Qty:</label>
+                                            <div class="product-details-quantity">
+                                                <button onclick="decrement()" id="btn_decrement">-</button>
+                                                <input disabled min="1"  type="text" name="" id="quantity" value="1" readonly required>
+                                                <button onclick="increment()" id="btn_increment">+</button>
+                                            </div>
+                                          
+                                        </div><!-- End .details-filter-row -->
+    
+                                        <div class="product-details-action">
+                            
+                                            <a id="btn_addtocart1" onclick="addToCart('<%= locals.varient._id %>')"  class="btn-product btn-cart"><span>add to cart</span></a>
+                                            
+                                            <div id="btn_wishlist11" onclick="addToWishList('<%= locals.varient._id %>')" class="details-action-wrapper">
+                                                <a id="btn_wishlist_text" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                                <!-- <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a> -->
+                                            </div><!-- End .details-action-wrapper -->
+    
+                                            <div id="btn_wishlist22" onclick="addToWishList('<%= locals.varient._id %>')" class="">
+                                                <a id="btn_wishlist_text" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                                <!-- <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a> -->
+                                            </div>
+                                        </div><!-- End .product-details-action -->
+                                        
+                                    <% } %>   
+
+                                    <div class="product-details-footer">
+                                        <div class="product-cat">
+                                            <span>Category:</span>
+                                            <a><%= locals.varient.product.type.type_name %> </a>>
+                                            <a><%= locals.varient.product.category.category_name %> </a>>
+                                            <a><%= locals.varient.color[0].color_name %></a>
+                                        </div>
+
+                                        <div class="social-icons social-icons-sm">
+                                            <span class="social-label">Share:</span>
+                                            <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                            <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                            <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                            <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                        </div>
+                                    </div><!-- End .product-details-footer -->
+                                </div><!-- End .product-details -->
+                            </div><!-- End .col-md-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+
+                    <div class="product-details-tab">
+                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+                            </li> -->
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                                <div class="product-desc-content">
+                                    <h3>Product Information</h3>
+                                    <p><%= locals.varient.product.discription %></p>
+                                    <h3 style="margin-top: 10px;">Sizes</h3>
+                                    <ul>
+                                        <p>
+                                        <% locals.varient.size.forEach((size)=>{ %>
+                                           <%= size.size_name %>,&nbsp;
+                                        <% }) %>
+                                        </p>
+                                        
+                                    </ul>
+
+                                    <h3 style="margin-top: 10px;">Colors</h3>
+                                    <ul>
+                                        <p>
+                                        <% locals.varient.allColors.forEach((color)=>{ %>
+                                            <%= color.color_name %>,&nbsp;
+                                        <% }) %>
+                                        </p>
+                                        
+                                    </ul>
+
+                                    <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p> -->
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <!-- <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                                <div class="product-desc-content">
+                                    <h3>Information</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
+
+                                    <h3>Fabric & care</h3>
+                                    <ul>
+                                        <li>Faux suede fabric</li>
+                                        <li>Gold tone metal hoop handles.</li>
+                                        <li>RI branding</li>
+                                        <li>Snake print trim interior </li>
+                                        <li>Adjustable cross body strap</li>
+                                        <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+                                    </ul>
+
+                                    <h3>Size</h3>
+                                    <p>one size</p>
+                                </div>
+                            </div> -->
+                            <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+                                <div class="product-desc-content">
+                                    <h3>Delivery & returns</h3>
+                                    <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our Delivery information<br>
+                                    We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our Returns information</p>
+                                </div><!-- End .product-desc-content -->
+                            </div>
+                            <!-- <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                                <div class="reviews">
+                                    <h3>Reviews (2)</h3>
+                                    <div class="review">
+                                        <div class="row no-gutters">
+                                            <div class="col-auto">
+                                                <h4><a href="#">Samanta J.</a></h4>
+                                                <div class="ratings-container">
+                                                    <div class="ratings">
+                                                        <div class="ratings-val" style="width: 80%;"></div>
+                                                    </div>
+                                                </div>
+                                                <span class="review-date">6 days ago</span>
+                                            </div>
+                                            <div class="col">
+                                                <h4>Good, perfect size</h4>
+
+                                                <div class="review-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                </div>
+
+                                                <div class="review-action">
+                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="review">
+                                        <div class="row no-gutters">
+                                            <div class="col-auto">
+                                                <h4><a href="#">John Doe</a></h4>
+                                                <div class="ratings-container">
+                                                    <div class="ratings">
+                                                        <div class="ratings-val" style="width: 100%;"></div>
+                                                    </div>
+                                                </div>
+                                                <span class="review-date">5 days ago</span>
+                                            </div>
+                                            <div class="col">
+                                                <h4>Very good</h4>
+
+                                                <div class="review-content">
+                                                    <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
+                                                </div>
+
+                                                <div class="review-action">
+                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
+                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>-->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .product-details-tab -->
+                <% if(locals.relatedProducts.length !== 0){ %>
+                    <h4 class="title text-center mb-4">You May Also Like</h4>
+                <div class="container">
+                    <div class="tab-content tab-content-carousel">
+                        <div class="tab-pane p-0 fade show active" id="trendy-all-tab" role="tabpanel"
+                            aria-labelledby="trendy-all-link">
+                            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
+                                data-toggle="owl" data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":2
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true
+                                }
+                            }
+                        }'>  
+
+                        <% locals.relatedProducts.forEach(v=> { %>
+                             
+                            <% if(v.product.type.type_name === 'Men'){ %>
+
+                            <div class="product product-2">
+                                <figure style="margin-top: 10px;" class="product-media">
+
+                                    <% if(v.stock[0] === 0){ %>
+
+                                        <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                     
+                                    <% } else{%>
+                                        
+                                        <% 
+                                        let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                        let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                        %>
+                                        <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                            <% if (offer1 > offer2) { %>
+                                                <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                            <% } else { %>
+                                                <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                            <% } %>        
+                                        <% } %>
+
+                                      
+                                     
+                                    <% } %>    
+
+                                    <!-- <span class="product-label label-new">New</span> -->
+                                    <!-- <span class="product-label label-out">Out of stock</span> -->
+                                    <!-- <span class="product-label label-sale">30% off</span> -->
+                                    <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                        <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                            alt="Product image" class="product-image">
+                                        <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                            alt="Product image" class="product-image-hover">
+                                    </a>
+
+                                    <div class="product-action-vertical">
+                                        <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                            title="Add to wishlist"><span>add to wishlist</span></a>       
+                                    </div>
+
+
+                                    <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                        <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                cart</span></a>
+                                                <form action="">
+                                                    <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                    <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                </form>
+                                        <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                            class="btn-product btn-quickview add_to_cart_"
+                                            title="Quick view"><span>Quick view</span></a>
+
+                                    </div>
+
+                                    <!-- <div class="product-action product-action-transparent">
+                                        <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                        <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                    </div> -->
+
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <!-- <div class="product-cat">
+                                        <a href="#">Clothing</a>
+                                    </div> -->
+                                    <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                            <%= v.product.product_name %>
+                                        </a></p><!-- End .product-title -->
+                                  
+
+
+                                    <% 
+                let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                %>
+                <% if (offer1 !== 0 || offer2 !== 0) { %>
+                    <% if (offer1 > offer2) { %>
+
+                        <% let discountAmount = v.actualPrice * (offer1/100) %>
+                        <% let lastTotal = v.actualPrice - discountAmount %>
+
+                        <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                            <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                            <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                        </div>
+                     
+
+                    <% }else{ %> 
+
+                        <% let discountAmount = v.actualPrice * (offer2/100) %>
+                        <% let lastTotal = v.actualPrice - discountAmount %>
+
+                        <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                            <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                            <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                        </div>
+                     
+                        
+                    <% } %>    
+                <% }else{ %>
+                    <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                        <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                    </div>
+                <% } %> 
+
+
+                                    <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                    
+                                        <% v.allColors.forEach((color,index) => { %>
+
+                                         
+                                           
+                                                <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                    <!-- <span class="">Color name</span> -->
+                                                </a>
+                                                <script type="text/javascript">
+                                                    // Execute the function when the DOM content is loaded
+                                                    document.addEventListener("DOMContentLoaded", function (event) {
+                                                        getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                    });
+                                                </script>
+
+                                            
+                                               
+                                           
+                                        <% }) %>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                           
+                        <% } %>
+                            
+                        <% }); %>
+                             
+                            </div><!-- End .owl-carousel -->
+                        </div><!-- .End .tab-pane -->
+                    </div>
+                </div>   
+                <% }else{ %>
+                 
+                    <h4 class="title text-center mb-4">No Related Products</h4>
+
+                <% } %>    
+                    
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+        <footer class="footer">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget widget-about">
+                                <h2 id="footer-logo">StyleSavvy</h2>
+                                <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+
+                                <div class="social-icons">
+                                    <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                    <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                    <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                </div><!-- End .soial-icons -->
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a>About Molla</a></li>
+                                    <li><a>How to shop on StyleSavvy</a></li>
+                                    <li><a>FAQ</a></li>
+                                    <li><a>Contact us</a></li>
+                                    <li><a>Log in</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a >Payment Methods</a></li>
+                                    <li><a >Money-back guarantee!</a></li>
+                                    <li><a >Returns</a></li>
+                                    <li><a >Shipping</a></li>
+                                    <li><a >Terms and conditions</a></li>
+                                    <li><a >Privacy Policy</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="/signIn">Sign In</a></li>
+                                    <li><a href="/cart">View Cart</a></li>
+                                    <li><a href="/wishlist">My Wishlist</a></li>
+                                    <li><a href="/orders">Track My Order</a></li>
+                                    <li><a href="/contact">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                    <!-- End .footer-copyright -->
+                    <figure class="footer-payments">
+                        <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                            height="20">
+                    </figure><!-- End .footer-payments -->
+                </div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container mobile-menu-dark">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form id="search_form1" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search"  class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+            
+            <script>
+                const form1 = document.getElementById('search_form1')
+                form1.addEventListener('submit', (e)=>{
+                     e.preventDefault()
+
+                    const data = document.getElementById('search1').value
+
+                    let url = new URL(window.location.href);
+                    url.pathname = '/shop';
+                    url.searchParams.set('search', data);
+                    window.location.href = url.toString();
+                })                                        
+           </script>
+            
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li>
+                        <a href="/home">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="/shop">Shop</a>
+
+                    </li>
+
+                    <li>
+                        <a href="/contact">Contact</a>
+
+                    </li>
+                    <li>
+                        <a href="/wishlist">Wishlist</a>
+                    </li>
+                    <li>
+                        <a href="/cart">Cart</a>
+                    </li>
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="social-icons">
+                <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+</section>
+
+
+
+    <!-- Plugins JS File -->
+    <script src="/assets/js/api/productDetails.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/bootstrap-input-spinner.js"></script>
+    <script src="assets/js/jquery.elevateZoom.min.js"></script>
+    <script src="assets/js/bootstrap-input-spinner.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- molla/product.html  22 Nov 2019 09:55:05 GMT -->
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Verify Email</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+
+</head>
+
+<body onload="loadVerifyEmail()">
+ <!-- loading -->
+ <!-- <section id="loading">
+    <h2 id="footer-logo">StyleSavvy</h2>
+    <span class="loader"></span>
+    
+</section> -->
+
+<div id="snackbar">
+    <span style="color: green;" id="snackbar_icon" class="material-symbols-outlined">
+        task_alt
+    </span>
+    <p id="snackbar_msg"></p>
+</div>
+
+
+<section style="display: block;" id="verify_page">
+    <header  style="padding: 13px 0px 8px 0px;" class="header header-5">
+        <div class="header-middle sticky-header">
+            <div class="container">
+                <div class="header-left">
+                    <h2 id="logo">StyleSavvy</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="login-page verify_page">
+            <div class="container cont">
+                <p class="p_heading" style="text-align: center;">Please enter the OTP send your email<br><span id="verify_email"><%= locals.email %></span></p>
+                <div style="position: relative;" class="form-box">
+                    <div class="form-tab">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a style="border-width: 0px 0px 2px 0px; border-color: #bf8040; border-style: solid;"
+                                    class="nav-link active">Verify Email</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                aria-labelledby="register-tab-2">
+
+                                <form id="verify_form">
+                                    <div class="form-group">
+                                       <div style="display: flex; justify-content: space-between;">
+                                        <label for="register-password-2">Enter the OTP *</label>
+                                        <p id="error_otp" style="color: red; font-weight: 500; font-size: 14px;"></p> 
+                                       </div>              
+                                        <!-- <div id="field_div">
+                                            <input type="text" class="form-control" name="otp" pattern="[1-9][0-9]*" maxlength="6" minlength="6" required
+                                                autocomplete="off">
+                                            <span id="otp_error" class="material-symbols-outlined">
+
+                                            </span>
+                                        </div> -->
+                                        <div id="field_div" style="display: flex; justify-content:space-between; align-items: center; width: 100%;">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid; margin: 10px; margin-left: 0px;" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp1" maxlength="1" required autocomplete="off" oninput="moveToNext(this, 'otp2')">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid;" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp2" maxlength="1" required autocomplete="off" oninput="moveToNext(this, 'otp3')">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid; margin: 10px" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp3" maxlength="1" required autocomplete="off" oninput="moveToNext(this, 'otp4')">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid;" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp4" maxlength="1" required autocomplete="off" oninput="moveToNext(this, 'otp5')">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid; margin: 10px;" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp5" maxlength="1" required autocomplete="off" oninput="moveToNext(this, 'otp6')">
+                                            <input style="border-width: 1px; border-color:#bf8040; border-style: solid;" type="text" class="form-control otp-input" onkeydown="handleKeyDown(event)" id="otp6" maxlength="1" required autocomplete="off" oninput="moveToNext(this, '')">
+                                        </div>
+                                        <!-- <p id="error_otp" style="color: red; font-weight: 500; font-size: 14px; padding-top: 10px; display: flex; justify-content: end;"></p>  -->
+                                        <!-- <div style="display: flex; justify-content: end; padding-top: 10px;">
+                                        <p style="color: red; font-weight: 500;">Incorrect OTP</p>                                        
+                                        </div> -->
+                                        <script>
+                                             function handleKeyDown(event) {
+                                                 const key = event.key;
+                                                 if (!/[0-9]/.test(key) && key !== 'Enter' && key !== 'Backspace' && key !== 'Tab' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
+                                                 event.preventDefault();
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;" dis class="form-footer">
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>Verify Email</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                        <div id="otp_div">
+                                            <p id="otp_p">Resend OTP in <span id="timer_otp"></span> seconds</p>
+                                            <a id="otp_button">Resend OTP?</a>                                          
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .form-group -->
+                                </form>
+                                <!-- End .form-choice -->
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .form-tab -->
+                  
+                </div><!-- End .form-box -->
+
+                
+
+            </div><!-- End .container -->
+        </div><!-- End .login-page section-bg -->
+    </main>
+
+</section>
+
+<!-- Plugins JS File -->
+<script src="/assets/js/api/verifyEmail.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/jquery.hoverIntent.min.js"></script>
+<script src="/assets/js/jquery.waypoints.min.js"></script>
+<script src="/assets/js/superfish.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<!-- Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
+
+</html>

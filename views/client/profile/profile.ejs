@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Profile</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+    <!-- bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+
+    <style>
+        .credit-card {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            /* background-color: #4a2c29; */
+            background-color: rgb(188, 185, 185);
+            position: relative;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chip {
+            width: 60px;
+            height: 45px;
+            /* background-color: #d4af37; */
+            /* background-color: rgb(46, 46, 46); */
+            border-radius: 5px;
+            position: absolute;
+            top: 30px;
+            left: 20px;
+        }
+        .card-number {
+            position: absolute;
+            bottom: 70px;
+            left: 20px;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        .card-holder {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            font-size: 14px;
+        }
+        .logo {
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            /* background-color: #653a36; */
+            /* background-color: #fff; */
+        }
+        .add-money-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .add-money-button:hover {
+            background-color: #45a049;
+        }
+        /* table */
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: none;
+            color: black;
+            font-size: 15px;
+            /* font-weight: 500; */
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: none;
+        }
+        .table tbody + tbody {
+            border-top: none;
+        }
+        .table .table {
+            background-color: #fff;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+</head>
+
+<body onload="loadProfile()">
+
+    <!-- loading -->
+    <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+    </section>
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+            task_alt
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+    <section id="profile">
+        <div class="page-wrapper">
+
+            <header class="header header-5">
+                <div class="header-middle sticky-header">
+                    <div class="container">
+                        <div class="header-left">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">Toggle mobile menu</span>
+                                <i class="icon-bars"></i>
+                            </button>
+
+                            <h2 id="logo">StyleSavvy</h2>
+
+                            <nav class="main-nav">
+                                <ul class="menu sf-arrows">
+                                    <li class="home">
+                                        <p class=""><a id="a_menu_item" href="/home">Home</a></p>
+                                    </li>
+                                    <li class="products">
+                                        <p><a id="a_menu_item" href="/shop">Shop</a></p>
+                                    </li>
+
+
+                                    <li class="more" id="more">
+                                        <p><a id="a_menu_item" href="/contact">Contact</a></p>
+                                        <!-- <ul>
+                                <li><a href="elements-products.html">About</a></li>
+                                <li><a href="elements-typography.html">Contact</a></li>
+                                </ul> -->
+                                    </li>
+                                </ul><!-- End .menu -->
+                            </nav><!-- End .main-nav -->
+                        </div><!-- End .header-left -->
+
+                        <div class="header-right">
+                            <div class="header-search header-search-extended header-search-visible">
+                                <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                <form id="search_form"  method="get">
+                                    <div class="header-search-wrapper">
+                                        <label for="q" class="sr-only">Search</label>
+                                        <input type="search" class="form-control" name="search" id="search"
+                                            placeholder="Search product" required autocomplete="off">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="icon-search"></i></button>
+                                    </div>
+                                </form>
+
+                                <script>
+                                        const form = document.getElementById('search_form')
+                                        form.addEventListener('submit', (e)=>{
+                                             e.preventDefault()
+
+                                            const data = document.getElementById('search').value
+
+                                            let url = new URL(window.location.href);
+                                            url.pathname = '/shop';
+                                            url.searchParams.set('search', data);
+                                            window.location.href = url.toString();
+
+                                        })                                        
+                                </script>
+                            </div>
+
+                            
+                            <a id="wishlist_icon" href="/wishlist" class="dropdown cart-dropdown">
+                                <i style="font-size: 24px;" class="icon-heart-o"></i>
+                                <span id="wishlist_count" class="cart-count"><%= locals.wishlist? locals.wishlist.items.length : 0 %></span> 
+                            </a>
+
+                            <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                                <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                                <span class="cart-count"><%= locals.cart? locals.cart.items.length : 0 %></span>
+                            </a>
+
+
+                            <% if (locals.user) { %>
+                                <% const names=locals.user.name.split(' ')[0]; %>
+                    <ul class="menu">
+                        <li class="home active">
+                            <p class=""><a style="color: white;" id="user_name" class="name_user" href=""><%= names %></a></p>
+                        </li>
+                    </ul>    
+                <% } else { %>
+                    <ul class="menu sf-arrows">
+                        <li class="home">
+                            <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                        </li>
+                    </ul> 
+                <% } %>
+                
+                
+
+            </div><!-- End .header-right -->
+        </div><!-- End .container-fluid -->
+    </div><!-- End .header-middle -->
+</header><!-- End .header -->
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb mt-1">
+                        <li class="breadcrumb-item"><a style="font-size: 15px; margin-right: 8px;font-weight: 500;" href="home">Home </a>  >  <a style="font-size: 15px; margin-right: 8px; margin-left: 8px;font-weight: 500;" href="/shop"> Shop </a>  >  <a style="font-size: 15px; margin-left: 8px; color: black;font-weight: 500;" > My Account</a></li>
+                    </ol>
+                </div>
+            </nav>
+            <div id="dashboard" class="page-content">
+            	<div class="dashboard mt-2">
+	                <div class="container">
+	                	<div class="row">
+	                		<aside class="col-md-2 col-lg-2">
+	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+								    <li class="nav-item">
+								        <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								    </li>
+                                    <li class="nav-item">
+								        <a class="nav-link" id="tab-wishlist-link" data-toggle="tab" href="#tab-wishlist" role="tab" aria-controls="tab-wishlist" aria-selected="false">Wishlist</a>
+								    </li>
+                                    <li class="nav-item">
+								        <a class="nav-link" id="tab-wallet-link" data-toggle="tab" href="#tab-wallet" role="tab" aria-controls="tab-wallet" aria-selected="false">Wallet</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+								    </li>
+                                    <li class="nav-item">
+								        <a class="nav-link" id="tab-changePassword-link" data-toggle="tab" href="#tab-changePassword" role="tab" aria-controls="tab-changePassword" aria-selected="false">Change Password</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" href="/user/logout">Sign Out</a>
+								    </li>
+								</ul>
+	                		</aside><!-- End .col-lg-3 -->
+
+	                		<div class="col-md-10 col-lg-10">
+	                			<div class="tab-content">
+								    <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+								    	<p>Hello <span class="font-weight-normal text-dark"><%= locals.user.name %></span> (not <span class="font-weight-normal text-dark"><%= locals.user.name %></span>? <a href="/user/logout">Log out</a>) 
+								    	<br>
+								    	From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, you can update your <a href="#tab-account" class="tab-trigger-link">account details</a>, 
+                                        and also <a href="#tab-changePassword" class="tab-trigger-link">change your password.</a> And here is your referral link to stylesavvy, <a style="color: #c96; cursor: pointer;" class="copy-text link-underline" data-link="/signUp?referralCode=<%= locals.user.referralCode %>">click here to copy</a> and send to your friends and get 100 Rs to your wallet.
+								     
+                                        
+                                        <script>
+                                            // JavaScript to handle copy to clipboard
+                                            document.querySelector(' .copy-text').addEventListener('click', function () {
+                                                const textToCopy = this.getAttribute('data-link');
+                                                navigator.clipboard.writeText(textToCopy).then(function () {
+        
+                                                    showSnackBar('Refferal link copied to clipboard!');
+
+                                                    }).catch(function (err) {
+                                                        
+                                                        showSnackBar(' Failed to copy refferal link.');
+
+                                                    });
+                                            }); 
+                                            
+                                            // show snack bar function
+                                            function showSnackBar(text) {
+                                                document.getElementById('snackbar_msg').innerHTML = text 
+                                                        const  x = document.getElementById("snackbar"); x.className = "show"; setTimeout(function () {
+                                                        x.className = x.className.replace("show", "");
+                                                        document.getElementById('snackbar_icon').innerHTML = 'task_alt'
+                                                        document.getElementById('snackbar_icon').style.color = 'rgb(37, 199, 37)'
+                                                    }, 3000);
+                                            }
+                                        </script>
+
+                                    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+								    
+                                        <% if(locals.orders.length > 0){ %>
+
+                                      
+	                		
+                                            <a style="font-weight: 500;" href="/orders">See the order history here.</a>
+                                             
+                                             
+                    
+                                    <% } else {%>
+
+                                        <a style="font-weight: 500;" href="/orders">See the order history here.</a>
+                                        <!-- <p>No order has been made yet.</p>
+								    	<a href="/shop" class="btn btn-outline-primary-2"><span style="font-size: 1.4rem;">Go Shop</span><i class="icon-long-arrow-right"></i></a> -->
+
+
+
+                                        <% } %>
+                    
+
+
+								    </div><!-- .End .tab-pane -->
+
+                                    <div class="tab-pane fade" id="tab-wishlist" role="tabpanel" aria-labelledby="tab-wishlist-link">
+								    
+                                        <% if(locals.wishlist){ %>
+
+                                            <a style="font-weight: 500; "  href="/wishlist">See your wishlist here.</a>
+                                                                
+                                    <% } else {%>
+                                        <a style="font-weight: 500; "  href="/wishlist">See your wishlist here.</a>
+<!-- 
+                                        
+                                        <p>No products are added to wishlist.</p>
+								    	<a href="/shop" class="btn btn-outline-primary-2"><span style="font-size: 1.4rem;">Go Shop</span><i class="icon-long-arrow-right"></i></a> -->
+                                       
+                                        <% } %>
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-wallet" role="tabpanel" aria-labelledby="tab-wallet-link">
+								    	<p>Your Wallet.</p>
+                                        <div class="row">
+                                            <!-- <div style="display: flex; justify-content: start; align-items: center;" class="col-sm-6">
+                                                <div class="credit-card">
+                                                    <div class="chip"></div>
+                                                    <div class="card-number">1234 5678 9012 3456</div>
+                                                    <p style="font-weight: 500;" class="card-holder"><%= locals.user.name %></p>
+                                                    <div class="logo"></div>
+                                                    <button class="add-money-button">Add Money</button>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-sm-12">
+                                                <h1 id="balance_amount" style="font-weight: 500; font-size: 16px;">Balance : Rs <%= locals.wallet? locals.wallet.balance : 0 %></h1>
+                                            </div>
+                                            <div style="margin-top: 5px;" class="col-sm-12">
+                                                <p class="d-inline-flex gap-1">
+                                                    <a onclick="addMoney()" style="background-color:#c96; color: white;" class="btn">
+                                                      Add Money
+                                                    </a>
+                                                    <button class="btn" style="background-color: transparent; color:#c96; border-style: solid; border-width: 1px; border-color: #c96;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                      Transaction history
+                                                    </button>
+                                                  </p>
+                                                  <div class="collapse" id="collapseExample">
+                                                    <% if(locals.wallet){ %>
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Amount</th>
+                                                                        <th>Type</th>
+                                                                        <th>Date and Time</th>
+                                                                        <th>Description</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                               
+                                                                   <% locals.wallet.transaction_history.reverse().forEach((element, index)=>{ %>
+                                                                  
+                                                                     <tr>
+                                                                        <td><%= element.amount  %></td>
+                                                                       <% if(element.type === 'Credited'){ %>
+                                                                        <td style="color: green;"><%= element.type  %></td>
+                                                                       <% }else{ %>
+                                                                        <td style="color: rgb(206, 27, 27);"><%= element.type  %></td>
+                                                                        <% } %> 
+                                                                        <td><%= formatDate(element.dateTime) + ' ' +
+                                                                            element.dateTime.toLocaleTimeString() %></td>
+                                                                        <td><%= element.discription %></td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                            <% } else {%>
+                                                                
+                                                            <p style="font-size: 15px; color: black; text-align: center; font-weight: 500;">No transactions yet</p>
+
+                                                            <% } %>    
+                                                  </div>
+                                            </div>
+                                         
+                                        </div>
+
+                                        <% function formatDate(dateString) {
+                                            const date = new Date(dateString);
+                                            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                                            return date.toLocaleDateString('en-GB', options);
+                                        } %>
+
+
+								    	
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+
+                                    <% if(locals.adresses){ %>    
+                                            <p style="cursor: pointer;"  onclick="addAddress()"><span id="add_address">You can add new addresses.</span><br> <a ><span id="add_address_btn_" style="font-size: 1.4rem;">Add</span><span style="font-size: 18px; color: #bf8040; position: relative; top: 4px;" class="material-symbols-outlined icon">
+                                                add
+                                            </span></a></p>
+                                    <% }else{ %>
+                                        <p style="cursor: pointer;" onclick="addAddress()" ><span  id="add_address">You have not set up any addresses yet.</span><br> <a><span id="add_address_btn_" style="font-size: 1.4rem;">Add</span><span style="font-size: 18px; color: #bf8040; position: relative; top: 4px;" class="material-symbols-outlined icon">
+                                            add
+                                        </span></a></p>
+                                    <% } %>  
+                                  
+
+                                        <!-- add addresss  -->
+
+                                        <div id="add_address_div">
+                                            <form id="add_address_form" >
+			                				
+                                                <label>Name *</label>
+                                                <div style="position: relative;">
+                                                    <input type="text" value="<%= locals.user.name %>" class="form-control" required autocomplete="off">
+                                                <span id="Name_error" class="material-symbols-outlined pass_icon">
+                                                 
+                                                </span>
+                                                </div>
+                                               
+    
+                                                <label>Street Address *</label>
+                                                <textarea class="form-control" required autocomplete="off" ></textarea>
+                                                
+
+                                                <div class="row">
+
+                                                   <div class="col-sm-6">
+                                                    <label>Town / City *</label>
+                                                    <div style="position: relative;">
+                                                        <input type="text" class="form-control" required autocomplete="off">
+                                                    <span id="city_error" class="material-symbols-outlined pass_icon">
+                                                        
+                                                       </span>
+                                                    </div>
+                                                   </div>
+
+                                                  <div class="col-sm-6">
+                                                    <label>District / State *</label>
+                                                    <div style="position: relative;">
+                                                   <input type="text" class="form-control" required autocomplete="off">
+                                                    <span id="district_error" class="material-symbols-outlined pass_icon">
+                                                   </span>
+                                                    </div>
+                                                  </div>
+
+                                                </div>
+                                                
+
+                                               <div class="row">
+
+                                                <div class="col-sm-6">
+                                                    <label>Pin Code *</label>
+                                                    <input type="text" maxlength="6" minlength="6" pattern="[1-9][0-9]*" class="form-control" required autocomplete="off">
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>Phone Number *</label>
+                                                    <div style="position: relative;">
+                                                     <input type="text" value="<%= locals.user.phoneNo %>" class="form-control" required autocomplete="off">
+                                                     <span id="Phone_error" class="material-symbols-outlined pass_icon">
+                                                         
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                               </div>
+    
+
+                                                <div>
+                                                    <button id="add_address_btn"  type="submit" class="btn btn-outline-primary-2">
+                                                        <span>Add Address</span>
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                                                    <button onclick="closeAddressForm()" id="close_btn_form"  class="btn btn-outline-primary-2" type="reset" >Close</button>
+                                                </div>
+   
+                                            </form>
+                                        </div>     
+                                        
+                                        <!-- edit addresss -->
+
+                                        <div id="edit_address_div">
+                                            <form id="edit_address_form" >
+			                				
+                                                <label>Name *</label>
+                                                <div style="position: relative;">
+                                                    <input type="text" class="form-control" required autocomplete="off">
+                                                <span id="Name_error_edit" class="material-symbols-outlined pass_icon">
+                                                 
+                                                </span>
+                                                </div>
+                                               
+    
+                                                <label>Street Address *</label>
+                                                <textarea name="" class="form-control" required autocomplete="off" ></textarea>
+                                                
+
+                                                <div class="row">
+                                                    
+                                                    <div class="col-sm-6">
+                                                        <label>Town / City *</label>
+                                                <div style="position: relative;">
+                                                    <input type="text" class="form-control" required autocomplete="off">
+                                                <span id="city_error_edit" class="material-symbols-outlined pass_icon">
+                                                    
+                                                   </span>
+                                                </div>
+                                                    </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>District / State *</label>
+                                                <div style="position: relative;">
+                                                    <input type="text" class="form-control" required autocomplete="off">
+                                                <span id="district_error_edit" class="material-symbols-outlined pass_icon">
+                                                   </span>
+                                                </div>
+                                                </div>
+
+                                                </div>
+                                                
+
+                                                <div class="row">
+
+                                                    
+                                                    <div class="col-sm-6">
+                                                        <label>Pin Code *</label>
+                                                        <input type="text" maxlength="6" minlength="6" pattern="[1-9][0-9]*" class="form-control" required autocomplete="off">
+        
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label>Phone Number *</label>
+                                                   <div style="position: relative;">
+                                                    <input type="text" class="form-control" required autocomplete="off">
+                                                    <span id="Phone_error_edit" class="material-symbols-outlined pass_icon">
+                                                        
+                                                       </span>
+                                                   </div>
+                                                    </div>
+
+                                                </div>
+
+                                               <input type="hidden">
+                                               <input type="hidden">
+
+                                                <div>
+                                                    <button id="edit_address_btn"  type="submit" class="btn btn-outline-primary-2">
+                                                        <span>Edit Address</span>
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                                                    <button onclick="closeEditForm()" id="close_btn_form_edit"  class="btn btn-outline-primary-2" type="reset" >Close</button>
+                                                </div>
+   
+                                            </form>
+                                        </div>  
+                                        
+                                        <form action="">
+                                            <input type="hidden" id="is_address_available">
+                                        </form>
+
+								<div id="addrress_container">  	
+                                <div id="address_div">
+                                    <% if(locals.adresses){ %>
+								    
+                                            <p>The following addresses will be used on the checkout page by default.</p>
+
+								    	<div class="row">
+
+                                            <% locals.adresses.forEach((data,index) => { %>
+
+                                                <div id="<%= data._id %>" class="col-lg-6">
+                                                    <div class="card card-dashboard">
+                                                        <div class="card-body">
+                                                            <h3 class="card-title">Billing Address <%= index + 1 %></h3><!-- End .card-title -->
+
+                                                            <p><%= data.name %><br>
+                                                                <% 
+                                                                const streetAddressWords = data.streetAddress.split(' ');
+                                                                const firstLine = streetAddressWords.slice(0, 3).join(' ');
+                                                                const secondLine = streetAddressWords.slice(3).join(' ');
+                                                                %>
+                                                                <%= firstLine %><br>
+                                                                <%= secondLine %><br>
+                                                            <%= data.city %> , <%= data.district %><br>
+                                                            <%= data.phoneNo %> <br>
+                                                            <!-- yourmail@mail.com<br> -->
+                                                            <div style="display: flex;">
+                                                                <a onclick="getEditForm('<%= index %>','<%= data._id %>')" style="font-weight: 500; color: #bf8040; cursor: pointer;" >Edit <span style="position: relative; top: 3px; font-size: 16px;" class="material-symbols-outlined">edit</span></a></p>
+                                        <a onclick="deleteAddress('<%= index %>')"
+                                            style="font-weight: 500; margin-left: 10px; color: #bf8040; cursor: pointer;">Delete
+                                            <span style="position: relative; top: 3px; font-size: 16px;"
+                                                class="material-symbols-outlined">
+                                                delete
+                                            </span></a></p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <% }); %>
+
+            </div>
+
+
+            <% } %>
+
+                </div>
+
+                </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+                    
+                    <% if(locals.user.isGoogleAuthenticated){ %>
+
+                        <form id="user_form_google">
+                            <label>Name *</label>
+                            <div style="position: relative;">
+                                <input type="text" id="name_google" value="<%= locals.user.name %>" class="form-control" required
+                                    autocomplete="off">
+                                <span id="name_error_google" class="material-symbols-outlined pass_icon">
+    
+                                </span>
+                            </div>
+                            <label>Phone Number *</label>
+                            <div style="position: relative;">
+                                <input type="text" id="phone_no_google" value="<%= locals.user.phoneNo %>" class="form-control" required
+                                    autocomplete="off">
+                                <span id="phone_error_google" class="material-symbols-outlined pass_icon">
+    
+                                </span>
+                            </div>
+
+                            <button id="save_changes_btn_google" type="submit" class="btn btn-outline-primary-2">
+                                <span>Save Changes</span>
+                                <i class="icon-long-arrow-right"></i>
+                            </button>
+                        </form>    
+
+
+
+                    <% }else{ %>
+
+                        <form id="user_form">
+
+                            <label>Name *</label>
+                            <div style="position: relative;">
+                                <input type="text" value="<%= locals.user.name %>" class="form-control" required
+                                    autocomplete="off">
+                                <span id="name_error" class="material-symbols-outlined pass_icon">
+    
+                                </span>
+                            </div>
+       
+                            <label>Phone Number *</label>
+                            <div style="position: relative;">
+                                <input type="text" value="<%= locals.user.phoneNo %>" class="form-control" required
+                                    autocomplete="off">
+                                <span id="phone_error" class="material-symbols-outlined pass_icon">
+    
+                                </span>
+                            </div>
+                               
+                            <a onclick="getEmailInput()" id="getEmailInput">Click here if you want to change email</a>
+                            <a onclick="HideEmailInput()" id="HideEmailInput">Click here if you dont want to change
+                                email</a>       
+                            
+                            <div id="submit_btn">                                    
+                                <label>Password *</label>
+                                <div class="p-div">
+                                    <input type="password" id="p1" class="form-control" required autocomplete="off">
+                                    <span id="password_error" class="material-symbols-outlined pass_icon">
+    
+                                    </span>
+                                    <span onclick="showPassword1()" id="v1" class="material-symbols-outlined pass_icon">
+                                        visibility_off
+                                    </span>
+                                </div>
+                            
+                                <button id="save_changes_btn" type="submit" class="btn btn-outline-primary-2">
+                                    <span>Save Changes</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+                            </div>
+    
+                        </form>
+
+                        <form action="" onsubmit="verifyEmail(event)" >
+                            <div style="display: none;" id="verify_btn">
+                                <label>Email address *</label>
+                                <div style="position: relative;">
+                                    <input type="email" id="email" value="<%= locals.user.email %>" class="form-control"
+                                        required autocomplete="off">
+                                    <span id="email_error" class="material-symbols-outlined pass_icon">   
+                                    </span>
+                                </div>
+    
+                                <button id="btn_verify_email" type="submit"
+                                    class="btn btn-outline-primary-2">
+                                    <span>Verify&nbsp;Email</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+
+                            </div>
+                        </form>   
+                        
+                        <form style="position: relative; top: -10px;" id="otp_form" action="">
+
+                            <div id="otp_div_profile">
+                                <label>OTP *</label>
+                                <div style="position: relative;">
+                                    <input maxlength="6" minlength="6" pattern="[1-9][0-9]*"  type="text" id="otp_input" name="otp" placeholder="Enter the OTP" class="form-control" required
+                                        autocomplete="off">
+                                    <span id="otp_error" class="material-symbols-outlined pass_icon">
+        
+                                    </span>
+                                </div>
+                                <div style="display: flex; height: 40px;">
+                                    <button id="confirm_btn" type="submit"
+                                    class="btn btn-outline-primary-2 btn_verify">
+                                    <span>Verify&nbsp;OTP</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </button>
+                                    <p style="margin-top: 15px; margin-left: 15px;" id="otp_p">Resend OTP in <span id="timer_otp"></span> seconds
+                                    </p>
+                                    <p style="margin-top: 15px; margin-left: 15px; cursor: pointer; text-decoration: underline;" onclick="resendOTP()" id="otp_button">Resend OTP?</p>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    <% } %>    
+
+                </div><!-- .End .tab-pane -->
+
+                <div class="tab-pane fade" id="tab-changePassword" role="tabpanel"
+                    aria-labelledby="tab-changePassword-link">
+                  
+
+                   <% if(locals.user.isGoogleAuthenticated){ %>
+
+                    <p>You can't change your password, becuase you have authenticated through google</p>
+                   
+
+                    <% } else {%>
+
+                    <form id="password_form">
+
+                        <label>Current password *</label>
+                        <div style="position: relative;">
+                            <input id="p2" type="password" class="form-control" required autocomplete="off">
+                            <span id="password2_error" class="material-symbols-outlined pass_icon">
+
+                            </span>
+                            <span onclick="showPassword2()" id="v2" class="material-symbols-outlined pass_icon">
+                                visibility_off
+                            </span>
+                        </div>
+
+                        <label>New password *</label>
+                        <div style="position: relative;">
+                            <input id="p3" type="password" class="form-control" required autocomplete="off">
+                            <span id="password3_error" class="material-symbols-outlined pass_icon">
+
+                            </span>
+                            <span onclick="showPassword3()" id="v3" class="material-symbols-outlined pass_icon">
+                                visibility_off
+                            </span>
+                        </div>
+
+                        <label>Confirm new password *</label>
+                        <div style="position: relative;">
+                            <input id="p4" type="password" class="form-control mb-2" required autocomplete="off">
+                            <span id="password4_error" class="material-symbols-outlined pass_icon">
+
+                            </span>
+                            <span onclick="showPassword4()" id="v4" class="material-symbols-outlined pass_icon">
+                                visibility_off
+                            </span>
+                        </div>
+
+                        <button id="password_change_btn" type="submit" class="btn btn-outline-primary-2">
+                            <span>Save Changes</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <% } %>
+
+                
+
+                
+                </div><!-- .End .tab-pane -->
+
+                </div>
+                </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+                </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+                </div><!-- End .page-content -->
+                </main><!-- End .main -->
+
+                <footer class="footer">
+                    <div class="footer-middle">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="widget widget-about">
+                                        <h2 id="footer-logo">StyleSavvy</h2>
+                                        <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+        
+                                        <div class="social-icons">
+                                            <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                            <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                            <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                            <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                        </div><!-- End .soial-icons -->
+                                    </div><!-- End .widget about-widget -->
+                                </div><!-- End .col-sm-6 col-lg-3 -->
+        
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Useful Links</h4>
+        
+                                        <ul class="widget-list">
+                                            <li><a>About Molla</a></li>
+                                            <li><a>How to shop on StyleSavvy</a></li>
+                                            <li><a>FAQ</a></li>
+                                            <li><a>Contact us</a></li>
+                                            <li><a>Log in</a></li>
+                                        </ul><!-- End .widget-list -->
+                                    </div><!-- End .widget -->
+                                </div><!-- End .col-sm-6 col-lg-3 -->
+        
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Customer Service</h4>
+        
+                                        <ul class="widget-list">
+                                            <li><a >Payment Methods</a></li>
+                                            <li><a >Money-back guarantee!</a></li>
+                                            <li><a >Returns</a></li>
+                                            <li><a >Shipping</a></li>
+                                            <li><a >Terms and conditions</a></li>
+                                            <li><a >Privacy Policy</a></li>
+                                        </ul><!-- End .widget-list -->
+                                    </div><!-- End .widget -->
+                                </div><!-- End .col-sm-6 col-lg-3 -->
+        
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="widget">
+                                        <h4 class="widget-title">My Account</h4>
+        
+                                        <ul class="widget-list">
+                                            <li><a href="/signIn">Sign In</a></li>
+                                            <li><a href="/cart">View Cart</a></li>
+                                            <li><a href="/wishlist">My Wishlist</a></li>
+                                            <li><a href="/orders">Track My Order</a></li>
+                                            <li><a href="/contact">Help</a></li>
+                                        </ul><!-- End .widget-list -->
+                                    </div><!-- End .widget -->
+                                </div><!-- End .col-sm-6 col-lg-3 -->
+                            </div><!-- End .row -->
+                        </div><!-- End .container -->
+                    </div><!-- End .footer-middle -->
+        
+                    <div class="footer-bottom">
+                        <div class="container">
+                            <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                            <!-- End .footer-copyright -->
+                            <figure class="footer-payments">
+                                <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                                    height="20">
+                            </figure><!-- End .footer-payments -->
+                        </div><!-- End .container -->
+                    </div><!-- End .footer-bottom -->
+                </footer><!-- End .footer -->
+                </div><!-- End .page-wrapper -->
+                <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+                <!-- Mobile Menu -->
+                <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+                <div class="mobile-menu-container mobile-menu-dark">
+                    <div class="mobile-menu-wrapper">
+                        <span class="mobile-menu-close"><i class="icon-close"></i></span>
+        
+                        <form id="search_form1" method="get" class="mobile-search">
+                            <label for="mobile-search" class="sr-only">Search</label>
+                            <input type="search"  class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                        </form>
+
+                        <script>
+                            const form1 = document.getElementById('search_form1')
+                            form1.addEventListener('submit', (e)=>{
+                                 e.preventDefault()
+            
+                                const data = document.getElementById('search1').value
+            
+                                let url = new URL(window.location.href);
+                                url.pathname = '/shop';
+                                url.searchParams.set('search', data);
+                                window.location.href = url.toString();
+                            })                                        
+                       </script>
+                        
+                        <nav class="mobile-nav">
+                            <ul class="mobile-menu">
+                                <li>
+                                    <a href="/home">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/shop">Shop</a>
+            
+                                </li>
+            
+                                <li>
+                                    <a href="/contact">Contact</a>
+            
+                                </li>
+                                <li>
+                                    <a href="/wishlist">Wishlist</a>
+                                </li>
+                                <li>
+                                    <a href="/cart">Cart</a>
+                                </li>
+                                <li class="active">
+                                    <a href="/profile">Profile</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+
+                        <div class="social-icons">
+                            <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                            <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                            <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                            <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                        </div><!-- End .social-icons -->
+                    </div><!-- End .mobile-menu-wrapper -->
+                </div><!-- End .mobile-menu-container -->
+
+    </section>
+
+
+    <div class="modal fade" id="add_money" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- <img id="img_cart" src="/assets/images/demos/demo-5/cart-unscreen.gif" alt="" style="position: absolute; top: 10em; left: 50%; transform: translateX(-120%); z-index: 9999; width: 45%;"> -->
+            <div class="modal-content">
+               <form action="" onsubmit="addMoneyToWallet(event)">
+                <div class="modal-body"> <!-- Added text-center class to center align text -->
+                    <div class="form-group">
+
+                       <div style="padding-left: 20px; padding-right: 20px;">
+                        <input placeholder="Enter an amount" type="text"  style="color: black; font-size: 15px;" pattern="[1-9][0-9]*" title="Please enter positive numbers (excluding zero)" id="amount_to_add" class="form-control" required
+                        autocomplete="off">
+                       </div>
+                 
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center"> <!-- Added justify-content-center class to center align buttons -->
+                    <button type="button" class="close_btn" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="confirm_btn" class="button2">Add Money</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="remove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="unlistCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <!-- <img id="img_cart" src="/assets/images/demos/demo-5/cart-unscreen.gif" alt="" style="position: absolute; top: 10em; left: 50%; transform: translateX(-120%); z-index: 9999; width: 45%;"> -->
+            <div class="modal-content">
+                <div class="modal-body text-center"> <!-- Added text-center class to center align text -->
+                    <h6>Are you sure you want to delete this address?</h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <!-- Added justify-content-center class to center align buttons -->
+                    <button class="close_btn" data-bs-dismiss="modal">No</button>
+                    <button id="confirm_btn_delete" class="button2">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Plugins JS File -->
+    
+    <script src="/assets/js/api/wallet.js"></script>
+    <script src="/assets/js/api/profile.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/superfish.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+
+
+</html>

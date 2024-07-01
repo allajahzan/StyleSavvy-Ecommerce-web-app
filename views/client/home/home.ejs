@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/index-5.html  22 Nov 2019 09:55:58 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+    <meta name="keywords" content="StyleSavvy">
+    <meta name="description" content="StyleSavvy">
+    <meta name="author" content="Ahsanallajpk">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/demos/demo-5/ss.png">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/plugins/jquery.countdown.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="/assets/css/skins/skin-demo-5.css"> -->
+    <link rel="stylesheet" href="/assets/css/demos/demo-5.css">
+    <link rel="stylesheet" href="/assets/css/myStyle.css">
+    <!-- <link rel="stylesheet" href="/assets/css/loading.css"> -->
+</head>
+
+<body onload="loadHomePage()">
+
+    <!-- loading -->
+    <section id="loading">
+        <h2 id="footer-logo">StyleSavvy</h2>
+        <span class="loader"></span>
+    </section>
+
+    <div id="snackbar">
+        <span id="snackbar_icon" class="material-symbols-outlined">
+            task_alt
+        </span>
+        <p id="snackbar_msg"></p>
+    </div>
+
+    <section id="home">
+        <div class="page-wrapper">
+            <header class="header header-5">
+                <div class="header-middle sticky-header">
+                    <div class="container">
+                        <div class="header-left">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">Toggle mobile menu</span>
+                                <i class="icon-bars"></i>
+                            </button>
+
+                            <h2 id="logo">StyleSavvy</h2>
+
+                            <nav class="main-nav">
+                                <ul class="menu sf-arrows">
+                                    <li class="home active">
+                                        <p class=""><a id="a_menu_item" href="home">Home</a></p>
+                                    </li>
+                                    <li class="products">
+                                        <p class=""><a id="a_menu_item" href="/shop">Shop</a></p>
+                                    </li>
+
+
+                                    <li class="more" id="more">
+                                        <p><a id="a_menu_item" href="/contact">Contact</a></p>
+                                    </li>
+                                </ul><!-- End .menu -->
+                            </nav><!-- End .main-nav -->
+                        </div><!-- End .header-left -->
+
+                        <div class="header-right">
+                            <div class="header-search header-search-extended header-search-visible">
+                                <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                <form id="search_form"  method="get">
+                                    <div class="header-search-wrapper">
+                                        <label for="q" class="sr-only">Search</label>
+                                        <input type="search" class="form-control" name="search" id="search"
+                                            placeholder="Search product" required autocomplete="off">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="icon-search"></i></button>
+                                    </div>
+                                </form>
+
+                                <script>
+                                        const form = document.getElementById('search_form')
+                                        form.addEventListener('submit', (e)=>{
+                                             e.preventDefault()
+
+                                            const data = document.getElementById('search').value
+
+                                            let url = new URL(window.location.href);
+                                            url.pathname = '/shop';
+                                            url.searchParams.set('search', data);
+                                            window.location.href = url.toString();
+
+                                        })                                        
+                                </script>
+                            </div>
+                          
+                            <% if (locals.user) { %>
+
+                                <a id="wishlist_icon" href="/wishlist" class="dropdown cart-dropdown">
+                                    <i style="font-size: 24px;" class="icon-heart-o"></i>
+                                    <span id="wishlist_count" class="cart-count"><%= locals.wishlistCount %></span> 
+                                </a>
+
+                          <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                            <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                            <span id="cart_count" class="cart-count"><%= locals.cartCount %></span>      
+                          </a>
+
+                          
+                                <% const
+                                    names=locals.user.name.split(' ')[0]; %>
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>
+                                </li>
+                            </ul>    
+                        <% } else { %>
+                            <a href="/wishlist" class="wishlist">
+                                <i class="icon-heart-o"></i>
+                                <!-- <span class="cart-count">2</span>  -->
+                            </a>
+
+                            <a id="cart_icon" href="/cart" class="dropdown cart-dropdown">
+                                <i style="font-size: 32px;" class="icon-shopping-cart"></i>
+                                <!-- <span class="cart-count">2</span>       -->
+                              </a>
+
+                            <ul class="menu sf-arrows">
+                                <li class="home">
+                                    <p class=""><a id="a_menu_item" href="/signIn">Login</a></p>
+                                </li>
+                            </ul> 
+                        <% } %>
+                        
+                        
+
+                    </div><!-- End .header-right -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        <main class="main">
+            <div class="intro-slider-container mb-0">
+                <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='
+                                    {"nav": false, "dots" : false}'>
+                                    <div class="intro-slide"
+                                        style="background-image: url(assets/images/demos/demo-5/slider/slide-3.jpg);">
+                                        <div class="container intro-content text-center">
+                                            <h3 class="intro-subtitle text-white">Don’t Miss</h3>
+                                            <!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title text-white">Mystery Deals</h1>
+                                            <!-- End .intro-title -->
+                                            <div class="intro-text text-white">Online Only</div><!-- End .intro-text -->
+                                            <a href="/shop" class="btn btn-primary">Discover NOW</a>
+                                        </div><!-- End .intro-content -->
+                                    </div><!-- End .intro-slide -->
+
+                                    <div class="intro-slide"
+                                        style="background-image: url(assets/images/demos/demo-5/slider/slide-1.jpg);">
+                                        <div class="container intro-content text-center">
+                                            <h3 class="intro-subtitle text-white">Limited time only</h3>
+                                            <!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title text-white">Treat your self</h1>
+                                            <!-- End .intro-title -->
+                                            <div class="intro-text text-white">Up to 50% off</div>
+                                            <!-- End .intro-text -->
+                                            <a href="/shop" class="btn btn-primary">Shop NOW</a>
+                                        </div><!-- End .intro-content -->
+                                    </div><!-- End .intro-slide -->
+                        </div><!-- End .intro-slider owl-carousel owl-theme -->
+
+                        <span class="slider-loader text-white"></span><!-- End .slider-loader -->
+                    </div><!-- End .intro-slider-container -->
+
+                    <div class="brands-border owl-carousel owl-simple mb-5" data-toggle="owl" data-owl-options='{
+                    "nav": false, 
+                    "dots": false,
+                    "margin": 0,
+                    "loop": false,
+                    "responsive": {
+                        "0": {
+                            "items":2
+                        },
+                        "420": {
+                            "items":3
+                        },
+                        "600": {
+                            "items":4
+                        },
+                        "900": {
+                            "items":5
+                        },
+                        "1024": {
+                            "items":6
+                        },
+                        "1360": {
+                            "items":7
+                        }
+                    }
+                }'>
+                        <a  class="brand">
+                            <img src="assets/images/brands/1.png" alt="Brand Name">
+                        </a>
+
+                        <a  class="brand">
+                            <img src="assets/images/brands/2.png" alt="Brand Name">
+                        </a>
+
+                        <a  class="brand">
+                            <img src="assets/images/brands/3.png" alt="Brand Name">
+                        </a>
+
+                        <a class="brand">
+                            <img src="assets/images/brands/4.png" alt="Brand Name">
+                        </a>
+
+                        <a class="brand">
+                            <img src="assets/images/brands/5.png" alt="Brand Name">
+                        </a>
+
+                        <a class="brand">
+                            <img src="assets/images/brands/6.png" alt="Brand Name">
+                        </a>
+
+                        <a class="brand">
+                            <img src="assets/images/brands/7.png" alt="Brand Name">
+                        </a>
+                    </div><!-- End .owl-carousel -->
+
+                    <div class="container">
+                        <div class="banner-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="banner banner-border">
+                                        <a>
+                                            <img src="assets/images/demos/demo-5/banners/banner-1.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content">
+                                            
+                                            <!-- End .banner-subtitle -->
+                                            <h3 class="banner-title"><a><span>This Week's<br>Most
+                                                        Wanted</span></a></h3><!-- End .banner-title -->
+                                            <a href="/shop" class="btn btn-outline-primary-2 banner-link">Discover Now<i
+                                                    class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-md-6-->
+
+                                <div class="col-md-6">
+                                    <div class="banner banner-border-hover">
+                                        <a >
+                                            <img src="assets/images/demos/demo-5/banners/banner-2.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content">
+                                            <h4 class="banner-subtitle"><a>Limited time only.</a></h4>
+                                            <!-- End .banner-subtitle -->
+                                            <h3 class="banner-title"><a><span>Trainers & Sportwear<br>Sale Up
+                                                        to 70% off</span></a></h3><!-- End .banner-title -->
+                                            <a href="/shop" class="btn btn-outline-primary-2 banner-link">Shop Now<i
+                                                    class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+
+                                    <div class="banner banner-border-hover">
+                                        <a>
+                                            <img src="assets/images/demos/demo-5/banners/banner-3.jpg" alt="Banner">
+                                        </a>
+
+                                        <div class="banner-content">
+                                            <h4 class="banner-subtitle"><a>This week we love...</a></h4>
+                                            <!-- End .banner-subtitle -->
+                                            <h3 class="banner-title"><a><span>Womens <br>Holiday
+                                                        Clothes</span></a></h3><!-- End .banner-title -->
+                                            <a href="/shop" class="btn btn-outline-primary-2 banner-link">Discover Now<i
+                                                    class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .banner-content -->
+                                    </div><!-- End .banner -->
+                                </div><!-- End .col-md-6 -->
+                            </div><!-- End .row -->
+                        </div><!-- End .banner-group -->
+                    </div><!-- End .container -->
+
+                    <div class="mb-4"></div><!-- End .mb-6 -->
+
+                    <div class="container">
+                        <div class="heading heading-center mb-3">
+                            <h2 class="title">Trendy Products</h2><!-- End .title -->
+
+                            <ul class="nav nav-pills justify-content-center" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="trendy-all-link" data-toggle="tab"
+                                        href="#trendy-all-tab" role="tab" aria-controls="trendy-all-tab"
+                                        aria-selected="true">Men</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="trendy-women-link" data-toggle="tab"
+                                        href="#trendy-women-tab" role="tab" aria-controls="trendy-women-tab"
+                                        aria-selected="false">Women</a>
+                                </li>
+                               
+                            </ul>
+                        </div><!-- End .heading -->
+
+                        <div class="tab-content tab-content-carousel">
+                            <div class="tab-pane p-0 fade show active" id="trendy-all-tab" role="tabpanel"
+                                aria-labelledby="trendy-all-link">
+                                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
+                                    data-toggle="owl" data-owl-options='{
+                                "nav": false, 
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":4,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                            <% locals.topVarients.forEach(v=> { %>
+                             
+                                <% if(v.product.type.type_name === 'Men'){ %>
+
+                                <div class="product product-2">
+                                    <figure style="margin-top: 10px;" class="product-media">
+
+                                        <% if(v.stock[0] === 0){ %>
+
+                                            <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                         
+                                        <% } else{%>
+                                            
+                                            <% 
+                                            let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                            let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                            %>
+                                            <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                                <% if (offer1 > offer2) { %>
+                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                                <% } else { %>
+                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                                <% } %>        
+                                            <% } %>
+
+                                          
+                                         
+                                        <% } %>    
+
+                                        <!-- <span class="product-label label-new">New</span> -->
+                                        <!-- <span class="product-label label-out">Out of stock</span> -->
+                                        <!-- <span class="product-label label-sale">30% off</span> -->
+                                        <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                            <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                                alt="Product image" class="product-image">
+                                            <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                                alt="Product image" class="product-image-hover">
+                                        </a>
+
+                                        <div class="product-action-vertical">
+                                            <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                                title="Add to wishlist"><span>add to wishlist</span></a>       
+                                        </div>
+
+
+                                        <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                            <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                    cart</span></a>
+                                                    <form action="">
+                                                        <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                        <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                    </form>
+                                            <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                                class="btn-product btn-quickview"
+                                                title="Quick view"><span>Quick view</span></a>
+
+                                        </div>
+
+                                        <!-- <div class="product-action product-action-transparent">
+                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                        </div> -->
+
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <!-- <div class="product-cat">
+                                            <a href="#">Clothing</a>
+                                        </div> -->
+                                        <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                <%= v.product.product_name %>
+                                            </a></p><!-- End .product-title -->
+                                      
+
+
+                                        <% 
+                    let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                    let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                    %>
+                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                        <% if (offer1 > offer2) { %>
+
+                            <% let discountAmount = v.actualPrice * (offer1/100) %>
+                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                            </div>
+                         
+
+                        <% }else{ %> 
+
+                            <% let discountAmount = v.actualPrice * (offer2/100) %>
+                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                            </div>
+                         
+                            
+                        <% } %>    
+                    <% }else{ %>
+                        <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                            <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                        </div>
+                    <% } %> 
+
+
+                                        <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                        
+                                            <% v.allColors.forEach((color,index) => { %>
+
+                                             
+                                               
+                                                    <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                        <!-- <span class="">Color name</span> -->
+                                                    </a>
+                                                    <script type="text/javascript">
+                                                        // Execute the function when the DOM content is loaded
+                                                        document.addEventListener("DOMContentLoaded", function (event) {
+                                                            getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                        });
+                                                    </script>
+
+                                                
+                                                   
+                                               
+                                            <% }) %>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                               
+                            <% } %>
+                                
+                            <% }); %>
+
+                                 
+                                </div><!-- End .owl-carousel -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane p-0 fade" id="trendy-women-tab" role="tabpanel"
+                                aria-labelledby="trendy-women-link">
+                                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
+                                    data-toggle="owl" data-owl-options='{
+                                "nav": false, 
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":4,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+
+
+                            <% locals.topVarients.forEach(v=> { %>
+                             
+                                <% if(v.product.type.type_name === 'Women'){ %>
+
+                                <div class="product product-2">
+                                    <figure style="margin-top: 10px;" class="product-media">
+
+                                        <% if(v.stock[0] === 0){ %>
+
+                                            <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                         
+                                        <% } else{%>
+                                            
+                                            <% 
+                                            let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                            let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                            %>
+                                            <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                                <% if (offer1 > offer2) { %>
+                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                                <% } else { %>
+                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                                <% } %>        
+                                            <% } %>
+
+                                          
+                                         
+                                        <% } %>    
+
+                                        <!-- <span class="product-label label-new">New</span> -->
+                                        <!-- <span class="product-label label-out">Out of stock</span> -->
+                                        <!-- <span class="product-label label-sale">30% off</span> -->
+                                        <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                            <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                                alt="Product image" class="product-image">
+                                            <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                                alt="Product image" class="product-image-hover">
+                                        </a>
+
+                                        <div class="product-action-vertical">
+                                            <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                                title="Add to wishlist"><span>add to wishlist</span></a>       
+                                        </div>
+
+
+                                        <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                            <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                    cart</span></a>
+                                                    <form action="">
+                                                        <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                        <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                    </form>
+                                            <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                                class="btn-product btn-quickview add_to_cart_"
+                                                title="Quick view"><span>Quick view</span></a>
+
+                                        </div>
+
+                                        <!-- <div class="product-action product-action-transparent">
+                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                        </div> -->
+
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <!-- <div class="product-cat">
+                                            <a href="#">Clothing</a>
+                                        </div> -->
+                                        <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                <%= v.product.product_name %>
+                                            </a></p><!-- End .product-title -->
+                                      
+
+
+                                        <% 
+                    let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                    let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                    %>
+                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                        <% if (offer1 > offer2) { %>
+
+                            <% let discountAmount = v.actualPrice * (offer1/100) %>
+                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                            </div>
+                         
+
+                        <% }else{ %> 
+
+                            <% let discountAmount = v.actualPrice * (offer2/100) %>
+                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                            </div>
+                         
+                            
+                        <% } %>    
+                    <% }else{ %>
+                        <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                            <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                        </div>
+                    <% } %> 
+
+
+                                        <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                        
+                                            <% v.allColors.forEach((color,index) => { %>
+
+                                             
+                                               
+                                                    <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                        <!-- <span class="">Color name</span> -->
+                                                    </a>
+                                                    <script type="text/javascript">
+                                                        // Execute the function when the DOM content is loaded
+                                                        document.addEventListener("DOMContentLoaded", function (event) {
+                                                            getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                        });
+                                                    </script>
+
+                                                
+                                                   
+                                               
+                                            <% }) %>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                               
+                             <% } %>
+                                
+                            <% }); %>
+
+
+
+                                </div><!-- End .owl-carousel -->
+                            </div><!-- .End .tab-pane -->
+                           
+                          
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .container -->
+
+                    <div class="mb-5"></div><!-- End .mb-5 -->
+
+                    <div class="video-banner video-banner-bg bg-image text-center"
+                        style="background-image: url(assets/images/demos/demo-5/bg-2.jpg)">
+                        <div class="container">
+                            <h3 class="video-banner-title h1 text-white"><span>New Collection</span><strong>Winter’19
+                                    <i>/</i> Spring’20</strong></h3><!-- End .video-banner-title -->
+                            <a href="https://www.youtube.com/watch?v=vBPgmASQ1A0" class="btn-video btn-iframe"><i
+                                    class="icon-play"></i></a>
+                        </div><!-- End .container -->
+                    </div><!-- End .video-banner bg-image -->
+
+                    <% if(locals.topVarients.length>0){ %>
+
+                    <div class="pt-6 pb-6" style="background-color: #fff;">
+                        <div class="container">
+                            <div class="banner-set">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="banner-set-content text-center">
+                                            <div class="set-content-wrapper">
+                                                <h4>Special</h4>
+                                                <h2>Refine Your Style.</h2>
+
+                                                <p>Get on our exclusive email list and be the first to hear about sales,
+                                                    coupons, new arrivals and more! </p>
+
+                                                <div class="banner-set-products">
+                                                    <div class="row">
+                                                        <div class="products">
+                                                            <div class="col-6">
+                                                                <div class="product product-2 text-center">
+                                                                    <figure class="product-media">
+                                                                        <a href="/product?pId=<%= topVarients[0].product._id %>&vId=<%= topVarients[0]._id %>">
+                                                                            <img src="/products/uploads/<%= topVarients[0].images[0] %>"
+                                                                                alt="Product image"
+                                                                                class="product-image">
+                                                                        </a>
+                                                                    </figure><!-- End .product-media -->
+
+                                                                    <!-- <div class="product-body">
+                                                                        <h3 class="product-title"><a
+                                                                                href="/shop">Rib-knit
+                                                                                cardigan</a></h3>
+                                                                    
+                                                                        <div class="product-price">
+                                                                            Rs 899
+                                                                        </div>
+                                                                    </div> -->
+                                                                </div><!-- End .product -->
+                                                            </div><!-- End .col-sm-6 -->
+
+                                                            <div class="col-6">
+                                                                <div class="product product-2 text-center">
+                                                                    <figure class="product-media">
+                                                                        <a href="/product?pId=<%= topVarients[0].product._id %>&vId=<%= topVarients[0]._id %>">
+                                                                            <img src="/products/uploads/<%= topVarients[0].images[1] %>"
+                                                                                alt="Product image"
+                                                                                class="product-image">
+                                                                        </a>
+                                                                    </figure><!-- End .product-media -->
+
+                                                                    <!-- <div class="product-body">
+                                                                        <h3 class="product-title"><a
+                                                                                href="product.html">Linen-blend
+                                                                                trousers</a></h3>
+                                                                        
+                                                                        <div class="product-price">
+                                                                            $19.99
+                                                                        </div>
+                                                                    </div> -->
+                                                                </div><!-- End .product -->
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div>
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .banner-set-products -->
+                                                <p style="margin-top: 20px;"><%= topVarients[0].product.product_name %></p>
+                                            </div><!-- End .set-content-wrapper -->
+                                        </div><!-- End .banner-set-content -->
+                                    </div><!-- End .col-lg-6 -->
+                                    <div class="col-lg-6">
+                                        <div class="banner-set-image">
+                                            <a href="/product?pId=<%= topVarients[0].product._id %>&vId=<%= topVarients[0]._id %>">
+                                                <img src="/products/uploads/<%= topVarients[0].images[0] %>" alt="banner">
+                                            </a>
+                                            <div class="banner-content">
+                                                <h3 class="banner-title"><a ><span><%= topVarients[0].product.product_name %><br>trendy
+                                                            key pieces.</span></a></h3><!-- End .banner-title -->
+                                                <!-- <h4 class="banner-subtitle">in this look</h4> -->
+                                                <!-- End .banner-subtitle -->
+                                                <!-- <h4 class="banner-detail">• Rib-knit cardigan <br>• Linen-blend paper -->
+                                                    <!-- bag trousers</h4> -->
+                                                <h3 style="font-weight: 500;" class="banner-title text-white">₹ <%= topVarients[0].actualPrice %></h3>
+                                                <a href="/product?pId=<%= topVarients[0].product._id %>&vId=<%= topVarients[0]._id %>" class="btn btn-outline-primary-2 banner-link">Buy Now</a>
+                                            </div><!-- End .banner-content -->
+                                        </div><!-- End .banner-set-image -->
+                                    </div><!-- End .col-lg-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .banner-set -->
+                        </div><!-- End .container -->
+                    </div><!-- End .bg-lighter pt6 pb-6 -->
+
+                    <% } %>
+
+                    <div class="container pt-6 new-arrivals">
+                        <div class="heading heading-center mb-3">
+                            <h2 class="title">New Arrivals</h2><!-- End .title -->
+
+                            <ul class="nav nav-pills justify-content-center" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="new-all-link" data-toggle="tab" href="#new-all-tab"
+                                            role="tab" aria-controls="new-all-tab" aria-selected="true">Men</a>
+                                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="new-cloth-link" data-toggle="tab" href="#new-cloth-tab"
+                                        role="tab" aria-controls="new-cloth-tab" aria-selected="false">Women</a>
+                                </li>
+                              <!--   <li class="nav-item">
+                                    <a class="nav-link" id="new-shoes-link" data-toggle="tab" href="#new-shoes-tab"
+                                        role="tab" aria-controls="new-shoes-tab" aria-selected="false">Shoes & Boots</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="new-access-link" data-toggle="tab" href="#new-access-tab"
+                                        role="tab" aria-controls="new-access-tab" aria-selected="false">Accessories</a>
+                                </li> -->
+                            </ul>
+                        </div><!-- End .heading -->
+
+                        <div class="tab-content">
+                            <div class="tab-pane p-0 fade show active" id="new-all-tab" role="tabpanel"
+                                aria-labelledby="new-all-link">
+                                <div class="products">
+                                    <div class="row justify-content-center">
+
+
+                                        <% locals.varients.forEach((v)=> { %>
+
+                                            <% if(v.product.type.type_name === 'Men') { %>
+
+
+                                            <div class="col-6 col-md-4 col-lg-3 varient_image">
+                                                <div class="product product-2">
+                                                    <figure style="margin-top: 10px;" class="product-media">
+
+                                                        <% if(v.stock[0] === 0){ %>
+
+                                                            <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                                         
+                                                        <% } else{%>
+                                                            
+                                                            <% 
+                                                            let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                                            let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                                            %>
+                                                            <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                                                <% if (offer1 > offer2) { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                                                <% } else { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                                                <% } %>        
+                                                            <% } %>
+
+                                                          
+                                                         
+                                                        <% } %>    
+
+                                                        <!-- <span class="product-label label-new">New</span> -->
+                                                        <!-- <span class="product-label label-out">Out of stock</span> -->
+                                                        <!-- <span class="product-label label-sale">30% off</span> -->
+                                                        <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                            <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                                                alt="Product image" class="product-image">
+                                                            <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                                                alt="Product image" class="product-image-hover">
+                                                        </a>
+
+                                                        <div class="product-action-vertical">
+                                                            <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                                                title="Add to wishlist"><span>add to wishlist</span></a>       
+                                                        </div>
+
+
+                                                        <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                                            <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                                    cart</span></a>
+                                                                    <form action="">
+                                                                        <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                                        <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                                    </form>
+                                                            <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                                                class="btn-product btn-quickview add_to_cart_"
+                                                                title="Quick view"><span>Quick view</span></a>
+
+                                                        </div>
+
+                                                        <!-- <div class="product-action product-action-transparent">
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                        </div> -->
+
+                                                    </figure><!-- End .product-media -->
+
+                                                    <div class="product-body">
+                                                        <!-- <div class="product-cat">
+                                                            <a href="#">Clothing</a>
+                                                        </div> -->
+                                                        <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                                <%= v.product.product_name %>
+                                                            </a></p><!-- End .product-title -->
+                                                      
+
+
+                                                        <% 
+                                    let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                    let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                                    %>
+                                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                        <% if (offer1 > offer2) { %>
+
+                                            <% let discountAmount = v.actualPrice * (offer1/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+        
+                                        <% }else{ %> 
+
+                                            <% let discountAmount = v.actualPrice * (offer2/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+                                            
+                                        <% } %>    
+                                    <% }else{ %>
+                                        <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                                            <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                        </div>
+                                    <% } %> 
+
+
+                                                        <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                                        
+                                                            <% v.allColors.forEach((color,index) => { %>
+
+                                                             
+                                                               
+                                                                    <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                                        <!-- <span class="">Color name</span> -->
+                                                                    </a>
+                                                                    <script type="text/javascript">
+                                                                        // Execute the function when the DOM content is loaded
+                                                                        document.addEventListener("DOMContentLoaded", function (event) {
+                                                                            getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                                        });
+                                                                    </script>
+
+                                                                
+                                                                   
+                                                               
+                                                            <% }) %>
+                                                        </div>
+
+                                                       
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                       <% } %>
+
+                                    <% }); %>
+
+                                    </div><!-- End .row -->
+                                </div><!-- End .products -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane p-0 fade" id="new-cloth-tab" role="tabpanel"
+                                aria-labelledby="new-cloth-link">
+                                <div class="products">
+                                    <div class="row justify-content-center">
+
+                                        <% locals.varients.forEach((v)=> { %>
+
+                                            <% if(v.product.type.type_name === 'Women') { %>
+
+
+                                            <div class="col-6 col-md-4 col-lg-3 varient_image">
+                                                <div class="product product-2">
+                                                    <figure style="margin-top: 10px;" class="product-media">
+
+                                                        <% if(v.stock[0] === 0){ %>
+
+                                                            <span id="label_<%= v._id %>" style="background-color: rgba(0, 0, 0, 0.498);" class="product-label label-sale">Out of stock</span>
+                                                         
+                                                        <% } else{%>
+                                                            
+                                                            <% 
+                                                            let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                                            let offer2 = v.product.category ? (v.product.category.categoryOffer ? v.product.category.categoryOffer : 0) : 0;
+                                                            %>
+                                                            <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                                                <% if (offer1 > offer2) { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer1 %>% Offer</span>
+                                                                <% } else { %>
+                                                                    <span id="label_<%= v._id %>" style="background-color: rgba(128, 128, 128, 0.437);" class="product-label label-out"><%= offer2 %>% Offer</span>
+                                                                <% } %>        
+                                                            <% } %>
+
+                                                          
+                                                         
+                                                        <% } %>    
+
+                                                        <!-- <span class="product-label label-new">New</span> -->
+                                                        <!-- <span class="product-label label-out">Out of stock</span> -->
+                                                        <!-- <span class="product-label label-sale">30% off</span> -->
+                                                        <a id="anchor_tag<%= v._id %>" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                            <img id="varient_image1<%= v._id %>" src="/products/uploads/<%= v.images[0] %>"
+                                                                alt="Product image" class="product-image">
+                                                            <img id="varient_image2<%= v._id %>"  src="/products/uploads/<%= v.images[1] %>"
+                                                                alt="Product image" class="product-image-hover">
+                                                        </a>
+
+                                                        <div class="product-action-vertical">
+                                                            <a id="wishlist_btn"  onclick="addToWishList('<%= v._id %>')" class="btn-product-icon btn-wishlist"
+                                                                title="Add to wishlist"><span>add to wishlist</span></a>       
+                                                        </div>
+
+
+                                                        <div style="padding-bottom: 8px;" class="product-action action-icon-top">
+                                                            <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
+                                                                    cart</span></a>
+                                                                    <form action="">
+                                                                        <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
+                                                                        <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                                                    </form>
+                                                            <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
+                                                                class="btn-product btn-quickview add_to_cart_"
+                                                                title="Quick view"><span>Quick view</span></a>
+
+                                                        </div>
+
+                                                        <!-- <div class="product-action product-action-transparent">
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                            <a href="#" class="btn-product btn-cart add_to_cart_"><span>add to cart</span></a>
+                                                        </div> -->
+
+                                                    </figure><!-- End .product-media -->
+
+                                                    <div class="product-body">
+                                                        <!-- <div class="product-cat">
+                                                            <a href="#">Clothing</a>
+                                                        </div> -->
+                                                        <p style="font-weight: 500;" class="product-title"><a href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>">
+                                                                <%= v.product.product_name %>
+                                                            </a></p><!-- End .product-title -->
+                                                      
+
+
+                                                        <% 
+                                    let offer1 = v.product.productOffer ? v.product.productOffer : 0;
+                                    let offer2 = v.product.category.categoryOffer ? v.product.category.categoryOffer : 0;
+                                    %>
+                                    <% if (offer1 !== 0 || offer2 !== 0) { %>
+                                        <% if (offer1 > offer2) { %>
+
+                                            <% let discountAmount = v.actualPrice * (offer1/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+        
+                                        <% }else{ %> 
+
+                                            <% let discountAmount = v.actualPrice * (offer2/100) %>
+                                            <% let lastTotal = v.actualPrice - discountAmount %>
+
+                                            <div style=" margin-top: 4px; display: flex;" id="product_price<%= v._id %>" class="">
+                                                <p style="color: black; font-weight: 500; font-size: 13px;">₹&nbsp;<%= Math.round(lastTotal) %>&nbsp;&nbsp;</p>
+                                                <p style="text-decoration:line-through; font-size: 13px; color: rgb(181, 180, 180); font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                            </div>
+                                         
+                                            
+                                        <% } %>    
+                                    <% }else{ %>
+                                        <div style=" margin-top: 4px;" id="product_price<%= v._id %>" class="">
+                                            <p style="font-size: 13px; color: black; font-weight: 500;">₹&nbsp;<%= v.actualPrice %></p>
+                                        </div>
+                                    <% } %> 
+
+
+                                                        <div style="margin-left: 0px; margin-top: 8px;" class="product-nav product-nav-dots1">
+                                                        
+                                                            <% v.allColors.forEach((color,index) => { %>
+
+                                                             
+                                                               
+                                                                    <a style="border: none;" class="<%= color.color_name %> color_btn">
+                                                                        <!-- <span class="">Color name</span> -->
+                                                                    </a>
+                                                                    <script type="text/javascript">
+                                                                        // Execute the function when the DOM content is loaded
+                                                                        document.addEventListener("DOMContentLoaded", function (event) {
+                                                                            getColor('<%= color.color_name %>','<%= color.color_code %>'); // Call the function when the DOM content is loaded
+                                                                        });
+                                                                    </script>
+
+                                                                
+                                                                   
+                                                               
+                                                            <% }) %>
+                                                        </div>
+
+                                                       
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                       <% } %>
+
+                                    <% }); %>
+
+                                    </div><!-- End .row -->
+                                </div><!-- End .products -->
+                            </div><!-- .End .tab-pane -->
+                            
+                           
+                        </div><!-- End .tab-content -->
+
+                        <div class="more-container text-center mt-5 mb-3">
+                            <a href="/shop" class="btn btn-outline-primary-2 btn-round btn-more">Explore more</a>
+                        </div><!-- End .more-container -->
+                    </div><!-- End .container -->
+
+                    <div class="mb-2"></div><!-- End .mb-2 -->
+
+                    <div class="container">
+                        <div class="cta cta-separator mb-5">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cta-wrapper cta-text text-center">
+                                        <h3 class="cta-title">Shop Social</h3><!-- End .cta-title -->
+                                        <p class="cta-desc">You can contact us and exlpore more about us through the social media accounts below.</p><!-- End .cta-desc -->
+
+                                        <div class="social-icons social-icons-colored justify-content-center">
+                                            <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon social-youtube" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                            <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                            <a href="https://www.instagram.com/allajahzan/" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                            <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                        </div><!-- End .soial-icons -->
+                                    </div><!-- End .cta-wrapper -->
+                                  
+                                </div><!-- End .col-lg-6 -->
+
+                                <!-- <div class="col-lg-6">
+                            <div class="cta-wrapper text-center">
+                                <h3 class="cta-title">Get the Latest Deals</h3>
+                                <p class="cta-desc">and <br>receive <span class="text-primary">$20 coupon</span> for first shopping</p>
+                        
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" placeholder="Enter your Email Address" aria-label="Email Adress" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary btn-rounded" type="submit"><i class="icon-long-arrow-right"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> -->
+                            </div><!-- End .row -->
+                        </div><!-- End .cta -->
+                    </div><!-- End .container -->
+                    </main><!-- End .main -->
+
+
+                    <footer class="footer">
+                        <div class="footer-middle">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="widget widget-about">
+                                            <h2 id="footer-logo">StyleSavvy</h2>
+                                            <p>Discover the latest trends and timeless classics in fashion. Shop with us for quality clothing that fits your style and budget. Thank you for choosing us!.</p>
+            
+                                            <div class="social-icons">
+                                                <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                                                <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                                <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                                <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                            </div><!-- End .soial-icons -->
+                                        </div><!-- End .widget about-widget -->
+                                    </div><!-- End .col-sm-6 col-lg-3 -->
+            
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="widget">
+                                            <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+            
+                                            <ul class="widget-list">
+                                                <li><a>About Molla</a></li>
+                                                <li><a>How to shop on StyleSavvy</a></li>
+                                                <li><a>FAQ</a></li>
+                                                <li><a>Contact us</a></li>
+                                                <li><a>Log in</a></li>
+                                            </ul><!-- End .widget-list -->
+                                        </div><!-- End .widget -->
+                                    </div><!-- End .col-sm-6 col-lg-3 -->
+            
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="widget">
+                                            <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+            
+                                            <ul class="widget-list">
+                                                <li><a >Payment Methods</a></li>
+                                                <li><a >Money-back guarantee!</a></li>
+                                                <li><a >Returns</a></li>
+                                                <li><a >Shipping</a></li>
+                                                <li><a >Terms and conditions</a></li>
+                                                <li><a >Privacy Policy</a></li>
+                                            </ul><!-- End .widget-list -->
+                                        </div><!-- End .widget -->
+                                    </div><!-- End .col-sm-6 col-lg-3 -->
+            
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="widget">
+                                            <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+            
+                                            <ul class="widget-list">
+                                                <li><a href="/signIn">Sign In</a></li>
+                                                <li><a href="/cart">View Cart</a></li>
+                                                <li><a href="/wishlist">My Wishlist</a></li>
+                                                <li><a href="/orders">Track My Order</a></li>
+                                                <li><a href="/contact">Help</a></li>
+                                            </ul><!-- End .widget-list -->
+                                        </div><!-- End .widget -->
+                                    </div><!-- End .col-sm-6 col-lg-3 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .container -->
+                        </div><!-- End .footer-middle -->
+            
+                        <div class="footer-bottom">
+                            <div class="container">
+                                <p class="footer-copyright">Copyright © 2024 StyleSavvy. All Rights Reserved.</p>
+                                <!-- End .footer-copyright -->
+                                <figure class="footer-payments">
+                                    <img src="/assets/images/payments.png" alt="Payment methods" width="272"
+                                        height="20">
+                                </figure><!-- End .footer-payments -->
+                            </div><!-- End .container -->
+                        </div><!-- End .footer-bottom -->
+                    </footer><!-- End .footer -->
+                </div><!-- End .page-wrapper -->
+                <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+                <!-- Mobile Menu -->
+                <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+                <div class="mobile-menu-container mobile-menu-dark">
+                    <div class="mobile-menu-wrapper">
+                        <span class="mobile-menu-close"><i class="icon-close"></i></span>
+        
+                        <form id="search_form1" method="get" class="mobile-search">
+                            <label for="mobile-search" class="sr-only">Search</label>
+                            <input type="search"  class="form-control" name="mobile-search" id="search1" autocomplete="off" placeholder="Search in..." required>
+                            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                        </form>
+
+                        <script>
+                            const form1 = document.getElementById('search_form1')
+                            form1.addEventListener('submit', (e)=>{
+                                 e.preventDefault()
+            
+                                const data = document.getElementById('search1').value
+            
+                                let url = new URL(window.location.href);
+                                url.pathname = '/shop';
+                                url.searchParams.set('search', data);
+                                window.location.href = url.toString();
+                            })                                        
+                       </script>
+                        
+                        <nav class="mobile-nav">
+                            <ul class="mobile-menu">
+                                <li class="active">
+                                    <a href="/home">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/shop">Shop</a>
+            
+                                </li>
+            
+                                <li>
+                                    <a href="/contact">Contact</a>
+            
+                                </li>
+                                <li>
+                                    <a href="/wishlist">Wishlist</a>
+                                </li>
+                                <li>
+                                    <a href="/cart">Cart</a>
+                                </li>
+                                <li>
+                                    <a href="/profile">Profile</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="social-icons">
+                            <a href="https://www.youtube.com/channel/UCm0ea9vsyhG6mMJZr99HNCg" class="social-icon" title="Facebook" target="_blank"><i class="icon-youtube"></i></a>
+                            <!-- <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                            <a href="https://www.instagram.com/allajahzan/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                            <a href="https://in.pinterest.com/ahsanallaj/" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                        </div><!-- End .social-icons -->
+                    </div><!-- End .mobile-menu-wrapper -->
+                </div><!-- End .mobile-menu-container -->
+
+    </section>
+
+
+
+    <script src="/assets/js/api/home.js"></script>
+
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/demos/demo-5.js"></script>
+</body>
+
+
+<!-- molla/index-5.html  22 Nov 2019 09:56:18 GMT -->
+
+</html>
