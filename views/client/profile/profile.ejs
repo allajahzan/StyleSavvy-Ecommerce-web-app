@@ -219,7 +219,7 @@
 
 
                             <% if (locals.user) { %>
-                                <% const names=locals.user.name.split(' ')[0]; %>
+                                <% const names=locals.user.name[0].toUpperCase(); %>
                     <ul class="menu">
                         <li class="home active">
                             <p class=""><a style="color: white;" id="user_name" class="name_user" href=""><%= names %></a></p>
@@ -703,9 +703,9 @@
                                 </span>
                             </div>
                                
-                            <a onclick="getEmailInput()" id="getEmailInput">Click here if you want to change email</a>
-                            <a onclick="HideEmailInput()" id="HideEmailInput">Click here if you dont want to change
-                                email</a>       
+                            <!-- <a onclick="getEmailInput()" id="getEmailInput">Click here if you want to change email</a> -->
+                            <!-- <a onclick="HideEmailInput()" id="HideEmailInput">Click here if you dont want to change
+                                email</a>        -->
                             
                             <div id="submit_btn">                                    
                                 <label>Password *</label>

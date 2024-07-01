@@ -163,7 +163,7 @@
                           </a>
 
         
-                            <% const names = locals.user.split(' ')[0]; %>
+                            <% const names = locals.user[0].toUpperCase(); %>
                             <ul class="menu sf-arrows">
                                 <li class="home">
                                     <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>

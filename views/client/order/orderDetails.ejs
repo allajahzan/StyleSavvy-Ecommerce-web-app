@@ -113,7 +113,7 @@
                             </a>
 
                             <% if (locals.user) { %>
-                                <% const names=locals.user.name.split(' ')[0]; %>
+                                <% const names=locals.user.name[0].toUpperCase(); %>
                         <ul class="menu">
                             <li class="home">
                                 <p class=""><a id="a_menu_item" href="/profile"><%= names %></a></p>

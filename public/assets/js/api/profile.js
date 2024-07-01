@@ -167,12 +167,12 @@ async function loadProfile() {
 
     // delete otp on page reload
 
-    try {
-        await fetch('/profile/deleteOTP', { method: 'DELETE' })
-    } catch (err) {
-        console.log(err);
-        window.location.href = '/500-Server-Error'
-    }
+    // try {
+    //     await fetch('/profile/deleteOTP', { method: 'DELETE' })
+    // } catch (err) {
+    //     console.log(err);
+    //     window.location.href = '/500-Server-Error'
+    // }
 
     // send otp to verify email
 
