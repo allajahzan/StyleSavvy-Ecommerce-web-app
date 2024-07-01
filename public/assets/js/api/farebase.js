@@ -73,7 +73,7 @@ btn.addEventListener('click', () => {
             const email = error.customData.email;
             const credential = GoogleAuthProvider.credentialFromError(error);
             console.error('Sign-in error:', errorCode, errorMessage);
-            window.location.href = '/500-Server-Error'
+            // window.location.href = '/500-Server-Error'
         });
 });
 
