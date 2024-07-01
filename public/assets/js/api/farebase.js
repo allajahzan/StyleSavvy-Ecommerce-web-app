@@ -64,7 +64,7 @@ btn.addEventListener('click', () => {
             }).catch((error) => {
                 // Handle fetch request errors
                 console.error('Fetch error:', error);
-                window.location.href = '/500-Server-Error'
+                // window.location.href = '/500-Server-Error'
             });
         }).catch((error) => {
             // Handle sign-in errors

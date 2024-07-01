@@ -380,7 +380,7 @@ exports.sendLinkToEmail = async (req, res) => {
 
         req.session.generatedUUID = generatedUUID
 
-        const link = `http://localhost:3000/resetpassword?token=${req.session.generatedUUID}`
+        const link = `https://www.stylesavvy.online/resetpassword?token=${req.session.generatedUUID}`
 
         // send OTP to Email
         nodeMailer.resetPassword(email, link, function (error, info) {
