@@ -741,6 +741,12 @@ html {
     /* display: none; */
 }
 
+@media (max-width:800px) {
+    .zoomContainer {
+        display: none;
+    }
+}
+
 .product-main-image img {
     max-width: none;
     width: 100%;
