@@ -741,6 +741,12 @@ html {
     /* display: none; */
 }
 
+@media (max-width:500.20px) {
+    .zoomContainer {
+        display: none;
+    }
+}
+
 .product-main-image img {
     max-width: none;
     width: 100%;
@@ -1146,7 +1152,6 @@ html {
     #btn_quantity_cart .product-details-quantity {
         max-width: 178px;
     }
-
 }
 
 @media (max-width:787.20px) {
