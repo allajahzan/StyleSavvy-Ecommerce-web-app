@@ -38,11 +38,11 @@ exports.getProductsPage = async (req, res) => {
       colorSelected = ''
     }
 
-    const searchQuery = req.query.search || '';
-    if(searchQuery == '*'){
-      searchQuery = ''
+    let searchQuery = req.query.search || '';
+    if (searchQuery === '*') {
+      searchQuery = '';
     }
-
+    
 
     let orderQuery;
     let orderValue;
