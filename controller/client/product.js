@@ -40,6 +40,16 @@ exports.getProductsPage = async (req, res) => {
 
     const searchQuery = req.query.search || '';
 
+    const pattern = /[!@#$%^&*(),.?":{}|<>]/;
+
+    if (req.query.search) {
+      const containsSpecialSymbols = pattern.test(text);
+
+      if (containsSpecialSymbols) {
+        searchQuery = '';
+      }
+    }
+
 
     let orderQuery;
     let orderValue;
@@ -195,7 +205,7 @@ exports.getProductsPage = async (req, res) => {
           _id: 1,
           isListed: 1,
           images: 1,
-          color:1,
+          color: 1,
           actualPrice: 1,
           allColors: 1,
           stock: 1,
@@ -269,87 +279,87 @@ exports.getProductsPage = async (req, res) => {
         }
       },
       {
-      $lookup: {
-        from: 'products',
-        localField: 'product',
-        foreignField: '_id',
-        as: 'product'
-      }
-    },
-    {
-      $unwind: '$product'
-    },
-    {
-      $lookup: {
-        from: 'types',
-        localField: 'product.type',
-        foreignField: '_id',
-        as: 'product.type'
-      }
-    },
-    {
-      $unwind: {
-        path: '$product.type',
-        preserveNullAndEmptyArrays: true
-      }
-    },
-    {
-      $lookup: {
-        from: 'categories',
-        localField: 'product.category',
-        foreignField: '_id',
-        as: 'product.category'
-      }
-    },
-    {
-      $unwind: {
-        path: '$product.category',
-        preserveNullAndEmptyArrays: true
-      }
-    },
-    {
-      $match: { 'product.isListed': true }
-    },
-    {
-      $match: { isListed: true }
-    },
-    {
-      $match: { 'product.category.isListed': true }
-    },
-    {
-      $match: { 'product.type.isListed': true }
-    },
-    {
-      $match: {
-        $or: [
-          { 'color.color_name': { $regex: colorSelected.replace(/\s+/g, '\\s*'), $options: 'i' } },
-        ]
-      }
-    },
-    {
-      $match: {
-        $or: [
-          { 'product.category.category_name': { $regex: filter.replace(/\s+/g, '\\s*'), $options: 'i' } },
-        ]
-      }
-    },
-    {
-      $match: {
-        $or: [
-          { 'product.type.type_name': { $regex: typeSelected.replace(/\s+/g, '\\s*'), $options: 'i' } },
-        ]
-      }
-    },
-    {
-      $match: {
-        $or: [
-          { 'product.product_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
-          { 'product.category.category_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
-          { 'product.type.type_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
-          { 'product.title': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } }
-        ]
-      }
-    },
+        $lookup: {
+          from: 'products',
+          localField: 'product',
+          foreignField: '_id',
+          as: 'product'
+        }
+      },
+      {
+        $unwind: '$product'
+      },
+      {
+        $lookup: {
+          from: 'types',
+          localField: 'product.type',
+          foreignField: '_id',
+          as: 'product.type'
+        }
+      },
+      {
+        $unwind: {
+          path: '$product.type',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'product.category',
+          foreignField: '_id',
+          as: 'product.category'
+        }
+      },
+      {
+        $unwind: {
+          path: '$product.category',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $match: { 'product.isListed': true }
+      },
+      {
+        $match: { isListed: true }
+      },
+      {
+        $match: { 'product.category.isListed': true }
+      },
+      {
+        $match: { 'product.type.isListed': true }
+      },
+      {
+        $match: {
+          $or: [
+            { 'color.color_name': { $regex: colorSelected.replace(/\s+/g, '\\s*'), $options: 'i' } },
+          ]
+        }
+      },
+      {
+        $match: {
+          $or: [
+            { 'product.category.category_name': { $regex: filter.replace(/\s+/g, '\\s*'), $options: 'i' } },
+          ]
+        }
+      },
+      {
+        $match: {
+          $or: [
+            { 'product.type.type_name': { $regex: typeSelected.replace(/\s+/g, '\\s*'), $options: 'i' } },
+          ]
+        }
+      },
+      {
+        $match: {
+          $or: [
+            { 'product.product_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
+            { 'product.category.category_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
+            { 'product.type.type_name': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } },
+            { 'product.title': { $regex: searchQuery.replace(/\s+/g, '\\s*'), $options: 'i' } }
+          ]
+        }
+      },
     ])
 
 
@@ -359,7 +369,7 @@ exports.getProductsPage = async (req, res) => {
 
     // get all with promise.all
 
-    const [varients, filteredVarients, type, category, colors] = await Promise.all([varientsPromise, filteredVarientsPromise, typePromise, categoryPromise,colorPromise])
+    const [varients, filteredVarients, type, category, colors] = await Promise.all([varientsPromise, filteredVarientsPromise, typePromise, categoryPromise, colorPromise])
 
 
     totalVarients = filteredVarients.length
@@ -368,7 +378,7 @@ exports.getProductsPage = async (req, res) => {
 
     // user Name
     if (!req.session.user) {
-      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors ,searchQuery })
+      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors, searchQuery })
 
     }
     const token = req.session.user
@@ -376,28 +386,28 @@ exports.getProductsPage = async (req, res) => {
     if (!isTokenValid) {
       delete req.session.user
       delete req.session.userName
-      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors ,searchQuery})
+      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors, searchQuery })
     }
 
     const userPromise = User.findById(isTokenValid.id)
-    const cartPromise = Cart.findOne({customerId:isTokenValid.id})
-    const wishlistPromise = Wishlist.findOne({customerId:isTokenValid.id})
+    const cartPromise = Cart.findOne({ customerId: isTokenValid.id })
+    const wishlistPromise = Wishlist.findOne({ customerId: isTokenValid.id })
 
-    const [ user, cart, wishlist] = await Promise.all([userPromise, cartPromise, wishlistPromise]) 
+    const [user, cart, wishlist] = await Promise.all([userPromise, cartPromise, wishlistPromise])
 
     if (!user) {
       delete req.session.user
       delete req.session.userName
-      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors ,searchQuery})
+      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors, searchQuery })
     }
 
     if (user.isBlocked) {
       delete req.session.user
       delete req.session.userName
-      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors ,searchQuery})
+      return res.render('products', { varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors, searchQuery })
     }
 
-    res.render('products', { user: user.name, varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors ,searchQuery, cart, wishlist})
+    res.render('products', { user: user.name, varients: varients, totalPages, currentPage, totalVarients, select, type, category, colors, searchQuery, cart, wishlist })
   } catch (err) {
     console.log(err);
     res.render('500')
@@ -416,10 +426,158 @@ exports.getProductsDetails = async (req, res) => {
   const vid = req.query.vId
 
   try {
-    
-      const varientsPromise = Varient.aggregate([
+
+    const varientsPromise = Varient.aggregate([
+      {
+        $match: { isListed: true, _id: new ObjectId(vid), product: new ObjectId(pid) }
+      },
+      {
+        $lookup: {
+          from: 'colors',
+          localField: 'color',
+          foreignField: '_id',
+          as: 'color'
+        }
+      },
+      {
+        $addFields: { originalColorOrder: "$colors" }
+      },
+      {
+        $lookup: {
+          from: 'colors',
+          localField: 'colors',
+          foreignField: '_id',
+          as: 'allColors'
+        }
+      },
+      {
+        $lookup: {
+          from: 'sizes',
+          localField: 'size',
+          foreignField: '_id',
+          as: 'size'
+        }
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'product',
+          foreignField: '_id',
+          as: 'product'
+        }
+      },
+      {
+        $unwind: '$product'
+      },
+      {
+        $lookup: {
+          from: 'types',
+          localField: 'product.type',
+          foreignField: '_id',
+          as: 'product.type'
+        }
+      },
+      {
+        $unwind: {
+          path: '$product.type',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'product.category',
+          foreignField: '_id',
+          as: 'product.category'
+        }
+      },
+      {
+        $unwind: {
+          path: '$product.category',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $lookup: {
+          from: 'varients',
+          localField: 'product.varients',
+          foreignField: '_id',
+          as: 'product.varients'
+        }
+      },
+      {
+        $addFields: {
+          allColors: {
+            $map: {
+              input: "$originalColorOrder",
+              as: "colorId",
+              in: {
+                $arrayElemAt: [
+                  {
+                    $filter: {
+                      input: "$allColors",
+                      as: "color",
+                      cond: { $eq: ["$$color._id", "$$colorId"] }
+                    }
+                  },
+                  0
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          'product._id': 1,
+          'product.product_name': 1,
+          'product.discription': 1,
+          'product.isListed': 1,
+          'product.title': 1,
+          'product.productOffer': 1,
+          'product.category.category_name': 1,
+          'product.category.isListed': 1,
+          'product.category.categoryOffer': 1,
+          'product.type.type_name': 1,
+          'product.type.isListed': 1,
+          'product.type.isListed': 1,
+          'product.varients': 1,
+          _id: 1,
+          isListed: 1,
+          images: 1,
+          color: 1,
+          actualPrice: 1,
+          allColors: 1,
+          stock: 1,
+          size: 1,
+          addedDateTime: 1
+        }
+      },
+      {
+        $match: { 'product.isListed': true }
+      },
+      {
+        $match: { isListed: true }
+      },
+      {
+        $match: { 'product.category.isListed': true }
+      },
+      {
+        $match: { 'product.type.isListed': true }
+      },
+
+    ]);
+
+    const [varient] = await Promise.all([varientsPromise])
+
+    if (varient) {
+
+      const title = varient[0].product.title
+      const type_name = varient[0].product.type.type_name
+
+      const relatedProductsPromise = Varient.aggregate([
         {
-          $match: { isListed: true , _id: new ObjectId(vid), product: new ObjectId(pid)}
+          $match: { isListed: true, _id: { $ne: new ObjectId(vid) } }
         },
         {
           $lookup: {
@@ -531,7 +689,7 @@ exports.getProductsDetails = async (req, res) => {
             'product.type.type_name': 1,
             'product.type.isListed': 1,
             'product.type.isListed': 1,
-            'product.varients':1,
+            'product.varients': 1,
             _id: 1,
             isListed: 1,
             images: 1,
@@ -555,219 +713,71 @@ exports.getProductsDetails = async (req, res) => {
         {
           $match: { 'product.type.isListed': true }
         },
-  
+        {
+          $match: { 'product.type.type_name': type_name }
+        },
+        {
+          $match: { 'product.title': title }
+        },
+
       ]);
 
-      const [varient] = await Promise.all([varientsPromise])
 
-      if (varient) {
-
-        const title = varient[0].product.title
-        const type_name = varient[0].product.type.type_name
-
-        const relatedProductsPromise = Varient.aggregate([
-          {
-            $match: { isListed: true , _id: { $ne: new ObjectId(vid) }}
-          },
-          {
-            $lookup: {
-              from: 'colors',
-              localField: 'color',
-              foreignField: '_id',
-              as: 'color'
-            }
-          },
-          {
-            $addFields: { originalColorOrder: "$colors" }
-          },
-          {
-            $lookup: {
-              from: 'colors',
-              localField: 'colors',
-              foreignField: '_id',
-              as: 'allColors'
-            }
-          },
-          {
-            $lookup: {
-              from: 'sizes',
-              localField: 'size',
-              foreignField: '_id',
-              as: 'size'
-            }
-          },
-          {
-            $lookup: {
-              from: 'products',
-              localField: 'product',
-              foreignField: '_id',
-              as: 'product'
-            }
-          },
-          {
-            $unwind: '$product'
-          },
-          {
-            $lookup: {
-              from: 'types',
-              localField: 'product.type',
-              foreignField: '_id',
-              as: 'product.type'
-            }
-          },
-          {
-            $unwind: {
-              path: '$product.type',
-              preserveNullAndEmptyArrays: true
-            }
-          },
-          {
-            $lookup: {
-              from: 'categories',
-              localField: 'product.category',
-              foreignField: '_id',
-              as: 'product.category'
-            }
-          },
-          {
-            $unwind: {
-              path: '$product.category',
-              preserveNullAndEmptyArrays: true
-            }
-          },
-          {
-            $lookup: {
-              from: 'varients',
-              localField: 'product.varients',
-              foreignField: '_id',
-              as: 'product.varients'
-            }
-          },
-          {
-            $addFields: {
-              allColors: {
-                $map: {
-                  input: "$originalColorOrder",
-                  as: "colorId",
-                  in: {
-                    $arrayElemAt: [
-                      {
-                        $filter: {
-                          input: "$allColors",
-                          as: "color",
-                          cond: { $eq: ["$$color._id", "$$colorId"] }
-                        }
-                      },
-                      0
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          {
-            $project: {
-              'product._id': 1,
-              'product.product_name': 1,
-              'product.discription': 1,
-              'product.isListed': 1,
-              'product.title': 1,
-              'product.productOffer': 1,
-              'product.category.category_name': 1,
-              'product.category.isListed': 1,
-              'product.category.categoryOffer': 1,
-              'product.type.type_name': 1,
-              'product.type.isListed': 1,
-              'product.type.isListed': 1,
-              'product.varients':1,
-              _id: 1,
-              isListed: 1,
-              images: 1,
-              color: 1,
-              actualPrice: 1,
-              allColors: 1,
-              stock: 1,
-              size: 1,
-              addedDateTime: 1
-            }
-          },
-          {
-            $match: { 'product.isListed': true }
-          },
-          {
-            $match: { isListed: true }
-          },
-          {
-            $match: { 'product.category.isListed': true }
-          },
-          {
-            $match: { 'product.type.isListed': true }
-          },
-          {
-            $match: { 'product.type.type_name': type_name }
-          },
-          {
-            $match: { 'product.title': title }
-          },
-    
-        ]);
+      const [relatedProducts] = await Promise.all([relatedProductsPromise])
 
 
-        const [relatedProducts] = await Promise.all([relatedProductsPromise])
-
-
-        // user Name
-        if (!req.session.user) {
-          return res.render('productDetails', { varient:varient[0] , relatedProducts:relatedProducts})
-
-        }
-        const token = req.session.user
-        const isTokenValid = jwt.verify(token, process.env.userSecretCode)
-        if (!isTokenValid) {
-          delete req.session.user
-          delete req.session.userName
-          return res.render('productDetails', { varient:varient[0] , relatedProducts:relatedProducts })
-        }
-
-        const userPromise = User.findById(isTokenValid.id)
-        const cartPromise = Cart.findOne({customerId:isTokenValid.id})
-        const wishlistPromise = Wishlist.findOne({customerId:isTokenValid.id})
-
-        
-        const [user, cart, wishlist] = await Promise.all([userPromise, cartPromise, wishlistPromise])
-
-
-        if (!user) {
-          delete req.session.user
-          delete req.session.userName
-          return res.render('productDetails', { varient:varient[0] , relatedProducts:relatedProducts })
-        }
-
-        if (user.isBlocked) {
-          delete req.session.user
-          delete req.session.userName
-          return res.render('productDetails', { varient:varient[0] , relatedProducts:relatedProducts })
-        }
-
-       
-
-        res.render('productDetails', { user: user.name, varient:varient[0] , relatedProducts:relatedProducts ,cart, wishlist})
-
-
-      } else { //if varient is not listed or null
-
-        const varient = await Varient.findOne({ $and: [{ product: pid }, { isListed: true }] })  //another listed varient of that product
-        if (varient) {
-          const vId = varient._id
-          const pId = pid
-          res.redirect(`/product?pId=${pId}&vId=${vId}`)
-          return;
-        } else {
-          res.redirect('/shop')
-          return
-        }
+      // user Name
+      if (!req.session.user) {
+        return res.render('productDetails', { varient: varient[0], relatedProducts: relatedProducts })
 
       }
+      const token = req.session.user
+      const isTokenValid = jwt.verify(token, process.env.userSecretCode)
+      if (!isTokenValid) {
+        delete req.session.user
+        delete req.session.userName
+        return res.render('productDetails', { varient: varient[0], relatedProducts: relatedProducts })
+      }
+
+      const userPromise = User.findById(isTokenValid.id)
+      const cartPromise = Cart.findOne({ customerId: isTokenValid.id })
+      const wishlistPromise = Wishlist.findOne({ customerId: isTokenValid.id })
+
+
+      const [user, cart, wishlist] = await Promise.all([userPromise, cartPromise, wishlistPromise])
+
+
+      if (!user) {
+        delete req.session.user
+        delete req.session.userName
+        return res.render('productDetails', { varient: varient[0], relatedProducts: relatedProducts })
+      }
+
+      if (user.isBlocked) {
+        delete req.session.user
+        delete req.session.userName
+        return res.render('productDetails', { varient: varient[0], relatedProducts: relatedProducts })
+      }
+
+
+
+      res.render('productDetails', { user: user.name, varient: varient[0], relatedProducts: relatedProducts, cart, wishlist })
+
+
+    } else { //if varient is not listed or null
+
+      const varient = await Varient.findOne({ $and: [{ product: pid }, { isListed: true }] })  //another listed varient of that product
+      if (varient) {
+        const vId = varient._id
+        const pId = pid
+        res.redirect(`/product?pId=${pId}&vId=${vId}`)
+        return;
+      } else {
+        res.redirect('/shop')
+        return
+      }
+
+    }
     // } else {
     //   res.redirect('/shop')
     //   return
