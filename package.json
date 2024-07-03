@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "btoa": "^1.2.1",
     "color-name": "^2.0.0",
     "colornames": "^1.1.1",
