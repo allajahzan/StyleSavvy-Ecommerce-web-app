@@ -7,6 +7,8 @@ const isAuthFetch = require('../../middlewears/admin/authFetch')
 
 const controller = require('../../controller/admin/product')
 
+router.use(bodyParser.json({ limit: '100mb' }));
+router.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 // Multer configuration
 const storage = multer.diskStorage({
