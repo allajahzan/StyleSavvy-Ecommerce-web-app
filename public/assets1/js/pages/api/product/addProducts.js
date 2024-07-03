@@ -342,7 +342,7 @@ async function addVarient() {
             }
         } catch (err) {
             console.log(err);
-            window.location.href = '/admin/500-Server-Error'
+            // window.location.href = '/admin/500-Server-Error'
         }
 
     }
