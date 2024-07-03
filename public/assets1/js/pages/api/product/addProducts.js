@@ -307,8 +307,6 @@ async function addVarient() {
     formData.append('file4', document.getElementById('imageInput4').files[0]);
 
 
-    console.log(Object.fromEntries(formData));
-
     if (size.length > 0 && stock.length > 0 && price.length > 0) {
         $('#varient').modal('hide');
 
@@ -344,7 +342,7 @@ async function addVarient() {
             }
         } catch (err) {
             console.log(err);
-            // window.location.href = '/admin/500-Server-Error'
+            window.location.href = '/admin/500-Server-Error'
         }
 
     }
