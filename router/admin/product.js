@@ -11,7 +11,7 @@ const controller = require('../../controller/admin/product')
 // Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/products/uploads/');
+    cb(null, 'home/ubuntu/StyleSavvy-Ecommerce-Website/public/products/uploads/');
   },
   filename: function (req, file, cb) {
     const name = Date.now() + '-' + file.originalname;
