@@ -1,1 +1,2 @@
-StyleSavvy, it's an Ecommerce website. here is the link https://www.stylesavvy.online
+StyleSavvy, it's an Ecommerce web application, for selling clothes online.
+
