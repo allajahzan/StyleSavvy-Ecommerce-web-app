@@ -25,6 +25,7 @@ function loadProducts() {
 
 }
 
+
 async function addToCart(vId) {
     try {
         const obj = {

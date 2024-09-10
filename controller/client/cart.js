@@ -368,7 +368,7 @@ exports.addToCart = async (req, res) => {
 
         const myCart = await cart.save();
         let count = myCart.items.length
-        return res.status(200).json({ msg: 'Successfully added to cart', type: 'success', count });
+        res.status(200).json({ msg: 'Successfully added to cart', type: 'success', count });
 
 
     } catch (err) {

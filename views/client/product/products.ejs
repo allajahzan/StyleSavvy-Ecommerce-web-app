@@ -316,9 +316,10 @@
                                                         <div style="padding-bottom: 8px;" class="product-action action-icon-top">
                                                             <a style="cursor: pointer; color: #c96;" onclick="addToCart('<%= v._id %>')" class="btn-product btn-cart add_to_cart_" title="Add To Cart"><span>add to
                                                                     cart</span></a>
-                                                                    <form action="">
+                                                                    <form id="asdf" action="">
                                                                         <input type="hidden" value="<%= v.size[0]._id %>" id="select_size<%= v._id %>">
                                                                         <input type="hidden" value="<%= v.actualPrice %>" id="price<%= v._id %>" >
+                                        
                                                                     </form>
                                                             <a style="cursor: pointer;" href="/product?pId=<%= v.product._id %>&vId=<%= v._id %>"
                                                                 class="btn-product btn-quickview"
