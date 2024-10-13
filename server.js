@@ -91,7 +91,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(morgan('dev'))
 
-
 // ===================== Admin side routes ==========================
 // admin 
 app.use('/', admin_route)
